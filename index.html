@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#0a0a0c" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<html lang="fr"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Abraham Berne myGod</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <style>
         /* ===== RESET & TOKENS ===== */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -454,6 +453,7 @@
     </style>
 </head>
 <body>
+<script>try{localStorage.removeItem("abraham-berne-mygod-v9");}catch(e){}</script>
 
 <header>
     <div class="header-inner">
@@ -465,38 +465,551 @@
             </div>
         </div>
         <div class="header-actions">
-            <button class="btn-reset-icon hidden" id="exportBtn" onclick="exportHTML()" title="Exporter le HTML mis à jour" aria-label="Exporter le HTML">
+            <button class="btn-reset-icon" id="exportBtn" onclick="exportHTML()" title="Exporter le HTML mis à jour" aria-label="Exporter le HTML">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
                     <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
             </button>
-            <button class="btn-reset-icon hidden" id="resetBtn" onclick="confirmReset()" title="Réinitialiser tout le code" aria-label="Réinitialiser">
+            <button class="btn-reset-icon" id="resetBtn" onclick="confirmReset()" title="Réinitialiser tout le code" aria-label="Réinitialiser">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                     <path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path>
                 </svg>
             </button>
-            <button class="btn-lock" id="lockBtn" onclick="promptLock()" title="Déverrouiller pour modifier" aria-label="Verrouiller/Déverrouiller">
-                <svg id="lockIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                </svg>
+            <button class="btn-lock locked" id="lockBtn" onclick="promptLock()" title="Déverrouiller pour modifier" aria-label="Verrouiller/Déverrouiller">
+                <svg id="lockIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
             </button>
         </div>
     </div>
 </header>
 
 <div class="scroll-container">
-    <main id="view"></main>
+    <main id="view">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+                <div>
+                    <h2 class="page-title">Dimanches</h2>
+                    <p class="page-sub" style="margin-bottom:0">56 programmes</p>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="openNewSunday()">+ Nouveau</button>
+            </div>
+            <div class="field">
+                <input type="search" id="filterQ" placeholder="Rechercher un titre, chantre ou date...">
+            </div>
+            <div id="sundayList">
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2026-11-15')">
+                            <div class="date">dimanche 15 novembre 2026</div>
+                            <div class="pills">
+                                <span class="pill pill-a">2A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Naomie · Rebecca</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2026-11-22')">
+                            <div class="date">dimanche 22 novembre 2026</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Prunelle · Rebecca · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2026-11-29')">
+                            <div class="date">dimanche 29 novembre 2026</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Pélagie · Prunelle · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2026-12-06')">
+                            <div class="date">dimanche 6 décembre 2026</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Naomie · Pélagie · Rebecca</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2026-12-13')">
+                            <div class="date">dimanche 13 décembre 2026</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Naomie · Rebecca · Prunelle</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2026-12-20')">
+                            <div class="date">dimanche 20 décembre 2026</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Prunelle · Pélagie · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2026-12-27')">
+                            <div class="date">dimanche 27 décembre 2026</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Naomie · Prunelle · Pélagie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-01-03')">
+                            <div class="date">dimanche 3 janvier 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Pélagie · Rebecca · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-01-10')">
+                            <div class="date">dimanche 10 janvier 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Rebecca · Prunelle · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-01-17')">
+                            <div class="date">dimanche 17 janvier 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Naomie · Prunelle · Pélagie · Rebecca</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-01-24')">
+                            <div class="date">dimanche 24 janvier 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Naomie · Pélagie · Rebecca · Prunelle</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-01-31')">
+                            <div class="date">dimanche 31 janvier 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Rebecca · Pélagie · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-02-07')">
+                            <div class="date">dimanche 7 février 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Pélagie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-02-14')">
+                            <div class="date">dimanche 14 février 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">1L</span>
+                            </div>
+                            <div class="singers">Pélagie · Rebecca · Prunelle · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-02-21')">
+                            <div class="date">dimanche 21 février 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Pélagie · Prunelle · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-02-28')">
+                            <div class="date">dimanche 28 février 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Naomie · Pélagie · Rebecca</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-03-07')">
+                            <div class="date">dimanche 7 mars 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Naomie · Rebecca · Prunelle</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-03-14')">
+                            <div class="date">dimanche 14 mars 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Prunelle · Pélagie · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-03-21')">
+                            <div class="date">dimanche 21 mars 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Naomie · Prunelle · Pélagie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-03-28')">
+                            <div class="date">dimanche 28 mars 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Pélagie · Rebecca · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-04-04')">
+                            <div class="date">dimanche 4 avril 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Rebecca · Prunelle · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-05-02')">
+                            <div class="date">dimanche 2 mai 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Naomie · Rebecca · Prunelle · Pélagie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-05-09')">
+                            <div class="date">dimanche 9 mai 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Rebecca · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-05-16')">
+                            <div class="date">dimanche 16 mai 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Pélagie · Prunelle · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-05-23')">
+                            <div class="date">dimanche 23 mai 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Naomie · Pélagie · Rebecca</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-05-30')">
+                            <div class="date">dimanche 30 mai 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Naomie · Rebecca · Prunelle</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-06-06')">
+                            <div class="date">dimanche 6 juin 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Prunelle · Pélagie · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-06-13')">
+                            <div class="date">dimanche 13 juin 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Naomie · Prunelle · Pélagie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-06-20')">
+                            <div class="date">dimanche 20 juin 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Pélagie · Rebecca · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-06-27')">
+                            <div class="date">dimanche 27 juin 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Rebecca · Prunelle · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-07-04')">
+                            <div class="date">dimanche 4 juillet 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Naomie · Prunelle · Pélagie · Rebecca</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-07-11')">
+                            <div class="date">dimanche 11 juillet 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Naomie · Pélagie · Rebecca · Prunelle</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-07-18')">
+                            <div class="date">dimanche 18 juillet 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Rebecca · Pélagie · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-07-25')">
+                            <div class="date">dimanche 25 juillet 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Naomie · Rebecca · Prunelle · Pélagie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-08-01')">
+                            <div class="date">dimanche 1 août 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Prunelle · Rebecca · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-08-08')">
+                            <div class="date">dimanche 8 août 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Prunelle · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-08-15')">
+                            <div class="date">dimanche 15 août 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Naomie · Pélagie · Rebecca</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-08-22')">
+                            <div class="date">dimanche 22 août 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Naomie · Rebecca · Prunelle</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-08-29')">
+                            <div class="date">dimanche 29 août 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Prunelle · Pélagie · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-09-05')">
+                            <div class="date">dimanche 5 septembre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Naomie · Prunelle · Pélagie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-09-12')">
+                            <div class="date">dimanche 12 septembre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Pélagie · Rebecca · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-09-19')">
+                            <div class="date">dimanche 19 septembre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Rebecca · Prunelle · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-09-26')">
+                            <div class="date">dimanche 26 septembre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">1L</span>
+                            </div>
+                            <div class="singers">Naomie · Rebecca · Prunelle · Pélagie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-10-03')">
+                            <div class="date">dimanche 3 octobre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Naomie · Pélagie · Rebecca · Prunelle</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-10-10')">
+                            <div class="date">dimanche 10 octobre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Rebecca · Pélagie · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-10-17')">
+                            <div class="date">dimanche 17 octobre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Naomie · Rebecca · Prunelle · Pélagie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-10-24')">
+                            <div class="date">dimanche 24 octobre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Prunelle · Rebecca · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-10-31')">
+                            <div class="date">dimanche 31 octobre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Naomie · Prunelle · Pélagie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-11-07')">
+                            <div class="date">dimanche 7 novembre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Rebecca · Pélagie · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-11-14')">
+                            <div class="date">dimanche 14 novembre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Naomie · Prunelle · Rebecca · Pélagie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-11-21')">
+                            <div class="date">dimanche 21 novembre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Rebecca · Pélagie · Prunelle · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-11-28')">
+                            <div class="date">dimanche 28 novembre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Naomie · Rebecca · Prunelle</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-12-05')">
+                            <div class="date">dimanche 5 décembre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Prunelle · Rebecca · Pélagie · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-12-12')">
+                            <div class="date">dimanche 12 décembre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Pélagie · Rebecca · Prunelle · Naomie</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-12-19')">
+                            <div class="date">dimanche 19 décembre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Naomie · Prunelle · Pélagie · Rebecca</div>
+                        </div>
+                    
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('2027-12-26')">
+                            <div class="date">dimanche 26 décembre 2027</div>
+                            <div class="pills">
+                                <span class="pill pill-a">4A</span>
+                                <span class="pill pill-l">2L</span>
+                            </div>
+                            <div class="singers">Naomie · Pélagie · Rebecca · Prunelle</div>
+                        </div>
+                    </div>
+        </main>
 </div>
 
 <nav class="bottom-nav">
-    <button class="nav-item active" data-view="home">
+    <button class="nav-item" data-view="home">
         <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
         <span>Accueil</span>
     </button>
-    <button class="nav-item" data-view="sundays">
+    <button class="nav-item active" data-view="sundays">
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
         <span>Dimanches</span>
     </button>
@@ -519,75 +1032,2184 @@
 </nav>
 
 <div id="modal" class="modal hidden">
-    <div class="modal-sheet" id="modalSheet">
+    <div class="modal-sheet" id="modalSheet" style="">
         <div class="modal-handle"></div>
-        <div id="modalBody"></div>
+        <div id="modalBody">
+            <div class="modal-header">
+                <h3>dimanche 31 octobre 2027</h3>
+                <button class="btn-close" onclick="closeModal()" aria-label="Fermer">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div style="font-size:13px;color:var(--text-2);margin-bottom:16px">
+                <b>Chantres:</b> Rebecca · Naomie · Prunelle · Pélagie
+            </div>
+            <h3 class="section" style="margin-top:8px">Adoration</h3>
+            
+                <div class="song-item">
+                    <div class="song-thumb"><img src="https://img.youtube.com/vi/y2Cauq-RuGA/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>
+                    <div class="song-info">
+                        <div class="song-title">JE VEUX BOIRE À TA SOURCE, PLUS DE TOI ENCORE...</div>
+                        <div class="song-meta">
+                            <span class="singer">Rebecca</span>
+                            <span>Adoration</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        <a href="https://youtu.be/y2Cauq-RuGA" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>
+                        <button class="btn btn-ghost btn-icon" data-edit-cat="a" data-edit-title="JE VEUX BOIRE À TA SOURCE, PLUS DE TOI ENCORE..." title="Modifier">✎</button>
+                    </div>
+                </div>
+            
+                <div class="song-item">
+                    <div class="song-thumb"><img src="https://img.youtube.com/vi/2lOCIRwqwV4/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>
+                    <div class="song-info">
+                        <div class="song-title">Guy Christ Quel est ton problème</div>
+                        <div class="song-meta">
+                            <span class="singer">Rebecca</span>
+                            <span>Adoration</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        <a href="https://youtu.be/2lOCIRwqwV4" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>
+                        <button class="btn btn-ghost btn-icon" data-edit-cat="a" data-edit-title="Guy Christ Quel est ton problème" title="Modifier">✎</button>
+                    </div>
+                </div>
+            
+                <div class="song-item">
+                    <div class="song-thumb"><img src="https://img.youtube.com/vi/a6Vwr5GB-d4/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>
+                    <div class="song-info">
+                        <div class="song-title">LES CHANTRES DE LA FOI | PUISSANT SAUVEUR YESHUA</div>
+                        <div class="song-meta">
+                            <span class="singer">Naomie</span>
+                            <span>Adoration</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        <a href="https://youtu.be/a6Vwr5GB-d4" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>
+                        <button class="btn btn-ghost btn-icon" data-edit-cat="a" data-edit-title="LES CHANTRES DE LA FOI | PUISSANT SAUVEUR YESHUA" title="Modifier">✎</button>
+                    </div>
+                </div>
+            
+                <div class="song-item">
+                    <div class="song-thumb"><img src="https://img.youtube.com/vi/wzyPsI-Dq9A/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>
+                    <div class="song-info">
+                        <div class="song-title">MELODIE VENUE DU CIEL (Marcel Boungou) || Marie Zamor</div>
+                        <div class="song-meta">
+                            <span class="singer">Naomie</span>
+                            <span>Adoration</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        <a href="https://youtu.be/wzyPsI-Dq9A" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>
+                        <button class="btn btn-ghost btn-icon" data-edit-cat="a" data-edit-title="MELODIE VENUE DU CIEL (Marcel Boungou) || Marie Zamor" title="Modifier">✎</button>
+                    </div>
+                </div>
+            
+            <h3 class="section">Louange</h3>
+            
+                <div class="song-item">
+                    <div class="song-thumb"><img src="https://img.youtube.com/vi/Ka8eeMi_3ew/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>
+                    <div class="song-info">
+                        <div class="song-title">Apopola - Kodja Guy Vincent ft. Dezy Champion</div>
+                        <div class="song-meta">
+                            <span class="singer">Prunelle</span>
+                            <span>Louange</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        <a href="https://youtu.be/Ka8eeMi_3ew" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>
+                        <button class="btn btn-ghost btn-icon" data-edit-cat="l" data-edit-title="Apopola - Kodja Guy Vincent ft. Dezy Champion" title="Modifier">✎</button>
+                    </div>
+                </div>
+            
+                <div class="song-item">
+                    <div class="song-thumb"><img src="https://img.youtube.com/vi/TQCVS7tROSY/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>
+                    <div class="song-info">
+                        <div class="song-title">Medley louange - Groupe Prodige (à partir de 12 min)</div>
+                        <div class="song-meta">
+                            <span class="singer">Pélagie</span>
+                            <span>Louange</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        <a href="https://youtu.be/TQCVS7tROSY" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>
+                        <button class="btn btn-ghost btn-icon" data-edit-cat="l" data-edit-title="Medley louange - Groupe Prodige (à partir de 12 min)" title="Modifier">✎</button>
+                    </div>
+                </div>
+            
+            <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-primary" style="flex:1" onclick="openEditor('2027-10-31')">✎ Modifier le programme</button>
+                <button class="btn btn-ghost" onclick="projFromModal('2027-10-31')">📽️ Projeter</button>
+            </div>
+        </div>
     </div>
 </div>
 
-<div id="toast" class="toast hidden"></div>
+<div id="toast" class="toast hidden">✓ Programme enregistré</div>
 
 <script>
-    const SEED_SINGERS = ['Prunelle', 'Pélagie', 'Naomie', 'Rebecca'];
-
+    const SEED_SINGERS = [
+    "Prunelle",
+    "Pélagie",
+    "Naomie",
+    "Rebecca"
+];
     const SEED_SUNDAYS = [
-        { date: '2026-11-15', adoration: [{ singer: 'Naomie', title: 'JE VEUX BOIRE À TA SOURCE, PLUS DE TOI ENCORE...', url: 'https://youtu.be/y2Cauq-RuGA' }, { singer: 'Naomie', title: 'Guy Christ Quel est ton problème', url: 'https://youtu.be/2lOCIRwqwV4' }], louange: [{ singer: 'Rebecca', title: 'LES CHANTRES DE LA FOI | PUISSANT SAUVEUR YESHUA', url: 'https://youtu.be/a6Vwr5GB-d4' }, { singer: 'Rebecca', title: 'MELODIE VENUE DU CIEL (Marcel Boungou) || Marie Zamor', url: 'https://youtu.be/wzyPsI-Dq9A' }] },
-        { date: '2026-11-22', adoration: [{ singer: 'Pélagie', title: "Samuel Shukrani's- PAPA OH", url: 'https://youtu.be/Sru8S_qoiHc' }, { singer: 'Pélagie', title: 'JE VIENS POUR TE LOUER | Derek- Jones (Contemplation Live)', url: 'https://youtu.be/ZcwhRUPE30M' }, { singer: 'Prunelle', title: "FAIS MOI VOIR TA GLOIRE /Vteam à C'NIGHT (Lead : YANNICK BITTY)", url: 'https://youtu.be/YX0s-i1h6R4' }, { singer: 'Prunelle', title: 'Tu es yaweh', url: 'https://youtu.be/Dk2FHyotslo' }], louange: [{ singer: 'Rebecca', title: 'Rosny Kayiba ft Deborah Lukalu - Je Vais Le Louer', url: 'https://youtu.be/O98lxBb98Ck' }, { singer: 'Naomie', title: 'Ensemble louons le Seigneur', url: 'https://youtu.be/VJzfosG3dPs' }] },
-        { date: '2026-11-29', adoration: [{ singer: 'Rebecca', title: "EDEN - Je veux chanter un chant d'amour / Ton nom est infiniment grand / Attire- moi à Toi", url: 'https://youtu.be/IcSxoPhcVGk' }, { singer: 'Rebecca', title: "Eden t'adorer", url: 'https://youtu.be/uqccle_B0lo' }, { singer: 'Pélagie', title: 'Je ne desire que toi', url: 'https://youtu.be/VtwscHxXCV0' }, { singer: 'Pélagie', title: 'Jonathan C. Gambela - Sabaoth (clip officiel)', url: 'https://youtu.be/_iA52WcFQJc' }], louange: [{ singer: 'Prunelle', title: 'EDEN - Yessu Osseye', url: 'https://youtu.be/bmEm03K_GH8' }, { singer: 'Naomie', title: "Il n'y a personne comme Jésus", url: 'https://youtu.be/uYahuAoG3UA' }] },
-        { date: '2026-12-06', adoration: [{ singer: 'Prunelle', title: 'Hamos Ki- Say - Ton Nom est Yeshua (Live recording)', url: 'https://youtu.be/JYSTZcY3mTI' }, { singer: 'Prunelle', title: 'Emmanuel - Hosanna clips - Dena Mwana', url: 'https://youtu.be/NU4p2O12KLY' }, { singer: 'Naomie', title: 'EDEN - ESPRIT DE DIEU', url: 'https://youtu.be/AsLyhA8N_B8' }, { singer: 'Naomie', title: 'Nous te couronnons', url: 'https://youtu.be/pOTbbTE1Wq0' }], louange: [{ singer: 'Pélagie', title: 'Colombe Merveille - Emme- moi', url: 'https://youtu.be/znvfLXEqKc' }, { singer: 'Rebecca', title: 'Shekina - Brûle en moi', url: 'https://youtu.be/LF8fBElsFaE' }] },
-        { date: '2026-12-13', adoration: [{ singer: 'Pélagie', title: "Je veux chanter un chant d'amour - Hosanna clips - EDEN", url: 'https://youtu.be/XGIEp2rzT6M' }, { singer: 'Pélagie', title: 'Les Cieux proclament (À jamais tu seras) - Momentum Musique', url: 'https://youtu.be/Fy4qRLVuQJq' }, { singer: 'Naomie', title: 'Eden lago ayons', url: 'https://youtu.be/pZDy24ZL8U' }, { singer: 'Naomie', title: "J'ENTRE DANS LE SAINT / JE M'ATTENDS À TOI - Laura Dambury", url: 'https://youtu.be/5Nuw51jYBfs' }], louange: [{ singer: 'Rebecca', title: 'Infiniment grand (version louange)', url: 'https://youtu.be/BY_GKE9toFM' }, { singer: 'Prunelle', title: 'Dorcas Kaja - Il est bon de louer Dieu', url: 'https://youtu.be/ILhPhAfQ6Ew' }] },
-        { date: '2026-12-20', adoration: [{ singer: 'Rebecca', title: 'Marie Adé Tu es plus grand', url: 'https://youtu.be/1a6D-7DALZY' }, { singer: 'Rebecca', title: "Dena Mwana - 'Utilise- moi' (clip Officiel)", url: 'https://youtu.be/FH1Mps-cKSM' }, { singer: 'Prunelle', title: "Ne t'inquiète de rien", url: 'https://youtu.be/8lbbH29jp-l' }, { singer: 'Prunelle', title: "YESHUA - Seigneur fais- moi voir ta gloire / Tu es l'amour de mon âme - Grace Jocktane", url: 'https://youtu.be/CcJ_8A82vjE' }], louange: [{ singer: 'Pélagie', title: 'Constance - Owa Dewo', url: 'https://youtu.be_KeJV5u5xzE' }, { singer: 'Naomie', title: 'Pasteur Guy - Je suis dans la joie', url: 'https://youtu.be/IYWS3GMDS-E' }] },
-        { date: '2026-12-27', adoration: [{ singer: 'Rebecca', title: 'Jésus fait des miracles : Kacou Severin & Koné Fontaly', url: 'https://youtu.be/cFO2gyww3E4' }, { singer: 'Rebecca', title: 'Si le Dieu Des Esprits Des Prophets par Kouassi & living Gospel', url: 'https://youtu.be/TxX6EnpSY4l' }, { singer: 'Naomie', title: 'Inonde ce lieu de ta presence - Samuel Joseph', url: 'https://youtu.be/snKoJTmVrxq' }, { singer: 'Naomie', title: 'Le ciel est ouvert / Leve menm devan majeste / Mizerikod / Nous te rendons la Gloire - Grace Jocktane', url: 'https://youtu.be/aDfLR-94U8E' }], louange: [{ singer: 'Prunelle', title: 'DEBORAH LUKALU - Ma Consolation (Mungu wa Maajabu Live)', url: 'https://youtu.be/pDqW-f2x6kl' }, { singer: 'Pélagie', title: 'Je veux me rejouir', url: 'https://youtu.be/aweO0-Qh6mU' }] },
-        { date: '2027-01-03', adoration: [{ singer: 'Prunelle', title: "Je n'ai que toi", url: 'https://youtu.be/UjD_jKmP8Lk' }, { singer: 'Prunelle', title: 'Quand il descend', url: 'https://youtu.be/sc6i40B4nUY' }, { singer: 'Pélagie', title: 'Ouvre La Porte - Anthony & Keren Lambert Feat. Renaissance Worship', url: 'https://youtu.be/sX46whPXliQ' }, { singer: 'Pélagie', title: "DIEU QUI GARDE L'ALLIANCE I", url: 'https://youtu.be/Cc7vOmqE7fo' }], louange: [{ singer: 'Rebecca', title: "Dena Mwana - Je Bénirai L'Éternel", url: 'https://youtu.be/XR9vB2a9cjo' }, { singer: 'Naomie', title: 'Oh mon Dieu, qui est bon comme toi - Impact Gospel', url: 'https://youtu.be/_o7YezvlGVU' }] },
-        { date: '2027-01-10', adoration: [{ singer: 'Pélagie', title: 'Lumiere du monde', url: 'https://youtu.be/g0zwmV5Api4' }, { singer: 'Pélagie', title: 'MA SEULE FONDATION (Firm Foundation) LIVE | Victoire Musique feat. Carl Handy Corvil', url: 'https://youtu.be/laJDVDKGcL4' }, { singer: 'Rebecca', title: 'Adoration spontanée : ah eh eh / Yeshua/ Lion of Judah', url: 'https://youtu.be/kwWlz0Vo7K4' }, { singer: 'Rebecca', title: 'Sylvie Tagbo - QUE MA VIE SOIT UNE FLEUR (Live ICC)', url: 'https://youtu.be/kQMPv7yjzj1' }], louange: [{ singer: 'Prunelle', title: 'DEBORAH LUKALU feat. Lord Lombo - Tu es puissant / Call Me Favour', url: 'https://youtu.be/OL6k-hRRIVQ' }, { singer: 'Naomie', title: 'Comment ne pas te louer', url: 'https://youtu.be/8OrwyqCpN0E' }] },
-        { date: '2027-01-17', adoration: [{ singer: 'Naomie', title: 'Jésus tu as les paroles de la vie', url: 'https://youtu.be/Mn4oFz7umBo' }, { singer: 'Naomie', title: 'Hamos Ki- Say - YAHVÉ SHAMMA feat Larissa Doh', url: 'https://youtu.be/ghQ-gK9UvIM' }, { singer: 'Prunelle', title: 'Dans Ton sanctuaire - Gael Music- Live 2005', url: 'https://youtu.be/Bo1WV6jfdEY' }, { singer: 'Prunelle', title: 'À jamais tu es Saint', url: 'https://youtu.be/v2iRuO_u4aY' }], louange: [{ singer: 'Pélagie', title: 'Onel Mala - Vêtu de gloire', url: 'https://youtu.be/z9Y7ZlljFJg' }, { singer: 'Rebecca', title: 'Nous te louons (louange)', url: 'https://youtu.be/1Mbx8XrsWs' }] },
-        { date: '2027-01-24', adoration: [{ singer: 'Naomie', title: 'Rachel Anyeme - MIRACLE (Official Lyrics)', url: 'https://youtu.be/f4k4yL8igGQ' }, { singer: 'Naomie', title: 'Tu es tout pour moi', url: 'https://youtu.be/jBvHEu0mutw' }, { singer: 'Pélagie', title: "Adonai / Je T'adore - Athoms Mbuma", url: 'https://youtu.be/kQ-YDqAdL64' }, { singer: 'Pélagie', title: 'Oui je le vois', url: 'https://youtu.be/-RFIJr6FdGk' }], louange: [{ singer: 'Rebecca', title: 'Otis Endie - Ce que sa bouche a dit, sa main l\'accomplit', url: 'https://youtu.be/SMrUNuLeNds' }, { singer: 'Prunelle', title: 'Nadège Mbuma - Compilation Louange', url: 'https://youtu.be/xxWs03eFZyU' }] },
-        { date: '2027-01-31', adoration: [{ singer: 'Prunelle', title: 'Bénis L\'Éternel - Jonathan Munchongwa, Steev Y., SimianeMusic', url: 'https://youtu.be/1ieckehNEO8' }, { singer: 'Prunelle', title: 'Tu es plus grand - Hosanna clips - Athoms et Nadège Mbuma', url: 'https://youtu.be/CeKM7ctnRus' }, { singer: 'Rebecca', title: 'Dena Mwana - Souffle (Official video)', url: 'https://youtu.be/NM-eXztJFC4' }, { singer: 'Rebecca', title: "Jonathan C. Gambela - L'entrée du Roi (Clip Officiel)", url: 'https://youtu.be/Oc8_5tVTnX0' }], louange: [{ singer: 'Pélagie', title: 'Temps de louange avec Deborah Lukalu', url: 'https://youtu.be/_qITkwXqtHM' }, { singer: 'Naomie', title: 'Personne comme Jésus - Schekina', url: 'https://youtu.be/uYahuAoG3UA' }] },
-        { date: '2027-02-07', adoration: [{ singer: 'Prunelle', title: 'Je suis née pour le louer', url: 'https://youtu.be/AHq7jl_55NE' }, { singer: 'Prunelle', title: 'Digne est l\'Agneau (Hillsong) - Momentum Musique feat Laetitia Perraud', url: 'https://youtu.be/eusl00d92tl' }, { singer: 'Pélagie', title: 'Mireille Basirwa, puiser, plus de toi encore', url: 'https://youtu.be/C2ZYnxiUAmc' }, { singer: 'Pélagie', title: 'Elyah/ Adonai/Yeshua/Toi seul es Dieu - RuthDaniel LHOMME | CEEV Musique', url: 'https://youtu.be/0qcpfQyFnRk' }], louange: [{ singer: 'Prunelle', title: 'Koné Fontaly - Lago Sounagno', url: 'https://youtu.be/CdxWp8MbFU8' }, { singer: 'Pélagie', title: 'Dieu de miracles - Schekina', url: 'https://youtu.be/eZB_i8084OM' }] },
-        { date: '2027-02-14', adoration: [{ singer: 'Pélagie', title: 'NOUS TE COURONNONS (We crown You) || Dena Mwana & Plénitude Music', url: 'https://youtu.be/0WwyXT2pBc' }, { singer: 'Pélagie', title: 'JE VEUX PRIER | Derek- Jones feat. Olivia Kouamé (Live recording)', url: 'https://youtu.be/w47Br8rswmE' }, { singer: 'Rebecca', title: 'Qui peut encore dire ! - Josué le Sage', url: 'https://youtu.be/d3AN5N_NwuU' }, { singer: 'Prunelle', title: 'Je Lève Les Yeux', url: 'https://youtu.be/F2bH2CBluPA' }], louange: [{ singer: 'Naomie', title: 'Vibrez pour Dieu', url: 'https://youtu.be/wPXltafwCn1' }] },
-        { date: '2027-02-21', adoration: [{ singer: 'Rebecca', title: 'MOI ET MA MAISON (Live au Dôme de Paris) | REACH WORSHIP', url: 'https://youtu.be/TjKRzyzy7yCY' }, { singer: 'Rebecca', title: 'Dena Mwana - Saint Esprit (Officiel)', url: 'https://youtu.be/JPyvX4zFraU' }, { singer: 'Pélagie', title: 'Il veille sur moi - Marius Psalmiste', url: 'https://youtu.be/620s-RmQMkA' }, { singer: 'Pélagie', title: 'Jésus Christ est ressuscité', url: 'https://youtu.be/j8BCTovMrtM' }], louange: [{ singer: 'Prunelle', title: 'Jésus oh tu m\'as sauvé / Il a reçu le nom / Des cris de joie', url: 'https://youtu.be/vt3ek0dZkKY' }, { singer: 'Naomie', title: 'Sandrine Droubly - Prends ma main', url: 'https://youtu.be/gAkPDAtKtTO' }] },
-        { date: '2027-02-28', adoration: [{ singer: 'Prunelle', title: 'Colombe Merveille - que ton est Infiniment grand (feat Alliance de Grâce)', url: 'https://youtu.be/BY_GKE9toFM' }, { singer: 'Prunelle', title: 'DANY KASONGO Adullam & je viens puiser', url: 'https://youtu.be/L52u3RD7qJM' }, { singer: 'Naomie', title: 'À jamais tu seras', url: 'https://youtu.be/kMaz2rRMcGw' }, { singer: 'Naomie', title: 'Nous venons puiser plus de toi', url: 'https://youtu.be/x1iOQ8WLzek' }], louange: [{ singer: 'Pélagie', title: 'Fais- le savoir / Ça y est / Yékélé Kélé', url: 'https://youtu.be/F0Gu2XR5UM' }, { singer: 'Rebecca', title: 'Ano Mira - Écris mon nom', url: 'https://youtu.be/VmlLxj-eO_g' }] },
-        { date: '2027-03-07', adoration: [{ singer: 'Pélagie', title: 'Lyrique Ramène moi sur ta parole', url: 'https://youtu.be/43GUKWNOYPC' }, { singer: 'Pélagie', title: 'EH BABA (IL EST HORS DE QUESTION) - Enock Bahwere', url: 'https://youtu.be/up2iOpUUlbk' }, { singer: 'Naomie', title: 'Je louerai l\'Éternel', url: 'https://youtu.be/CZ_Pa_KsZIQ' }, { singer: 'Naomie', title: 'DANIEL BANAM - EL YAH | Live recording', url: 'https://youtu.be/JTsyX2Ta1TU' }], louange: [{ singer: 'Rebecca', title: "Il y a une prophétie sur ma vie / Hosanna / L'Éternel est bon", url: 'https://youtu.be/yqpPWheYcBo' }, { singer: 'Prunelle', title: 'Appelle, il te répondra (Cameroun)', url: 'https://youtu.be/no6JW1kjduDw' }] },
-        { date: '2027-03-14', adoration: [{ singer: 'Rebecca', title: "EDEN ' OUI DIEU ", url: 'https://youtu.be/QTWASEijcFI' }, { singer: 'Rebecca', title: 'Mains Levées (Wide as the sky) Adoration LIVE - Dena Mwana & Victoire Musique', url: 'https://youtu.be/CTG01ZSvfSE' }, { singer: 'Prunelle', title: "Moment d'adoration | Mon Seul Désir - Grace Jocktane à Évidence", url: 'https://youtu.be/bc7H1nIPdSw' }, { singer: 'Prunelle', title: "Hosanna (Jésus Nous T'élevons Plus Haut) (Live)", url: 'https://youtu.be/oUVrVQXnXLM' }], louange: [{ singer: 'Pélagie', title: 'Chant d\'amour - Rhema Loseke', url: 'https://youtu.be/9nfI9clq4UM' }, { singer: 'Naomie', title: 'Contemplation Night - Larissa Doh Ôti (à partir de 12 min)', url: 'https://youtu.be/qZRkiD_1tD4' }] },
-        { date: '2027-03-21', adoration: [{ singer: 'Rebecca', title: 'Alliance de grâce feat Colombe Merveille - Oins-moi', url: 'https://youtu.be/xuvt0F657U' }, { singer: 'Rebecca', title: 'Seigneur Nul n\'est comme toi', url: 'https://youtu.be/1rpvn3_FtmU' }, { singer: 'Naomie', title: 'Tu sais satisfaire', url: 'https://youtu.be/vEK1V-Zu0KU' }, { singer: 'Naomie', title: 'À la croix | NV Worship avec Jean Jean', url: 'https://youtu.be/U5eof6t4TZ0' }], louange: [{ singer: 'Prunelle', title: 'Lisanga — Il m\'a étonné', url: 'https://youtu.be/wCzeQqZfMmM' }, { singer: 'Pélagie', title: 'Les messagers du Sinaï - La foi en Dieu / Ceux qui se confient en l\'Éternel', url: 'https://youtu.be/im0ol1iitNk' }] },
-        { date: '2027-03-28', adoration: [{ singer: 'Prunelle', title: 'Je m\'abandonne | NV Worship', url: 'https://youtu.be/CfdbjdzQqDY' }, { singer: 'Prunelle', title: 'Emmanuel est là (ft Zoé Déborah)] Universal worship x Everlasting', url: 'https://youtu.be/iz4aRPHipxM' }, { singer: 'Pélagie', title: 'Tu es là présent permis nous waymaker', url: 'https://youtu.be/3EL5mryrdT4' }, { singer: 'Pélagie', title: 'Attire-moi à toi', url: 'https://youtu.be/3d6aqphOOxo' }], louange: [{ singer: 'Rebecca', title: 'Louange avec l\'archevêque Kodja Guy Vincent', url: 'https://youtu.be/hJUYqMH0s' }, { singer: 'Naomie', title: 'Marie-Anne Abia - L\'Heure de la Victoire', url: 'https://youtu.be/RZ45RuJpLg' }] },
-        { date: '2027-04-04', adoration: [{ singer: 'Pélagie', title: 'Jonathan C. Gambela - Onction (official video)', url: 'https://youtu.be/_O8psL1wTLw' }, { singer: 'Pélagie', title: 'QUE TA GLOIRE DESCENDE | Derek-Jones feat. Estelle Essouma (official video)', url: 'https://youtu.be/4KpGzx8HCQQ' }, { singer: 'Rebecca', title: 'ÉMERVEILLÉ EN TA PRÉSENCE ! / LE NOM DE JÉSUS', url: 'https://youtu.be/iM2Qc5WizR4' }, { singer: 'Rebecca', title: 'Change mon histoire guy Christ', url: 'https://youtu.be/s9k1c6rRBbo' }], louange: [{ singer: 'Prunelle', title: 'Louez l\'Éternel / Non je ne', url: 'https://youtu.be/K0xK7lK7lQ0' }, { singer: 'Naomie', title: 'Ma vie est entre tes mains', url: 'https://youtu.be/kX7lK7lQ0Q' }] },
-        { date: '2027-05-02', adoration: [{ singer: 'Naomie', title: 'Constance Père nous t\'adorons', url: 'https://youtu.be/4KRxebXkvas' }, { singer: 'Naomie', title: 'Je sais que tu es là eden', url: 'https://youtu.be/b6OXKeEDfzQ' }, { singer: 'Rebecca', title: 'IL ENTEND LES CRIS | REACH WORSHIP (feat. Patrick Isaac II)', url: 'https://youtu.be/d88iluuud_TI' }, { singer: 'Rebecca', title: 'L\'hymne - MLK Choir', url: 'https://youtu.be/ic8NMqgPGdQ' }], louange: [{ singer: 'Prunelle', title: 'Guy Vincent Kodja - J\'ai vu la puissance de Dieu', url: 'https://youtu.be/f1s_s8YDTRO' }, { singer: 'Pélagie', title: 'Louange en semaine (0 à 9 min)', url: 'https://youtu.be/LVd1dBXN0c8' }] },
-        { date: '2027-05-09', adoration: [{ singer: 'Prunelle', title: 'JE VEUX BOIRE À TA SOURCE, PLUS DE TOI ENCORE...', url: 'https://youtu.be/y2Cauq-RuGA' }, { singer: 'Prunelle', title: 'Guy Christ Quel est ton problème', url: 'https://youtu.be/2lOCIRwqwV4' }, { singer: 'Prunelle', title: 'LES CHANTRES DE LA FOI | PUISSANT SAUVEUR YESHUA', url: 'https://youtu.be/a6Vwr5GB-d4' }, { singer: 'Prunelle', title: 'MÉLODIE VENUE DU CIEL (Marcel Boungou) || Marie Zamor', url: 'https://youtu.be/wzyPsI-Dq9A' }], louange: [{ singer: 'Rebecca', title: 'Apopola - Kodja Guy Vincent ft. Dezy Champion', url: 'https://youtu.be/Ka8eeMi_3ew' }, { singer: 'Naomie', title: 'Medley louange - Groupe Prodige (à partir de 12 min)', url: 'https://youtu.be/TQCVS7tROSY' }] },
-        { date: '2027-05-16', adoration: [{ singer: 'Rebecca', title: 'Samuel Shukrani\'s- PAPA OH', url: 'https://youtu.be/Sru8S_qoiHc' }, { singer: 'Rebecca', title: 'JE VIENS POUR TE LOUER | Derek-Jones (Contemplation Live)', url: 'https://youtu.be/ZcwhRUPE30M' }, { singer: 'Pélagie', title: 'FAIS MOI VOIR TA GLOIRE / Vteam à C\'NIGHT (Lead : YANNICK BITTY)', url: 'https://youtu.be/YX0s-i1h6R4' }, { singer: 'Pélagie', title: 'Tu es yaweh', url: 'https://youtu.be/Dk2FHyotslo' }], louange: [{ singer: 'Prunelle', title: 'Bartimée - Chantre MariElo', url: 'https://youtu.be/GnhG1nBxb8b' }, { singer: 'Naomie', title: 'Geneviève Brou - Je marche avec assurance', url: 'https://youtu.be/LfwArPn6hOs' }] },
-        { date: '2027-05-23', adoration: [{ singer: 'Prunelle', title: 'EDEN - Je veux chanter un chant d\'amour / Ton nom est infiniment grand / Attire-moi à Toi', url: 'https://youtu.be/IcSxoPhcVGk' }, { singer: 'Prunelle', title: 'Eden t\'adorer', url: 'https://youtu.be/uqccle_B0lo' }, { singer: 'Naomie', title: 'Je ne désire que toi', url: 'https://youtu.be/VtwscHxXCV0' }, { singer: 'Naomie', title: 'Jonathan C. Gambela - Sabaoth (clip officiel)', url: 'https://youtu.be/_iA52WcFQJc' }], louange: [{ singer: 'Pélagie', title: 'Jésus ou Rien', url: 'https://youtu.be/Qk8bp3Z-c0o' }, { singer: 'Rebecca', title: 'Geneviève Brou - Jésus a ma vie (version louange)', url: 'https://youtu.be/3af967118Uo' }] },
-        { date: '2027-05-30', adoration: [{ singer: 'Pélagie', title: 'Hamos Ki-Say - Ton Nom est Yeshua (Live recording)', url: 'https://youtu.be/JYStZcY3mTI' }, { singer: 'Pélagie', title: 'Emmanuel - Hosanna clips - Dena Mwana', url: 'https://youtu.be/NU4p2O12KLY' }, { singer: 'Naomie', title: 'EDEN - ESPRIT DE DIEU', url: 'https://youtu.be/AsLyhA8N_B8' }, { singer: 'Naomie', title: 'Nous te couronnons', url: 'https://youtu.be/pOTbbTE1Wq0' }], louange: [{ singer: 'Rebecca', title: 'J\'ai décidé de suivre Jésus', url: 'https://youtu.be/EV0LLJhCOp0' }, { singer: 'Prunelle', title: 'Geneviève Brou - J\'ai un Dieu puissant là-haut', url: 'https://youtu.be/XhB6xxa77QE' }] },
-        { date: '2027-06-06', adoration: [{ singer: 'Rebecca', title: 'Je veux chanter un chant d\'amour - Hosanna clips - EDEN', url: 'https://youtu.be/XGIEp2rzT6M' }, { singer: 'Rebecca', title: 'Les Cieux proclament (À jamais tu seras) - Momentum Musique', url: 'https://youtu.be/Fy4qRLVvQJq' }, { singer: 'Prunelle', title: 'Eden lago ayons', url: 'https://youtu.be/pZDy24ZLL8U' }, { singer: 'Prunelle', title: 'J\'ENTRE DANS LE SAINT / JE M\'ATTENDS À TOI - Laura Dambury', url: 'https://youtu.be/5Nuw51jYBfs' }], louange: [{ singer: 'Pélagie', title: 'Marina', url: 'https://youtu.be/D4zeEAWKcZY' }, { singer: 'Naomie', title: 'Geneviève Brou - Elishama', url: 'https://youtu.be/BYHQ_3w24SU' }] },
-        { date: '2027-06-13', adoration: [{ singer: 'Rebecca', title: 'Marie Adé Tu es plus grand', url: 'https://youtu.be/1a6D-7DALZY' }, { singer: 'Rebecca', title: 'Dena Mwana - "Utilise-moi" (clip Officiel)', url: 'https://youtu.be/FH1Mps-cKSM' }, { singer: 'Naomie', title: 'Ne t\'inquiète de rien', url: 'https://youtu.be/8lbbH29jp-l' }, { singer: 'Naomie', title: 'YESHUA - Seigneur fais-moi voir ta gloire / Tu es l\'amour de mon âme - Grace Jocktane', url: 'https://youtu.be/CcJ_8A82vjE' }], louange: [{ singer: 'Prunelle', title: 'Asaph du Ciel - La Louange des aigles', url: 'https://youtu.be/JkCcXw2IkM' }, { singer: 'Pélagie', title: 'Qui peut encore dire', url: 'https://youtu.be/JwSxC3WjdEo' }] },
-        { date: '2027-06-20', adoration: [{ singer: 'Prunelle', title: 'Jésus fait des miracles : Kacou Severin & Koné Fontaly', url: 'https://youtu.be/cFO2gyww3E4' }, { singer: 'Prunelle', title: 'Si le Dieu Des Esprits Des Prophets par Kouassi & living Gospel', url: 'https://youtu.be/TxX6EnpSY4I' }, { singer: 'Pélagie', title: 'Inonde ce lieu de ta présence - Samuel Joseph', url: 'https://youtu.be/snKoJTmVrxq' }, { singer: 'Pélagie', title: 'Le ciel est ouvert / Leve menm devan majeste / Mizerikod / Nous te rendons la Gloire - Grace Jocktane', url: 'https://youtu.be/aDfLR-94U8E' }], louange: [{ singer: 'Rebecca', title: 'Je chanterai de tout cœur', url: 'https://youtu.be/nde-Px_5l2I' }, { singer: 'Naomie', title: 'Kollins Newman feat. Flamme de Vie - Louange prophétique', url: 'https://youtu.be/5jJla4Ta1Ho' }] },
-        { date: '2027-06-27', adoration: [{ singer: 'Pélagie', title: "Je n'ai que toi", url: 'https://youtu.be/UjD_jKmP8Lk' }, { singer: 'Pélagie', title: 'Quand il descend', url: 'https://youtu.be/sc6i40B4nUY' }, { singer: 'Rebecca', title: 'Ouvre La Porte - Anthony & Keren Lambert Feat. Renaissance Worship', url: 'https://youtu.be/sX46whPXlq' }, { singer: 'Rebecca', title: "DIEU QUI GARDE L'ALLIANCE !", url: 'https://youtu.be/Cc7vOmqE7fo' }], louange: [{ singer: 'Prunelle', title: 'Ensemble louons le Seigneur', url: 'https://youtu.be/VJzfosG3dPs' }, { singer: 'Naomie', title: 'Louange prophetique Acte 2 (à partir de 7 min 23)', url: 'https://youtu.be/qKlpkIckxE' }] },
-        { date: '2027-07-04', adoration: [{ singer: 'Naomie', title: 'Lumiere du monde', url: 'https://youtu.be/g0zwmV5Api4' }, { singer: 'Naomie', title: 'MA SEULE FONDATION (Firm Foundation) LIVE | Victoire Musique feat. Carl Handy Corvil', url: 'https://youtu.be/laJDVDKGcL4' }, { singer: 'Prunelle', title: 'Adoration spontanée : ah eh eh / Yeshua/ Lion of Judah', url: 'https://youtu.be/kwwlz0Vo7K4' }, { singer: 'Prunelle', title: 'Sylvie Tagbo - QUE MA VIE SOIT UNE FLEUR (Live ICC)', url: 'https://youtu.be/kQMPv7yJjz1' }], louange: [{ singer: 'Pélagie', title: "Il n'y a personne comme Jésus", url: 'https://youtu.be/uYahuAoG3UA' }, { singer: 'Rebecca', title: 'Louange prophetique à Bouaké (à partir de 2 min)', url: 'https://youtu.be/MSjV2ISLMUw' }] },
-        { date: '2027-07-11', adoration: [{ singer: 'Naomie', title: 'Jésus tu as les paroles de la vie', url: 'https://youtu.be/Mn4oFz7umBo' }, { singer: 'Naomie', title: 'Hamos Ki- Say - YAHVÉ SHAMMA feat Larissa Doh', url: 'https://youtu.be/ghQ-gK9UvIM' }, { singer: 'Pélagie', title: 'Dans Ton sanctuaire - Gael Music- Live 2005', url: 'https://youtu.be/Bo1WV6jfdEY' }, { singer: 'Pélagie', title: 'À jamais tu es Saint', url: 'https://youtu.be/v2iRuO_u4aY' }], louange: [{ singer: 'Rebecca', title: 'Shekina - Brûle en moi', url: 'https://youtu.be/LF8fBEIsFaE' }, { singer: 'Prunelle', title: 'Armand Koffi - Medley Louange', url: 'https://youtu.be/HLdciailjb0' }] },
-        { date: '2027-07-18', adoration: [{ singer: 'Prunelle', title: 'Rachel Anyone - MIRACLE (Official Lyrics)', url: 'https://youtu.be/t4k4yL8igGQ' }, { singer: 'Prunelle', title: 'Tu es tout pour moi', url: 'https://youtu.be/jBvHEu0mutw' }, { singer: 'Rebecca', title: 'Adonai / Je T\'adore - Athoms Mbuma', url: 'https://youtu.be/kQ-YDqAdL64' }, { singer: 'Rebecca', title: 'Oui je le vois', url: 'https://youtu.be/-RFIJr6FdGk' }], louange: [{ singer: 'Pélagie', title: 'Dorcas Kaja - Il est bon de louer Dieu', url: 'https://youtu.be/ILhPhaQ6Ew' }, { singer: 'Naomie', title: 'New Praise Family - Ivoirian Medley 2 (à partir de 10 min)', url: 'https://youtu.be/0Hr_6bfuQfA' }] },
-        { date: '2027-07-25', adoration: [{ singer: 'Naomie', title: 'Bénis L\'Éternel - Jonathan Munchongwa, Steev Y., SimianeMusic', url: 'https://youtu.be/1iechehNEO8' }, { singer: 'Naomie', title: 'Tu es plus grand - Hosanna clips - Athoms et Nadège Mbuma', url: 'https://youtu.be/CekM7ctnRus' }, { singer: 'Rebecca', title: 'Dena Mwana - Souffle (Official video)', url: 'https://youtu.be/NM-eXztJFC4' }, { singer: 'Rebecca', title: 'Jonathan C. Gambela - L\'entrée du Roi (Clip Officiel)', url: 'https://youtu.be/Oc8_5tVTnX0' }], louange: [{ singer: 'Prunelle', title: 'Pasteur Guy - Je suis dans la joie', url: 'https://youtu.be/IYWS3GMDS-E' }, { singer: 'Pélagie', title: 'New Praise Family - Ivoirian Medley 1', url: 'https://youtu.be/ZT3bDHRxQNI' }] },
-        { date: '2027-08-01', adoration: [{ singer: 'Pélagie', title: 'Je suis née pour te louer', url: 'https://youtu.be/AHq7jl_55NE' }, { singer: 'Pélagie', title: "Digne est l'Agneau (Hillsong) - Momentum Musique feat Laetitia Perraud", url: 'https://youtu.be/eusl00d92tl' }, { singer: 'Prunelle', title: 'Mireille Basiwa, puiser, plus de toi encore', url: 'https://youtu.be/C2ZYnxIUAmc' }, { singer: 'Prunelle', title: 'Elyah/ Adonai/Yeshua/Toi seul es Dieu - RuthDaniel LHOMME | CEEV Musique', url: 'https://youtu.be/0qcpfQyFnRk' }], louange: [{ singer: 'Rebecca', title: 'Je veux me réjouir', url: 'https://youtu.be/aweOQ-Qh6mU' }, { singer: 'Naomie', title: "Daniel Nortey - J'ai choisi Jésus", url: 'https://youtu.be/LEQ4JlmQ_3k' }] },
-        { date: '2027-08-08', adoration: [{ singer: 'Pélagie', title: 'NOUS TE COURONNONS (We crown You) || Dena Mwana & Plénitude Music', url: 'https://youtu.be/0WwyXT2pBc' }, { singer: 'Pélagie', title: 'JE VEUX PRIER | Derek- Jones feat. Olivia Kouamé (Live recording)', url: 'https://youtu.be/w47Br8srwmE' }, { singer: 'Pélagie', title: 'Je Lève Les Yeux', url: 'https://youtu.be/F2bH2CBluPA' }, { singer: 'Pélagie', title: 'Grâce valerie J\'aime ta présence', url: 'https://youtu.be/FfXV3M3S3dl' }], louange: [{ singer: 'Prunelle', title: 'Oh mon Dieu, qui est bon comme toi - Impact Gospel', url: 'https://youtu.be/_o7YezvlGVU' }, { singer: 'Naomie', title: "Jésus m'a libéré (Medley)", url: 'https://youtu.be/jqrogd61BZA' }] },
-        { date: '2027-08-15', adoration: [{ singer: 'Prunelle', title: 'MOI ET MA MAISON (Live au Dôme de Paris) | REACH WORSHIP', url: 'https://youtu.be/TjKRyzy7yCY' }, { singer: 'Prunelle', title: 'Dena Mwana - Saint Esprit (Officiel)', url: 'https://youtu.be/JPyvX4zFraU' }, { singer: 'Naomie', title: 'Il veille sur moi - Marius Psalmiste', url: 'https://youtu.be/620s-RmQMKA' }, { singer: 'Naomie', title: 'Jésus Christ est ressuscité', url: 'https://youtu.be/j8BCTovMrTM' }], louange: [{ singer: 'Pélagie', title: 'Comment ne pas te louer', url: 'https://youtu.be/8OrwyqCpNOE' }, { singer: 'Rebecca', title: 'La trompette sonnera', url: 'https://youtu.be/hSfKhJFOZfc' }] },
-        { date: '2027-08-22', adoration: [{ singer: 'Pélagie', title: 'Colombe Merveille - que ton est Infiniment grand (feat Alliance de Grâce)', url: 'https://youtu.be/BY_GKE9toFM' }, { singer: 'Pélagie', title: 'DANY KASONGO Adullam & je viens puiser', url: 'https://youtu.be/L52u3RD7qJM' }, { singer: 'Naomie', title: 'À jamais tu seras', url: 'https://youtu.be/kMaz2rRMcGw' }, { singer: 'Naomie', title: 'Nous venons puiser plus de toi', url: 'https://youtu.be/x1iOQ8WLzek' }], louange: [{ singer: 'Rebecca', title: 'Nous te louons (louange)', url: 'https://youtu.be/1Mbx8XrsWs' }, { singer: 'Prunelle', title: 'La nouvelle Jérusalem', url: 'https://youtu.be/3u9_SXVc3h0' }] },
-        { date: '2027-08-29', adoration: [{ singer: 'Rebecca', title: 'Lyrique Ramène moi sur ta parole', url: 'https://youtu.be/43GUKWNOYPc' }, { singer: 'Rebecca', title: 'EH BABA (IL EST HORS DE QUESTION) - Enock Bahwere', url: 'https://youtu.be/up2iOpUUbk' }, { singer: 'Prunelle', title: "Je louerai l'Éternel", url: 'https://youtu.be/CZ_Pa_KsZIQ' }, { singer: 'Prunelle', title: 'DANIEL BANAM - EL YAH | Live recording', url: 'https://youtu.be/JTtsyX2Ta1TU' }], louange: [{ singer: 'Pélagie', title: 'Nadège Mbuma - Compilation Louange', url: 'https://youtu.be/xxVwS03eFZyU' }, { singer: 'Naomie', title: 'Rabbi, il agira', url: 'https://youtu.be/ZDgdMTpTlLhw' }] },
-        { date: '2027-09-05', adoration: [{ singer: 'Rebecca', title: 'EDEN "OUI DIEU"', url: 'https://youtu.be/QTwASEijcF1' }, { singer: 'Rebecca', title: 'Mains Levées (Wide as the sky) Adoration LIVE - Dena Mwana & Victoire Musique', url: 'https://youtu.be/CTG01ZSvfSE' }, { singer: 'Naomie', title: "Moment d'adoration | Mon Seul Désir - Grace Jocktane à Évidence", url: 'https://youtu.be/bc7H1nIPdSw' }, { singer: 'Naomie', title: "Hosanna (Jésus Nous T'élevons Plus Haut) (Live)", url: 'https://youtu.be/oUVrVQXnXLM' }], louange: [{ singer: 'Prunelle', title: 'Personne comme Jésus - Schekina', url: 'https://youtu.be/uYahuAoG3UA' }, { singer: 'Pélagie', title: 'Sans toi, qui serais-je ?', url: 'https://youtu.be/la60SQBnhm0' }] },
-        { date: '2027-09-12', adoration: [{ singer: 'Prunelle', title: 'Alliance de grâce feat Colombe Merveille - Oins-moi', url: 'https://youtu.be/xuvt0F657U' }, { singer: 'Prunelle', title: "Seigneur Nul n'est comme toi", url: 'https://youtu.be/1rpvn3_FtmU' }, { singer: 'Pélagie', title: 'Tu sais satisfaire', url: 'https://youtu.be/vEK1V-Zu0KU' }, { singer: 'Pélagie', title: 'À la croix | NV Worship avec Jean Jean', url: 'https://youtu.be/U5eof6t4TZ0' }], louange: [{ singer: 'Rebecca', title: 'Dieu de miracles - Schekina', url: 'https://youtu.be/eZB_i8084OM' }, { singer: 'Naomie', title: 'Je ne peux pas le laisser', url: 'https://youtu.be/w5bZ1MzjgeE' }] },
-        { date: '2027-09-19', adoration: [{ singer: 'Pélagie', title: "Je m'abandonne | NV Worship", url: 'https://youtu.be/CfdbjdzQqDY' }, { singer: 'Pélagie', title: 'Emmanuel est là (ft Zoé Déborah)] Universal worship x Everlasting', url: 'https://youtu.be/iz4aRPHipxM' }, { singer: 'Rebecca', title: 'Tu es là présent permis nous waymaker', url: 'https://youtu.be/3EL5mryrdT4' }, { singer: 'Rebecca', title: 'Attire-moi à toi', url: 'https://youtu.be/3d6aqphOOxo' }], louange: [{ singer: 'Prunelle', title: 'Vibrez pour Dieu', url: 'https://youtu.be/wPXltafwCn1' }, { singer: 'Naomie', title: 'Si Jésus dit oui', url: 'https://youtu.be/qS5KrQD8qOw' }] },
-        { date: '2027-09-26', adoration: [{ singer: 'Naomie', title: 'Jonathan C. Gambela - Onction (official video)', url: 'https://youtu.be/_O8psL1wTLw' }, { singer: 'Naomie', title: 'QUE TA GLOIRE DESCENDE | Derek- Jones feat. Estelle Essouma (official video)', url: 'https://youtu.be/4KpGzx8HCQQ' }, { singer: 'Rebecca', title: 'Si mon peuple', url: 'https://youtu.be/lEw5lsvCq1w' }, { singer: 'Prunelle', title: 'ÉMERVEILLÉ EN TA PRÉSENCE ! / LE NOM DE JÉSUS', url: 'https://youtu.be/iM2Qc5WizR4' }], louange: [{ singer: 'Pélagie', title: 'Sandrine Droubly - Prends ma main', url: 'https://youtu.be/gAkPDAtKTT0' }] },
-        { date: '2027-10-03', adoration: [{ singer: 'Naomie', title: 'TU ES SAINT & CEST TOI - Derek- Jones (Contemplation Live)', url: 'https://youtu.be/e2tR4pq7lmQ' }, { singer: 'Naomie', title: 'Eden même si une mère abandonne son enfant', url: 'https://youtu.be/D88zQyEjTxk' }, { singer: 'Pélagie', title: 'Pape Jey - Adullam (Live Expérience)', url: 'https://youtu.be/jHHpsGEMg7w' }, { singer: 'Pélagie', title: 'SI LA MER SE DÉCHAÎNE', url: 'https://youtu.be/NiBZ7rroSVA' }], louange: [{ singer: 'Rebecca', title: 'Ano Mira - Écris mon nom', url: 'https://youtu.be/VmlLxj-eO_g' }, { singer: 'Prunelle', title: 'Souffle ton esprit', url: 'https://youtu.be/Eo0MJdbNHjk' }] },
-        { date: '2027-10-10', adoration: [{ singer: 'Prunelle', title: 'Au Contrôle / À jamais Tu es saint - Athoms Mbuma, Marie Zamor - EMCI Musique', url: 'https://youtu.be/l2Z8uMVKx9E' }, { singer: 'Prunelle', title: 'Deborah Lukalu - A Genoux - [Live]', url: 'https://youtu.be/q1qEBJSEWW' }, { singer: 'Rebecca', title: 'MON ÂME BÉNIT LE SEIGNEUR - Eloise Bouanga (cover Tchouva)', url: 'https://youtu.be/-Q7XpLhszSO' }, { singer: 'Rebecca', title: 'Koné Fontali je veux faire ton œuvre lyrics', url: 'https://youtu.be/G97fm_mgm3s' }], louange: [{ singer: 'Pélagie', title: 'Appelle, il te répondra (Cameroun)', url: 'https://youtu.be/no6JW1kjuDw' }, { singer: 'Naomie', title: 'Ton grand amour', url: 'https://youtu.be/FPelrT8iqJc' }] },
-        { date: '2027-10-17', adoration: [{ singer: 'Naomie', title: 'Mon meilleur ami', url: 'https://youtu.be/krPDnnW6OOM' }, { singer: 'Naomie', title: 'Amour extravagant', url: 'https://youtu.be/C7Co5SLVbY4' }, { singer: 'Rebecca', title: 'Yeshua d\'âge en âge', url: 'https://youtu.be/qhC3qi3qiR4' }, { singer: 'Rebecca', title: "Que t'es vives eaux", url: 'https://youtu.be/ZgWF5Xj_qB4' }], louange: [{ singer: 'Prunelle', title: 'Contemplation Night - Larissa Doh Oti (a partir de 12 min)', url: 'https://youtu.be/qZRkiD_t1D4' }, { singer: 'Pélagie', title: "J'ai l'assurance de mon salut", url: 'https://youtu.be/WKbNl0tNiEO' }] },
-        { date: '2027-10-24', adoration: [{ singer: 'Pélagie', title: "Constance Père nous t'adorons", url: 'https://youtu.be/4KRxebXkvas' }, { singer: 'Pélagie', title: 'Je sais que tu es là eden', url: 'https://youtu.be/b6OXKeEDfzQ' }, { singer: 'Prunelle', title: 'IL ENTEND LES CRIS | REACH WORSHIP (feat. Patrick Isaac II)', url: 'https://youtu.be/d88iluuud_TII' }, { singer: 'Prunelle', title: "L'hymne - MLK Choir", url: 'https://youtu.be/ic8NMqgPGdQ' }], louange: [{ singer: 'Rebecca', title: "Les messagers du Sinaï - La foi en Dieu / Ceux qui se confient en l'Éternel", url: 'https://youtu.be/im0ol1iitNk' }, { singer: 'Naomie', title: 'Le temps de Dieu', url: 'https://youtu.be/pYt-vnh4ols' }] },
-        { date: '2027-10-31', adoration: [{ singer: 'Rebecca', title: 'JE VEUX BOIRE A TA SOURCE, PLUS DE TOI ENCORE...', url: 'https://youtu.be/y2Cauq-RuGA' }, { singer: 'Rebecca', title: 'Guy Christ Quel est ton problème', url: 'https://youtu.be/2lOCIRwqwV4' }, { singer: 'Naomie', title: 'LES CHANTRES DE LA FOI | PUISSANT SAUVEUR YESHUA', url: 'https://youtu.be/a6Vwr5GB-d4' }, { singer: 'Naomie', title: 'MÉLODIE VENUE DU CIEL (Marcel Boungou) || Marie Zamor', url: 'https://youtu.be/wzyPsI-Dq9A' }], louange: [{ singer: 'Prunelle', title: 'Apopola - Kodja Guy Vincent ft. Dezy Champion', url: 'https://youtu.be/Ka8eeMi_3ew' }, { singer: 'Pélagie', title: 'Medley louange - Groupe Prodige (à partir de 12 min)', url: 'https://youtu.be/TQCVS7tROSY' }] },
-        { date: '2027-11-07', adoration: [{ singer: 'Prunelle', title: 'Samuel Shukrani\'s- PAPA OH', url: 'https://youtu.be/Sru8S_qoiHc' }, { singer: 'Prunelle', title: 'JE VIENS POUR TE LOUER | Derek-Jones (Contemplation Live)', url: 'https://youtu.be/ZcwhRUPE30M' }, { singer: 'Rebecca', title: 'FAIS MOI VOIR TA GLOIRE / Vteam à C\'NIGHT (Lead : YANNICK BITTY)', url: 'https://youtu.be/YX0s-i1h6R4' }, { singer: 'Rebecca', title: 'Tu es yaweh', url: 'https://youtu.be/Dk2FHyotslo' }], louange: [{ singer: 'Pélagie', title: 'Bartimée - Chantre MariElo', url: 'https://youtu.be/GnhG1nBxb8b' }, { singer: 'Naomie', title: 'Geneviève Brou - Je marche avec assurance', url: 'https://youtu.be/LfwArPn6hOs' }] },
-        { date: '2027-11-14', adoration: [{ singer: 'Naomie', title: 'EDEN - Je veux chanter un chant d\'amour / Ton nom est infiniment grand / Attire-moi à Toi', url: 'https://youtu.be/IcSxoPhcVGk' }, { singer: 'Naomie', title: 'Eden t\'adorer', url: 'https://youtu.be/uqccle_B0lo' }, { singer: 'Prunelle', title: 'Je ne désire que toi', url: 'https://youtu.be/VtwscHxXCV0' }, { singer: 'Prunelle', title: 'Jonathan C. Gambela - Sabaoth (clip officiel)', url: 'https://youtu.be/_iA52WcFQJc' }], louange: [{ singer: 'Rebecca', title: 'Jésus ou Rien', url: 'https://youtu.be/Qk8bp3Z-c0o' }, { singer: 'Pélagie', title: 'Geneviève Brou - Jésus a ma vie (version louange)', url: 'https://youtu.be/3af967118Uo' }] },
-        { date: '2027-11-21', adoration: [{ singer: 'Rebecca', title: 'Hamos Ki-Say - Ton Nom est Yeshua (Live recording)', url: 'https://youtu.be/JYStZcY3mTI' }, { singer: 'Rebecca', title: 'Emmanuel - Hosanna clips - Dena Mwana', url: 'https://youtu.be/NU4p2O12KLY' }, { singer: 'Pélagie', title: 'EDEN - ESPRIT DE DIEU', url: 'https://youtu.be/AsLyhA8N_B8' }, { singer: 'Pélagie', title: 'Nous te couronnons', url: 'https://youtu.be/pOTbbTE1Wq0' }], louange: [{ singer: 'Prunelle', title: 'J\'ai décidé de suivre Jésus', url: 'https://youtu.be/EV0LLJhCOp0' }, { singer: 'Naomie', title: 'Geneviève Brou - J\'ai un Dieu puissant là-haut', url: 'https://youtu.be/XhB6xxa77QE' }] },
-        { date: '2027-11-28', adoration: [{ singer: 'Pélagie', title: 'Je veux chanter un chant d\'amour - Hosanna clips - EDEN', url: 'https://youtu.be/XGIEp2rzT6M' }, { singer: 'Pélagie', title: 'Les Cieux proclament (À jamais tu seras) - Momentum Musique', url: 'https://youtu.be/Fy4qRLVvQJq' }, { singer: 'Naomie', title: 'Eden lago ayons', url: 'https://youtu.be/pZDy24ZLL8U' }, { singer: 'Naomie', title: 'J\'ENTRE DANS LE SAINT / JE M\'ATTENDS À TOI - Laura Dambury', url: 'https://youtu.be/5Nuw51jYBfs' }], louange: [{ singer: 'Rebecca', title: 'Marina', url: 'https://youtu.be/D4zeEAWKcZY' }, { singer: 'Prunelle', title: 'Geneviève Brou - Elishama', url: 'https://youtu.be/BYHQ_3w24SU' }] },
-        { date: '2027-12-05', adoration: [{ singer: 'Prunelle', title: 'Marie Adé Tu es plus grand', url: 'https://youtu.be/1a6D-7DALZY' }, { singer: 'Prunelle', title: 'Dena Mwana - "Utilise-moi" (clip Officiel)', url: 'https://youtu.be/FH1Mps-cKSM' }, { singer: 'Rebecca', title: 'Ne t\'inquiète de rien', url: 'https://youtu.be/8lbbH29jp-l' }, { singer: 'Rebecca', title: 'YESHUA - Seigneur fais-moi voir ta gloire / Tu es l\'amour de mon âme - Grace Jocktane', url: 'https://youtu.be/CcJ_8A82vjE' }], louange: [{ singer: 'Pélagie', title: 'Asaph du Ciel - La Louange des aigles', url: 'https://youtu.be/JkCcXw2IkM' }, { singer: 'Naomie', title: 'Qui peut encore dire', url: 'https://youtu.be/JwSxC3WjdEo' }] },
-        { date: '2027-12-12', adoration: [{ singer: 'Pélagie', title: 'Jésus fait des miracles : Kacou Severin & Koné Fontaly', url: 'https://youtu.be/cFO2gyww3E4' }, { singer: 'Pélagie', title: 'Si le Dieu Des Esprits Des Prophets par Kouassi & living Gospel', url: 'https://youtu.be/Txx6EnpSY4I' }, { singer: 'Rebecca', title: 'Inonde ce lieu de ta présence - Samuel Joseph', url: 'https://youtu.be/snKoJTmVrxq' }, { singer: 'Rebecca', title: 'Le ciel est ouvert / Leve menm devan majeste / Mizerikod / Nous te rendons la Gloire - Grace Jocktane', url: 'https://youtu.be/aDfLR-94U8E' }], louange: [{ singer: 'Prunelle', title: 'Medley louange - Groupe Prodige (a partir de 12 min)', url: 'https://youtu.be/TQCVS7tROSY' }, { singer: 'Naomie', title: 'Medley Gospel Retro - Africa New Gospel', url: 'https://youtu.be/-SRWgA_fyQ4' }] },
-        { date: '2027-12-19', adoration: [{ singer: 'Naomie', title: "Je n'ai que toi", url: 'https://youtu.be/UjD_jKmP8Lk' }, { singer: 'Naomie', title: 'Quand il descend', url: 'https://youtu.be/sc6i40B4nUY' }, { singer: 'Prunelle', title: 'Ouvre La Porte - Anthony & Keren Lambert Feat. Renaissance Worship', url: 'https://youtu.be/sX46whPXliQ' }, { singer: 'Prunelle', title: "DIEU QUI GARDE L'ALLIANCE I", url: 'https://youtu.be/Cc7vOmqE7fo' }], louange: [{ singer: 'Pélagie', title: 'Geneviève Brou - Je marche avec assurance', url: 'https://youtu.be/LfwArPn6hOs' }, { singer: 'Rebecca', title: 'Moi je ne souffrirai jamais (Il y a un nom / Jésus est merveilleux)', url: 'https://youtu.be/5XVUXX9_t-k' }] },
-        { date: '2027-12-26', adoration: [{ singer: 'Naomie', title: 'Lumiere du monde', url: 'https://youtu.be/g0zwmV5Api4' }, { singer: 'Naomie', title: 'MA SEULE FONDATION (Firm Foundation) LIVE | Victoire Musique feat. Carl Handy Corvil', url: 'https://youtu.be/laJDVDKGCcL4' }, { singer: 'Pélagie', title: 'Adoration spontanée : ah eh eh / Yeshua/ Lion of Judah', url: 'https://youtu.be/kwwlz0Vo7K4' }, { singer: 'Pélagie', title: 'Sylvie Tagbo - QUE MA VIE SOIT UNE FLEUR (Live ICC)', url: 'https://youtu.be/kQMPv7yJzl' }], louange: [{ singer: 'Rebecca', title: 'Geneviève Brou - Jésus a ma vie (version louange)', url: 'https://youtu.be/3af967118Uo' }, { singer: 'Prunelle', title: 'Je sais que Jésus est la vie', url: 'https://youtu.be/D9Q4qu0bZSU' }] }
-    ];
+    {
+        "date": "2026-11-15",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "JE VEUX BOIRE À TA SOURCE, PLUS DE TOI ENCORE...",
+                "url": "https://youtu.be/y2Cauq-RuGA"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Guy Christ Quel est ton problème",
+                "url": "https://youtu.be/n08-cH_3L3k?is=1OKBTpaed8377mG9"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "LES CHANTRES DE LA FOI | PUISSANT SAUVEUR YESHUA",
+                "url": "https://youtu.be/a6Vwr5GB-d4"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "MELODIE VENUE DU CIEL (Marcel Boungou) || Marie Zamor",
+                "url": "https://youtu.be/wzyPsl-Dq9A?is=HfVfWX_276Hniqei"
+            }
+        ]
+    },
+    {
+        "date": "2026-11-22",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Samuel Shukrani's- PAPA OH",
+                "url": "https://youtu.be/Sru8S_qoiHc"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "JE VIENS POUR TE LOUER | Derek-Jones (Contemplation Live)",
+                "url": "https://youtu.be/ZcwHRUPE30M?is=p4W-kHgrj6--AcAy"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "FAIS MOI VOIR TA GLOIRE /Vteam à C'NIGHT (Lead : YANNICK BITTY)",
+                "url": "https://youtu.be/YX0s-i1h6R4"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Tu es yaweh",
+                "url": "https://youtu.be/Dk2FHyotslo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Rosny Kayiba ft Deborah Lukalu - Je Vais Le Louer",
+                "url": "https://youtu.be/O98lxBb98Ck"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Ensemble louons le Seigneur",
+                "url": "https://youtu.be/VJzfosG3dPs"
+            }
+        ]
+    },
+    {
+        "date": "2026-11-29",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "EDEN - Je veux chanter un chant d'amour / Ton nom est infiniment grand / Attire-moi à Toi",
+                "url": "https://youtu.be/lcSxoPhcVGk?is=S3pJq2S0C3r-JDPZ"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Eden t'adorer",
+                "url": "https://youtu.be/uqccle_B0lo"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Je ne desire que toi",
+                "url": "https://youtu.be/VtwscHxXCV0"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Jonathan C. Gambela - Sabaoth (clip officiel)",
+                "url": "https://youtu.be/_iA52WcFQJc"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "EDEN - Yessu Osseye",
+                "url": "https://youtu.be/bmEm03K_GH8"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Il n'y a personne comme Jésus",
+                "url": "https://youtu.be/uYahuAoG3UA"
+            }
+        ]
+    },
+    {
+        "date": "2026-12-06",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Hamos Ki-Say - Ton Nom est Yeshua (Live recording)",
+                "url": "https://youtu.be/JYsTzcY3mTI?is=qLqCCccrTTXWds25"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Emmanuel - Hosanna clips - Dena Mwana",
+                "url": "https://youtu.be/NU4p2Ol2KLY?is=WZne-sj6LMNoTbI1"
+            },
+            {
+                "singer": "Naomie",
+                "title": "EDEN - ESPRIT DE DIEU",
+                "url": "https://youtu.be/AsLyhA8N_B8"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Nous te couronnons",
+                "url": "https://youtu.be/pOTbbTE1Wq0"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Colombe Merveille - Emme- moi",
+                "url": "https://youtu.be/znvfLXEqcKc?is=pcwPPZYw32mwfc48"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Shekina - Brûle en moi",
+                "url": "https://youtu.be/LF8fBEIsFaE?is=ekzAbc1l5pEu9cfz"
+            }
+        ]
+    },
+    {
+        "date": "2026-12-13",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Je veux chanter un chant d'amour - Hosanna clips - EDEN",
+                "url": "https://youtu.be/XGlEp2rzT6M?is=xFYheJrHJvHzvzDp"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Les Cieux proclament (À jamais tu seras) - Momentum Musique",
+                "url": "https://youtu.be/Fy4gRLVuQJg?is=yNxfMcEWTW6DOsOb"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Eden lago ayons",
+                "url": "https://youtu.be/pZDy24ZLL8U?is=t4jXyeTWDe7nyf_P"
+            },
+            {
+                "singer": "Naomie",
+                "title": "J'ENTRE DANS LE SAINT / JE M'ATTENDS À TOI - Laura Dambury",
+                "url": "https://youtu.be/5Nuw51jYBfs?is=xiXDZrvyVAVFcEn5"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Infiniment grand (version louange)",
+                "url": "https://youtu.be/BY_GKE9toFM"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Dorcas Kaja - Il est bon de louer Dieu",
+                "url": "https://youtu.be/lLhPhAfQ6Ew?is=JmxcZy81DkiePkVV"
+            }
+        ]
+    },
+    {
+        "date": "2026-12-20",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Marie Adé Tu es plus grand",
+                "url": "https://youtu.be/1a6D-7DALZY"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Dena Mwana - \"Utilise-moi\" (clip Officiel)",
+                "url": "https://youtu.be/FH1MpS-cKSM?is=x5eSEkcqG8MvS_mh"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Ne t'inquiète de rien",
+                "url": "https://youtu.be/TtmWGV1ugsg?is=1rGn0GZNLr-OjhID"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "YESHUA - Seigneur fais- moi voir ta gloire / Tu es l'amour de mon âme - Grace Jocktane",
+                "url": "https://youtu.be/CcJ_8A82vjE"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Constance - Owa Dewo",
+                "url": "https://youtu.be/_KeJV5u5xzE?is=qK_mhaxOpohxMzyg"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Pasteur Guy - Je suis dans la joie",
+                "url": "https://youtu.be/lYWS3GMDS-E?is=hEZj6OxMTW71NtXZ"
+            }
+        ]
+    },
+    {
+        "date": "2026-12-27",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Jésus fait des miracles : Kacou Severin & Koné Fontaly",
+                "url": "https://youtu.be/cFO2gyvw3E4?is=B6KRUQvXimRWkJSy"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Si le Dieu Des Esprits Des Prophets par Kouassi & living Gospel",
+                "url": "https://youtu.be/TxX6EnpSY4I?is=eublrUMchFi538Fv"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Inonde ce lieu de ta présence - Samuel Joseph",
+                "url": "https://youtu.be/snKoJTmVrxg?is=KFn_x-6i9ZZ1NeZ7"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Le ciel est ouvert / Leve menm devan majeste / Mizerikod / Nous te rendons la Gloire - Grace Jocktane",
+                "url": "https://youtu.be/aDfLR-94U8E"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "DEBORAH LUKALU - Ma Consolation (Mungu wa Maajabu Live)",
+                "url": "https://youtu.be/pDqW-f2x6kI?is=LPnZQCtBNMs5NnyQ"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Je veux me rejouir",
+                "url": "https://youtu.be/aweO0-Qh6mU"
+            }
+        ]
+    },
+    {
+        "date": "2027-01-03",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Je n'ai que toi",
+                "url": "https://youtu.be/UjD_jKmP8Lk"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Quand il descend",
+                "url": "https://youtu.be/sc6i40B4nUY"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Ouvre La Porte - Anthony & Keren Lambert Feat. Renaissance Worship",
+                "url": "https://youtu.be/sX46whPXlIQ?is=x8o66uqtWnskTetb"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "DIEU QUI GARDE L'ALLIANCE I",
+                "url": "https://youtu.be/Cc7vOmqE7fo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Dena Mwana - Je Bénirai L'Éternel",
+                "url": "https://youtu.be/XR9vBZa9cjo?is=of4guvOp1e8b-Czj"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Oh mon Dieu, qui est bon comme toi - Impact Gospel",
+                "url": "https://youtu.be/_o7YezvIGVU?is=o_Yrer9eiLxvqxC-"
+            }
+        ]
+    },
+    {
+        "date": "2027-01-10",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Lumiere du monde",
+                "url": "https://youtu.be/g0zwmV5Api4"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "MA SEULE FONDATION (Firm Foundation) LIVE | Victoire Musique feat. Carl Handy Corvil",
+                "url": "https://youtu.be/laJDVDKGcL4?is=O-Zx2xNqeF29kXCj"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Adoration spontanée : ah eh eh / Yeshua/ Lion of Judah",
+                "url": "https://youtu.be/kwWIz0Vo7K4?is=7zx6rEDBKUkvmCbB"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Sylvie Tagbo - QUE MA VIE SOIT UNE FLEUR (Live ICC)",
+                "url": "https://youtu.be/kQMPv7yJjzI?is=Nqzxn14oNXBpOKho"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "DEBORAH LUKALU feat. Lord Lombo - Tu es puissant / Call Me Favour",
+                "url": "https://youtu.be/OL6k-hRRIvQ?is=dfimQi26_nd_TeN0"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Comment ne pas te louer",
+                "url": "https://youtu.be/Wv_KsPW0tIY?is=H5bxdcoXtE8CLuua"
+            }
+        ]
+    },
+    {
+        "date": "2027-01-17",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Jésus tu as les paroles de la vie",
+                "url": "https://youtu.be/Mn4oFz7umBo"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Hamos Ki- Say - YAHVÉ SHAMMA feat Larissa Doh",
+                "url": "https://youtu.be/ghQ-gK9UvlM?is=aYAfBKAWmsIo3OU1"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Dans Ton sanctuaire - Gael Music- Live 2005",
+                "url": "https://youtu.be/Bo1WV6jfdEY"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "À jamais tu es Saint",
+                "url": "https://youtu.be/v2iRuO_u4aY"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Onel Mala - Vêtu de gloire",
+                "url": "https://youtu.be/z9Y7ZIIjFJg?is=EFvtM24DIYcCD9Dm"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Nous te louons (louange)",
+                "url": "https://youtu.be/1Mbxr8XrsWs?is=9lbkhvCUX7M07fkN"
+            }
+        ]
+    },
+    {
+        "date": "2027-01-24",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Rachel Anyeme - MIRACLE (Official Lyrics)",
+                "url": "https://youtu.be/t4k4yL8igGQ?is=hJqKiCM0-MCJnUbp"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Tu es tout pour moi",
+                "url": "https://youtu.be/jBvHEu0mutw"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Adonai / Je T'adore - Athoms Mbuma",
+                "url": "https://youtu.be/kQ-YDqAdL64"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Oui je le vois mlk ",
+                "url": "https://youtu.be/-RFlJr6FdGk?is=N6tj1eFVyO0Qr7C-"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Otis Endie - Ce que sa bouche a dit, sa main l'accomplit",
+                "url": "https://youtu.be/SMrNUnLeNds?is=CEe_C-xEdMhCDudu"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Nadège Mbuma - Compilation Louange",
+                "url": "https://youtu.be/xxWs03eFZyU"
+            }
+        ]
+    },
+    {
+        "date": "2027-01-31",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Bénis L'Éternel - Jonathan Munchongwa, Steev Y., SimianeMusic",
+                "url": "https://youtu.be/1ieckehNEO8"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Tu es plus grand - Hosanna clips - Athoms et Nadège Mbuma",
+                "url": "https://youtu.be/CeKM7ctnRus"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Dena Mwana - Souffle (Official video)",
+                "url": "https://youtu.be/NM-eXztJFc4?is=-0IodXSh_N4PTNE_"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Jonathan C. Gambela - L'entrée du Roi (Clip Officiel)",
+                "url": "https://youtu.be/Oc8_5tVTnX0"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Temps de louange avec Deborah Lukalu",
+                "url": "https://youtu.be/_qlTkwXqtHM?is=NeYbiFYuofdKMqSx"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Il n'y a personne comme Jésus",
+                "url": "https://youtu.be/uYahuAoG3UA"
+            }
+        ]
+    },
+    {
+        "date": "2027-02-07",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Je suis née pour le louer",
+                "url": "https://youtu.be/AHq7jl_55NE"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Digne est l'Agneau (Hillsong) - Momentum Musique feat Laetitia Perraud",
+                "url": "https://youtu.be/eusI00d92tI?is=bwlWaVqGoc8ns-lv"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Mireille Basirwa, puiser, plus de toi encore",
+                "url": "https://youtu.be/C2ZYnxiUAmc"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Elyah/ Adonai/Yeshua/Toi seul es Dieu - RuthDaniel LHOMME | CEEV Musique",
+                "url": "https://youtu.be/0qcpfQyFnRk"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Koné Fontaly - Lago Sounagno",
+                "url": "https://youtu.be/CdxWp8MbFU8"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Dieu de miracles - Schekina",
+                "url": "https://youtu.be/eZB_j8084OM?is=d1gcgG0KZ_P9EQKU"
+            }
+        ]
+    },
+    {
+        "date": "2027-02-14",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "NOUS TE COURONNONS (We crown You) || Dena Mwana & Plénitude Music",
+                "url": "https://youtu.be/dx_H0LSQEyg?is=QxJy5RsCp99YMyLu"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "JE VEUX PRIER | Derek- Jones feat. Olivia Kouamé (Live recording)",
+                "url": "https://youtu.be/w47Br8srwmE?is=rJYIKM6P4Dtm4tsd"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Qui peut encore dire ! - Josué le Sage",
+                "url": "https://youtu.be/d3AN5N_NwuU"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Je Lève Les Yeux",
+                "url": "https://youtu.be/F2bH2CBluPA"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Naomie",
+                "title": "Vibrez pour Dieu",
+                "url": "https://youtu.be/wPXItafwCnI?is=i49qkQjvJCMWpx9E"
+            }
+        ]
+    },
+    {
+        "date": "2027-02-21",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "MOI ET MA MAISON (Live au Dôme de Paris) | REACH WORSHIP",
+                "url": "https://youtu.be/TjKRyzy7yCY?is=68XdqIrKEHRtXur0"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Dena Mwana - Saint Esprit (Officiel)",
+                "url": "https://youtu.be/JPyyX4zFraU?is=26tgayOUgyG3Pzic"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Il veille sur moi - Marius Psalmiste",
+                "url": "https://youtu.be/620s-RmQMkA"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Jésus Christ est ressuscité",
+                "url": "https://youtu.be/j8BCTovMrtM"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Jésus oh tu m'as sauvé / Il a reçu le nom / Des cris de joie",
+                "url": "https://youtu.be/vt3ek0dZkKY"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Sandrine Droubly - Prends ma main",
+                "url": "https://youtu.be/gAkPDaTkTT0?is=DCjHM71-0D9meAxA"
+            }
+        ]
+    },
+    {
+        "date": "2027-02-28",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Infiniment grand (version louange)",
+                "url": "https://youtu.be/BY_GKE9toFM"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "DANY KASONGO Adullam & je viens puiser",
+                "url": "https://youtu.be/L52u3RD7qJM"
+            },
+            {
+                "singer": "Naomie",
+                "title": "À jamais tu seras",
+                "url": "https://youtu.be/kMaz2rRMcGw"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Nous venons puiser plus de toi",
+                "url": "https://youtu.be/x1iOQ8WLzek"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Fais- le savoir / Ça y est / Yékélé Kélé",
+                "url": "https://youtu.be/FO6ui2XR5UM?is=qLIoTZYA4FabCNEP"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Ano Mira - Écris mon nom",
+                "url": "https://youtu.be/VmILxj-eO_g?is=yqvQVkXhGn1ZvkFr"
+            }
+        ]
+    },
+    {
+        "date": "2027-03-07",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Lyrique Ramène moi sur ta parole",
+                "url": "https://youtu.be/43GUKWN0YPc?is=2hHOcNgI3spJxoJZ"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "EH BABA (IL EST HORS DE QUESTION) - Enock Bahwere",
+                "url": "https://youtu.be/up2iOpUUlbk"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Je louerai l'Éternel",
+                "url": "https://youtu.be/CZ_Pa_KsZIQ"
+            },
+            {
+                "singer": "Naomie",
+                "title": "DANIEL BANAM - EL YAH | Live recording",
+                "url": "https://youtu.be/JTsyX2Ta1TU"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Il y a une prophétie sur ma vie / Hosanna / L'Éternel est bon",
+                "url": "https://youtu.be/yqpPWheYcBo"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Appelle, il te répondra (Cameroun)",
+                "url": "https://youtu.be/no6JW1kjuDw?is=KUR0m_6zhOu3adCs"
+            }
+        ]
+    },
+    {
+        "date": "2027-03-14",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "EDEN ' OUI DIEU ",
+                "url": "https://youtu.be/QTwASEijcFI?is=I3HPxjnGxw0lr08s"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Mains Levées (Wide as the sky) Adoration LIVE - Dena Mwana & Victoire Musique",
+                "url": "https://youtu.be/CTG01ZSvfSE"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Moment d'adoration | Mon Seul Désir - Grace Jocktane à Évidence",
+                "url": "https://youtu.be/bc7H1nIPdSw"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Hosanna (Jésus Nous T'élevons Plus Haut) (Live)",
+                "url": "https://youtu.be/oVUrVQXnXLM?is=wRgmY-AHR3dIpmAk"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Chant d'amour - Rhema Loseke",
+                "url": "https://youtu.be/9nfi9cIq4UM?is=kukxuGvMu6v67m6q"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Contemplation Night - Larissa Doh Ôti (à partir de 12 min)",
+                "url": "https://youtu.be/qZRkiD_t1D4?is=RIEcpiur7kZo7s1v"
+            }
+        ]
+    },
+    {
+        "date": "2027-03-21",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Alliance de grâce feat Colombe Merveille - Oins-moi",
+                "url": "https://youtu.be/xuvt0Ff657U?is=a43CWbCYFdRnpZDM"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Seigneur Nul n'est comme toi",
+                "url": "https://youtu.be/1rpvn3_FtmU"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Tu sais satisfaire",
+                "url": "https://youtu.be/vEK1V-Zu0KU"
+            },
+            {
+                "singer": "Naomie",
+                "title": "À la croix | NV Worship avec Jean Jean",
+                "url": "https://youtu.be/U5eof6t4TZ0"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Lisanga — Il m'a étonné",
+                "url": "https://youtu.be/wCzeQqZfMmM"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Les messagers du Sinaï - La foi en Dieu / Ceux qui se confient en l'Éternel",
+                "url": "https://youtu.be/im0ol1iltNk?is=rlx0-TRzX6-b_IXa"
+            }
+        ]
+    },
+    {
+        "date": "2027-03-28",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Je m'abandonne | NV Worship",
+                "url": "https://youtu.be/CfdbjdzQgDY?is=i1OJ_Mo5BZ0KPXn1"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Emmanuel est là (ft Zoé Déborah)] Universal worship x Everlasting",
+                "url": "https://youtu.be/iz4aRPHipxM"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Tu es là présent permis nous waymaker",
+                "url": "https://youtu.be/3EL5mryrdT4"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Attire-moi à toi",
+                "url": "https://youtu.be/3d6aqphOOxo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Louange avec l'archevêque Kodja Guy Vincent",
+                "url": "https://youtu.be/hJluVYqMH0s?is=7hQ0BiTy6_a1Germ"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Marie-Anne Abia - L'Heure de la Victoire",
+                "url": "https://youtu.be/c5XSO7CKXr4?is=l-MRBHWPotG70qHj"
+            }
+        ]
+    },
+    {
+        "date": "2027-04-04",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Jonathan C. Gambela - Onction (official video)",
+                "url": "https://youtu.be/_O8psLIwTLw?is=3SC9Scsq-CsV40F4"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "QUE TA GLOIRE DESCENDE | Derek-Jones feat. Estelle Essouma (official video)",
+                "url": "https://youtu.be/4KpGzx8HCQQ"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "ÉMERVEILLÉ EN TA PRÉSENCE ! / LE NOM DE JÉSUS",
+                "url": "https://youtu.be/iM2Qc5WizR4"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Change mon histoire guy Christ",
+                "url": "https://youtu.be/s9k1c6rRBBo?is=j1qD9U2EEwO9ii64"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Louez l'Éternel / Non je ne mourrai pas ",
+                "url": "https://youtu.be/-ig5Bg87f34?is=mwr9jn1NGprnyvJw"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Ma vie est entre tes mains",
+                "url": "https://youtu.be/8lbbH29jp-I?is=pmGf1uDFZNerCkhn"
+            }
+        ]
+    },
+    {
+        "date": "2027-05-02",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Constance Père nous t'adorons",
+                "url": "https://youtu.be/4KRxebXkvas"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Je sais que tu es là eden",
+                "url": "https://youtu.be/b6OXKeEDfZQ?is=mtJYpaeCDRhU8zXb"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "IL ENTEND LES CRIS | REACH WORSHIP (feat. Patrick Isaac II)",
+                "url": "https://youtu.be/d88iuud_TlI?is=cGpKs3sTB-C_nEZo"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "L'hymne - MLK Choir",
+                "url": "https://youtu.be/ic8NMqgPGdQ"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Guy Vincent Kodja - J'ai vu la puissance de Dieu",
+                "url": "https://youtu.be/f1s_s8YDtR0?is=SdB5EvLLg3iD3Bjd"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Louange en semaine (de 0 à 9 min)",
+                "url": "https://youtu.be/bzDwd7P_ol8?is=Axa-m2OpIkULNIIQ"
+            }
+        ]
+    },
+    {
+        "date": "2027-05-09",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "JE VEUX BOIRE À TA SOURCE, PLUS DE TOI ENCORE...",
+                "url": "https://youtu.be/y2Cauq-RuGA"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Guy Christ Quel est ton problème",
+                "url": "https://youtu.be/n08-cH_3L3k?is=1OKBTpaed8377mG9"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "LES CHANTRES DE LA FOI | PUISSANT SAUVEUR YESHUA",
+                "url": "https://youtu.be/a6Vwr5GB-d4"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "MELODIE VENUE DU CIEL (Marcel Boungou) || Marie Zamor",
+                "url": "https://youtu.be/wzyPsl-Dq9A?is=HfVfWX_276Hniqei"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Apopola - Kodja Guy Vincent ft. Dezy Champion",
+                "url": "https://youtu.be/Ka9eeMi_3ew?is=xrXkxwg53s7DY2JG"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Medley louange - Groupe Prodige (a partir de 12 min)",
+                "url": "https://youtu.be/TQCVS7tRO5Y?is=HA8DFFndpb2auWbi"
+            }
+        ]
+    },
+    {
+        "date": "2027-05-16",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Samuel Shukrani's- PAPA OH",
+                "url": "https://youtu.be/Sru8S_qoiHc"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "JE VIENS POUR TE LOUER | Derek-Jones (Contemplation Live)",
+                "url": "https://youtu.be/ZcwHRUPE30M?is=p4W-kHgrj6--AcAy"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "FAIS MOI VOIR TA GLOIRE /Vteam à C'NIGHT (Lead : YANNICK BITTY)",
+                "url": "https://youtu.be/YX0s-i1h6R4"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Tu es yaweh",
+                "url": "https://youtu.be/Dk2FHyotslo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Bartimée - Chantre MariElo",
+                "url": "https://youtu.be/GnhG1nBxbb8?is=RqxutV9qhdqi-Ldf"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Geneviève Brou - Je marche avec assurance",
+                "url": "https://youtu.be/LfwArPn6hOs"
+            }
+        ]
+    },
+    {
+        "date": "2027-05-23",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "EDEN - Je veux chanter un chant d'amour / Ton nom est infiniment grand / Attire-moi à Toi",
+                "url": "https://youtu.be/lcSxoPhcVGk?is=S3pJq2S0C3r-JDPZ"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Eden t'adorer",
+                "url": "https://youtu.be/uqccle_B0lo"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Je ne desire que toi",
+                "url": "https://youtu.be/VtwscHxXCV0"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Jonathan C. Gambela - Sabaoth (clip officiel)",
+                "url": "https://youtu.be/_iA52WcFQJc"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Jésus ou Rien",
+                "url": "https://youtu.be/Qk8bp3Z-c0o"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Geneviève Brou - Jésus a ma vie (version louange)",
+                "url": "https://youtu.be/3af967l18Uo?is=JMzcglL8wKwPVIj-"
+            }
+        ]
+    },
+    {
+        "date": "2027-05-30",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Hamos Ki-Say - Ton Nom est Yeshua (Live recording)",
+                "url": "https://youtu.be/JYsTzcY3mTI?is=qLqCCccrTTXWds25"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Emmanuel - Hosanna clips - Dena Mwana",
+                "url": "https://youtu.be/NU4p2Ol2KLY?is=WZne-sj6LMNoTbI1"
+            },
+            {
+                "singer": "Naomie",
+                "title": "EDEN - ESPRIT DE DIEU",
+                "url": "https://youtu.be/AsLyhA8N_B8"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Nous te couronnons",
+                "url": "https://youtu.be/pOTbbTE1Wq0"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "J'ai décidé de suivre Jésus",
+                "url": "https://youtu.be/EV0LLJhCOpo?is=f6CcpSeEtP8gK3Yq"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Geneviève Brou - J'ai un Dieu puissant là-haut",
+                "url": "https://youtu.be/XhB6xxa77QE?is=GPqmpdPEpRSf8gl_"
+            }
+        ]
+    },
+    {
+        "date": "2027-06-06",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Je veux chanter un chant d'amour - Hosanna clips - EDEN",
+                "url": "https://youtu.be/XGIEp2rzT6M"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Les Cieux proclament (À jamais tu seras) - Momentum Musique",
+                "url": "https://youtu.be/Fy4qRLVvQJq"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Eden lago ayons",
+                "url": "https://youtu.be/pZDy24ZLL8U?is=t4jXyeTWDe7nyf_P"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "J'ENTRE DANS LE SAINT / JE M'ATTENDS À TOI - Laura Dambury",
+                "url": "https://youtu.be/5Nuw51jYBfs?is=xiXDZrvyVAVFcEn5"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Marina",
+                "url": "https://youtu.be/D4zeEAWKcZY"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Geneviève Brou - Elishama",
+                "url": "https://youtu.be/BYHQ_3w24SU"
+            }
+        ]
+    },
+    {
+        "date": "2027-06-13",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Marie Adé Tu es plus grand",
+                "url": "https://youtu.be/1a6D-7DALZY"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Dena Mwana - \"Utilise-moi\" (clip Officiel)",
+                "url": "https://youtu.be/FH1Mps-cKSM"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Ne t'inquiète de rien",
+                "url": "https://youtu.be/8lbbH29jp-l"
+            },
+            {
+                "singer": "Naomie",
+                "title": "YESHUA - Seigneur fais- moi voir ta gloire / Tu es l'amour de mon âme - Grace Jocktane",
+                "url": "https://youtu.be/CcJ_8A82vjE"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Asaph du Ciel - La Louange des aigles",
+                "url": "https://youtu.be/JkCcXw2IkM"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Qui peut encore dire",
+                "url": "https://youtu.be/JwSxC3WjdEo"
+            }
+        ]
+    },
+    {
+        "date": "2027-06-20",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Jésus fait des miracles : Kacou Severin & Koné Fontaly",
+                "url": "https://youtu.be/cFO2gyww3E4"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Si le Dieu Des Esprits Des Prophets par Kouassi & living Gospel",
+                "url": "https://youtu.be/TxX6EnpSY4I?is=eublrUMchFi538Fv"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Inonde ce lieu de ta présence - Samuel Joseph",
+                "url": "https://youtu.be/snKoJTmVrxq"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Le ciel est ouvert / Leve menm devan majeste / Mizerikod / Nous te rendons la Gloire - Grace Jocktane",
+                "url": "https://youtu.be/aDfLR-94U8E"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Je chanterai de tout cœur",
+                "url": "https://youtu.be/nde-Px_5l2I"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Kollins Newman feat. Flamme de Vie - Louange prophétique",
+                "url": "https://youtu.be/5jJla4Ta1Ho"
+            }
+        ]
+    },
+    {
+        "date": "2027-06-27",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Je n'ai que toi",
+                "url": "https://youtu.be/UjD_jKmP8Lk"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Quand il descend",
+                "url": "https://youtu.be/sc6i40B4nUY"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Ouvre La Porte - Anthony & Keren Lambert Feat. Renaissance Worship",
+                "url": "https://youtu.be/sX46whPXlq"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "DIEU QUI GARDE L'ALLIANCE I",
+                "url": "https://youtu.be/Cc7vOmqE7fo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Ensemble louons le Seigneur",
+                "url": "https://youtu.be/VJzfosG3dPs"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Louange prophetique Acte 2 (à partir de 7 min 23)",
+                "url": "https://youtu.be/qKlpkIckxE"
+            }
+        ]
+    },
+    {
+        "date": "2027-07-04",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Lumiere du monde",
+                "url": "https://youtu.be/g0zwmV5Api4"
+            },
+            {
+                "singer": "Naomie",
+                "title": "MA SEULE FONDATION (Firm Foundation) LIVE | Victoire Musique feat. Carl Handy Corvil",
+                "url": "https://youtu.be/laJDVDKGcL4?is=O-Zx2xNqeF29kXCj"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Adoration spontanée : ah eh eh / Yeshua/ Lion of Judah",
+                "url": "https://youtu.be/kwwlz0Vo7K4"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Sylvie Tagbo - QUE MA VIE SOIT UNE FLEUR (Live ICC)",
+                "url": "https://youtu.be/kQMPv7yJjz1"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Il n'y a personne comme Jésus",
+                "url": "https://youtu.be/uYahuAoG3UA"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Louange prophetique à Bouaké (à partir de 2 min)",
+                "url": "https://youtu.be/MSjV2ISLMUw"
+            }
+        ]
+    },
+    {
+        "date": "2027-07-11",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Jésus tu as les paroles de la vie",
+                "url": "https://youtu.be/Mn4oFz7umBo"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Hamos Ki- Say - YAHVÉ SHAMMA feat Larissa Doh",
+                "url": "https://youtu.be/ghQ-gK9UvIM"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Dans Ton sanctuaire - Gael Music- Live 2005",
+                "url": "https://youtu.be/Bo1WV6jfdEY"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "À jamais tu es Saint",
+                "url": "https://youtu.be/v2iRuO_u4aY"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Shekina - Brûle en moi",
+                "url": "https://youtu.be/LF8fBEIsFaE?is=ekzAbc1l5pEu9cfz"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Armand Koffi - Medley Louange",
+                "url": "https://youtu.be/HLdciailjb0"
+            }
+        ]
+    },
+    {
+        "date": "2027-07-18",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Rachel Anyeme - MIRACLE (Official Lyrics)",
+                "url": "https://youtu.be/t4k4yL8igGQ?is=hJqKiCM0-MCJnUbp"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Tu es tout pour moi",
+                "url": "https://youtu.be/jBvHEu0mutw"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Adonai / Je T'adore - Athoms Mbuma",
+                "url": "https://youtu.be/kQ-YDqAdL64"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Oui je le vois",
+                "url": "https://youtu.be/-RFIJr6FdGk"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Dorcas Kaja - Il est bon de louer Dieu",
+                "url": "https://youtu.be/ILhPhaQ6Ew"
+            },
+            {
+                "singer": "Naomie",
+                "title": "New Praise Family - Ivoirian Medley 2 (à partir de 10 min)",
+                "url": "https://youtu.be/0Hr_6bfuQfA"
+            }
+        ]
+    },
+    {
+        "date": "2027-07-25",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Bénis L'Éternel - Jonathan Munchongwa, Steev Y., SimianeMusic",
+                "url": "https://youtu.be/1iechehNEO8"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Tu es plus grand - Hosanna clips - Athoms et Nadège Mbuma",
+                "url": "https://youtu.be/CekM7ctnRus"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Dena Mwana - Souffle (Official video)",
+                "url": "https://youtu.be/NM-eXztJFC4"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Jonathan C. Gambela - L'entrée du Roi (Clip Officiel)",
+                "url": "https://youtu.be/Oc8_5tVTnX0"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Pasteur Guy - Je suis dans la joie",
+                "url": "https://youtu.be/IYWS3GMDS-E"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "New Praise Family - Ivoirian Medley 1",
+                "url": "https://youtu.be/ZT3bDHRxQNI"
+            }
+        ]
+    },
+    {
+        "date": "2027-08-01",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Je suis née pour le louer",
+                "url": "https://youtu.be/AHq7jl_55NE"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Digne est l'Agneau (Hillsong) - Momentum Musique feat Laetitia Perraud",
+                "url": "https://youtu.be/eusl00d92tl"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Mireille Basiwa, puiser, plus de toi encore",
+                "url": "https://youtu.be/C2ZYnxIUAmc"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Elyah/ Adonai/Yeshua/Toi seul es Dieu - RuthDaniel LHOMME | CEEV Musique",
+                "url": "https://youtu.be/0qcpfQyFnRk"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Je veux me réjouir",
+                "url": "https://youtu.be/aweOQ-Qh6mU"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Daniel Nortey - J'ai choisi Jésus",
+                "url": "https://youtu.be/LEQ4JlmQ_3k"
+            }
+        ]
+    },
+    {
+        "date": "2027-08-08",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "NOUS TE COURONNONS (We crown You) || Dena Mwana & Plénitude Music",
+                "url": "https://youtu.be/0WwyXT2pBc"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "JE VEUX PRIER | Derek- Jones feat. Olivia Kouamé (Live recording)",
+                "url": "https://youtu.be/w47Br8srwmE?is=rJYIKM6P4Dtm4tsd"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Je Lève Les Yeux",
+                "url": "https://youtu.be/F2bH2CBluPA"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Grâce valerie J'aime ta présence",
+                "url": "https://youtu.be/FfXV3M3S3dl"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Oh mon Dieu, qui est bon comme toi - Impact Gospel",
+                "url": "https://youtu.be/_o7YezvlGVU"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Jésus m'a libéré (Medley)",
+                "url": "https://youtu.be/jqrogd61BZA"
+            }
+        ]
+    },
+    {
+        "date": "2027-08-15",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "MOI ET MA MAISON (Live au Dôme de Paris) | REACH WORSHIP",
+                "url": "https://youtu.be/TjKRyzy7yCY?is=68XdqIrKEHRtXur0"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Dena Mwana - Saint Esprit (Officiel)",
+                "url": "https://youtu.be/JPyvX4zFraU"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Il veille sur moi - Marius Psalmiste",
+                "url": "https://youtu.be/620s-RmQMKA"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Jésus Christ est ressuscité",
+                "url": "https://youtu.be/j8BCTovMrTM"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Comment ne pas te louer",
+                "url": "https://youtu.be/8OrwyqCpNOE"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "La trompette sonnera",
+                "url": "https://youtu.be/hSfKhJFOZfc"
+            }
+        ]
+    },
+    {
+        "date": "2027-08-22",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Infiniment grand (version louange)",
+                "url": "https://youtu.be/BY_GKE9toFM"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "DANY KASONGO Adullam & je viens puiser",
+                "url": "https://youtu.be/L52u3RD7qJM"
+            },
+            {
+                "singer": "Naomie",
+                "title": "À jamais tu seras",
+                "url": "https://youtu.be/kMaz2rRMcGw"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Nous venons puiser plus de toi",
+                "url": "https://youtu.be/x1iOQ8WLzek"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Nous te louons (louange)",
+                "url": "https://youtu.be/1Mbx8XrsWs"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "La nouvelle Jérusalem",
+                "url": "https://youtu.be/3u9_SXVc3h0"
+            }
+        ]
+    },
+    {
+        "date": "2027-08-29",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Lyrique Ramène moi sur ta parole",
+                "url": "https://youtu.be/43GUKWNOYPc"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "EH BABA (IL EST HORS DE QUESTION) - Enock Bahwere",
+                "url": "https://youtu.be/up2iOpUUbk"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Je louerai l'Éternel",
+                "url": "https://youtu.be/CZ_Pa_KsZIQ"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "DANIEL BANAM - EL YAH | Live recording",
+                "url": "https://youtu.be/JTtsyX2Ta1TU"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Nadège Mbuma - Compilation Louange",
+                "url": "https://youtu.be/xxVwS03eFZyU"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Rabbi, il agira",
+                "url": "https://youtu.be/ZDgdMTpTlLhw"
+            }
+        ]
+    },
+    {
+        "date": "2027-09-05",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "EDEN \"OUI DIEU\"",
+                "url": "https://youtu.be/QTwASEijcF1"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Mains Levées (Wide as the sky) Adoration LIVE - Dena Mwana & Victoire Musique",
+                "url": "https://youtu.be/CTG01ZSvfSE"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Moment d'adoration | Mon Seul Désir - Grace Jocktane à Évidence",
+                "url": "https://youtu.be/bc7H1nIPdSw"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Hosanna (Jésus Nous T'élevons Plus Haut) (Live)",
+                "url": "https://youtu.be/oUVrVQXnXLM"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Il n'y a personne comme Jésus",
+                "url": "https://youtu.be/uYahuAoG3UA"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Sans toi, qui serais-je ?",
+                "url": "https://youtu.be/la60SQBnhm0"
+            }
+        ]
+    },
+    {
+        "date": "2027-09-12",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Alliance de grâce feat Colombe Merveille - Oins-moi",
+                "url": "https://youtu.be/xuvt0F657U"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Seigneur Nul n'est comme toi",
+                "url": "https://youtu.be/1rpvn3_FtmU"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Tu sais satisfaire",
+                "url": "https://youtu.be/vEK1V-Zu0KU"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "À la croix | NV Worship avec Jean Jean",
+                "url": "https://youtu.be/U5eof6t4TZ0"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Dieu de miracles - Schekina",
+                "url": "https://youtu.be/eZB_i8084OM"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Je ne peux pas le laisser",
+                "url": "https://youtu.be/w5bZ1MzjgeE"
+            }
+        ]
+    },
+    {
+        "date": "2027-09-19",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Je m'abandonne | NV Worship",
+                "url": "https://youtu.be/CfdbjdzQqDY"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Emmanuel est là (ft Zoé Déborah)] Universal worship x Everlasting",
+                "url": "https://youtu.be/iz4aRPHipxM"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Tu es là présent permis nous waymaker",
+                "url": "https://youtu.be/3EL5mryrdT4"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Attire-moi à toi",
+                "url": "https://youtu.be/3d6aqphOOxo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Vibrez pour Dieu",
+                "url": "https://youtu.be/wPXltafwCn1"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Si Jésus dit oui",
+                "url": "https://youtu.be/qS5KrQD8qOw"
+            }
+        ]
+    },
+    {
+        "date": "2027-09-26",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Jonathan C. Gambela - Onction (official video)",
+                "url": "https://youtu.be/_O8psL1wTLw"
+            },
+            {
+                "singer": "Naomie",
+                "title": "QUE TA GLOIRE DESCENDE | Derek-Jones feat. Estelle Essouma (official video)",
+                "url": "https://youtu.be/4KpGzx8HCQQ"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Si mon peuple",
+                "url": "https://youtu.be/lEw5lsvCq1w"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "ÉMERVEILLÉ EN TA PRÉSENCE ! / LE NOM DE JÉSUS",
+                "url": "https://youtu.be/iM2Qc5WizR4"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Sandrine Droubly - Prends ma main",
+                "url": "https://youtu.be/gAkPDAtKTT0"
+            }
+        ]
+    },
+    {
+        "date": "2027-10-03",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "TU ES SAINT & CEST TOI - Derek- Jones (Contemplation Live)",
+                "url": "https://youtu.be/e2tR4pq7lmQ"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Eden même si une mère abandonne son enfant",
+                "url": "https://youtu.be/D88zQyEjTxk"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Pape Jey - Adullam (Live Expérience)",
+                "url": "https://youtu.be/jHHpsGEMg7w"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "SI LA MER SE DÉCHAÎNE",
+                "url": "https://youtu.be/NiBZ7rroSVA"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Ano Mira - Écris mon nom",
+                "url": "https://youtu.be/VmlLxj-eO_g"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Souffle ton esprit",
+                "url": "https://youtu.be/Eo0MJdbNHjk"
+            }
+        ]
+    },
+    {
+        "date": "2027-10-10",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Au Contrôle / À jamais Tu es saint - Athoms Mbuma, Marie Zamor - EMCI Musique",
+                "url": "https://youtu.be/l2Z8uMVKx9E"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Deborah Lukalu - A Genoux - [Live]",
+                "url": "https://youtu.be/q1qEBJSEWW"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "MON ÂME BÉNIT LE SEIGNEUR - Eloise Bouanga (cover Tchouva)",
+                "url": "https://youtu.be/-Q7XpLhszSO"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Koné Fontali je veux faire ton œuvre lyrics",
+                "url": "https://youtu.be/G97fm_mgm3s"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Appelle, il te répondra (Cameroun)",
+                "url": "https://youtu.be/no6JW1kjuDw?is=KUR0m_6zhOu3adCs"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Ton grand amour",
+                "url": "https://youtu.be/FPelrT8iqJc"
+            }
+        ]
+    },
+    {
+        "date": "2027-10-17",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Mon meilleur ami",
+                "url": "https://youtu.be/krPDnnW6OOM"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Amour extravagant",
+                "url": "https://youtu.be/C7Co5SLVbY4"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Yeshua d'âge en âge",
+                "url": "https://youtu.be/qhC3qi3qiR4"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Que t'es vives eaux",
+                "url": "https://youtu.be/ZgWF5Xj_qB4"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Contemplation Night - Larissa Doh Ôti (à partir de 12 min)",
+                "url": "https://youtu.be/qZRkiD_t1D4?is=RIEcpiur7kZo7s1v"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "J'ai l'assurance de mon salut",
+                "url": "https://youtu.be/WKbNl0tNiEO"
+            }
+        ]
+    },
+    {
+        "date": "2027-10-24",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Constance Père nous t'adorons",
+                "url": "https://youtu.be/4KRxebXkvas"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Je sais que tu es là eden",
+                "url": "https://youtu.be/b6OXKeEDfzQ"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "IL ENTEND LES CRIS | REACH WORSHIP (feat. Patrick Isaac II)",
+                "url": "https://youtu.be/d88iluuud_TII"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "L'hymne - MLK Choir",
+                "url": "https://youtu.be/ic8NMqgPGdQ"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Les messagers du Sinaï - La foi en Dieu / Ceux qui se confient en l'Éternel",
+                "url": "https://youtu.be/im0ol1iitNk"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Le temps de Dieu",
+                "url": "https://youtu.be/pYt-vnh4ols"
+            }
+        ]
+    },
+    {
+        "date": "2027-10-31",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "JE VEUX BOIRE À TA SOURCE, PLUS DE TOI ENCORE...",
+                "url": "https://youtu.be/y2Cauq-RuGA"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Guy Christ Quel est ton problème",
+                "url": "https://youtu.be/2lOCIRwqwV4"
+            },
+            {
+                "singer": "Naomie",
+                "title": "LES CHANTRES DE LA FOI | PUISSANT SAUVEUR YESHUA",
+                "url": "https://youtu.be/a6Vwr5GB-d4"
+            },
+            {
+                "singer": "Naomie",
+                "title": "MELODIE VENUE DU CIEL (Marcel Boungou) || Marie Zamor",
+                "url": "https://youtu.be/wzyPsI-Dq9A"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Apopola - Kodja Guy Vincent ft. Dezy Champion",
+                "url": "https://youtu.be/Ka8eeMi_3ew"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Medley louange - Groupe Prodige (à partir de 12 min)",
+                "url": "https://youtu.be/TQCVS7tROSY"
+            }
+        ]
+    },
+    {
+        "date": "2027-11-07",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Samuel Shukrani's- PAPA OH",
+                "url": "https://youtu.be/Sru8S_qoiHc"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "JE VIENS POUR TE LOUER | Derek-Jones (Contemplation Live)",
+                "url": "https://youtu.be/ZcwHRUPE30M?is=p4W-kHgrj6--AcAy"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "FAIS MOI VOIR TA GLOIRE /Vteam à C'NIGHT (Lead : YANNICK BITTY)",
+                "url": "https://youtu.be/YX0s-i1h6R4"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Tu es yaweh",
+                "url": "https://youtu.be/Dk2FHyotslo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Bartimée - Chantre MariElo",
+                "url": "https://youtu.be/GnhG1nBxbb8?is=RqxutV9qhdqi-Ldf"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Geneviève Brou - Je marche avec assurance",
+                "url": "https://youtu.be/LfwArPn6hOs"
+            }
+        ]
+    },
+    {
+        "date": "2027-11-14",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "EDEN - Je veux chanter un chant d'amour / Ton nom est infiniment grand / Attire-moi à Toi",
+                "url": "https://youtu.be/lcSxoPhcVGk?is=S3pJq2S0C3r-JDPZ"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Eden t'adorer",
+                "url": "https://youtu.be/uqccle_B0lo"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Je ne desire que toi",
+                "url": "https://youtu.be/VtwscHxXCV0"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Jonathan C. Gambela - Sabaoth (clip officiel)",
+                "url": "https://youtu.be/_iA52WcFQJc"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Jésus ou Rien",
+                "url": "https://youtu.be/Qk8bp3Z-c0o"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Geneviève Brou - Jésus a ma vie (version louange)",
+                "url": "https://youtu.be/3af967l18Uo?is=JMzcglL8wKwPVIj-"
+            }
+        ]
+    },
+    {
+        "date": "2027-11-21",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Hamos Ki-Say - Ton Nom est Yeshua (Live recording)",
+                "url": "https://youtu.be/JYsTzcY3mTI?is=qLqCCccrTTXWds25"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Emmanuel - Hosanna clips - Dena Mwana",
+                "url": "https://youtu.be/NU4p2Ol2KLY?is=WZne-sj6LMNoTbI1"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "EDEN - ESPRIT DE DIEU",
+                "url": "https://youtu.be/AsLyhA8N_B8"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Nous te couronnons",
+                "url": "https://youtu.be/pOTbbTE1Wq0"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "J'ai décidé de suivre Jésus",
+                "url": "https://youtu.be/EV0LLJhCOpo?is=f6CcpSeEtP8gK3Yq"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Geneviève Brou - J'ai un Dieu puissant là-haut",
+                "url": "https://youtu.be/XhB6xxa77QE?is=GPqmpdPEpRSf8gl_"
+            }
+        ]
+    },
+    {
+        "date": "2027-11-28",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Je veux chanter un chant d'amour - Hosanna clips - EDEN",
+                "url": "https://youtu.be/XGlEp2rzT6M?is=xFYheJrHJvHzvzDp"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Les Cieux proclament (À jamais tu seras) - Momentum Musique",
+                "url": "https://youtu.be/Fy4gRLVuQJg?is=yNxfMcEWTW6DOsOb"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Eden lago ayons",
+                "url": "https://youtu.be/pZDy24ZLL8U?is=t4jXyeTWDe7nyf_P"
+            },
+            {
+                "singer": "Naomie",
+                "title": "J'ENTRE DANS LE SAINT / JE M'ATTENDS À TOI - Laura Dambury",
+                "url": "https://youtu.be/5Nuw51jYBfs?is=xiXDZrvyVAVFcEn5"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Marina",
+                "url": "https://youtu.be/D4zeEAWKcZY"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Geneviève Brou - Elishama",
+                "url": "https://youtu.be/BYHQ_3w24SU"
+            }
+        ]
+    },
+    {
+        "date": "2027-12-05",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Marie Adé Tu es plus grand",
+                "url": "https://youtu.be/1a6D-7DALZY"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Dena Mwana - \"Utilise-moi\" (clip Officiel)",
+                "url": "https://youtu.be/FH1MpS-cKSM?is=x5eSEkcqG8MvS_mh"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Ne t'inquiète de rien",
+                "url": "https://youtu.be/TtmWGV1ugsg?is=1rGn0GZNLr-OjhID"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "YESHUA - Seigneur fais- moi voir ta gloire / Tu es l'amour de mon âme - Grace Jocktane",
+                "url": "https://youtu.be/CcJ_8A82vjE"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Asaph du Ciel - La Louange des aigles",
+                "url": "https://youtu.be/jJKcCxW2IkM?is=vyqgClMblJIVYbiT"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Qui peut encore dire",
+                "url": "https://youtu.be/JwSxC3WjdEo"
+            }
+        ]
+    },
+    {
+        "date": "2027-12-12",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Jésus fait des miracles : Kacou Severin & Koné Fontaly",
+                "url": "https://youtu.be/cFO2gyvw3E4?is=B6KRUQvXimRWkJSy"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Si le Dieu Des Esprits Des Prophets par Kouassi & living Gospel",
+                "url": "https://youtu.be/TxX6EnpSY4I?is=eublrUMchFi538Fv"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Inonde ce lieu de ta présence - Samuel Joseph",
+                "url": "https://youtu.be/snKoJTmVrxg?is=KFn_x-6i9ZZ1NeZ7"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Le ciel est ouvert / Leve menm devan majeste / Mizerikod / Nous te rendons la Gloire - Grace Jocktane",
+                "url": "https://youtu.be/aDfLR-94U8E"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Medley louange - Groupe Prodige (a partir de 12 min)",
+                "url": "https://youtu.be/TQCVS7tRO5Y?is=HA8DFFndpb2auWbi"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Medley Gospel Retro - Africa New Gospel",
+                "url": "https://youtu.be/-SRWgA_fyQ4"
+            }
+        ]
+    },
+    {
+        "date": "2027-12-19",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Je n'ai que toi",
+                "url": "https://youtu.be/UjD_jKmP8Lk"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Quand il descend",
+                "url": "https://youtu.be/sc6i40B4nUY"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Ouvre La Porte - Anthony & Keren Lambert Feat. Renaissance Worship",
+                "url": "https://youtu.be/sX46whPXlIQ?is=x8o66uqtWnskTetb"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "DIEU QUI GARDE L'ALLIANCE I",
+                "url": "https://youtu.be/Cc7vOmqE7fo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Geneviève Brou - Je marche avec assurance",
+                "url": "https://youtu.be/LfwArPn6hOs"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Moi je ne souffrirai jamais (Il y a un nom / Jésus est merveilleux)",
+                "url": "https://youtu.be/5XVUXX9_t-k"
+            }
+        ]
+    },
+    {
+        "date": "2027-12-26",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Lumiere du monde",
+                "url": "https://youtu.be/g0zwmV5Api4"
+            },
+            {
+                "singer": "Naomie",
+                "title": "MA SEULE FONDATION (Firm Foundation) LIVE | Victoire Musique feat. Carl Handy Corvil",
+                "url": "https://youtu.be/laJDVDKGcL4?is=O-Zx2xNqeF29kXCj"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Adoration spontanée : ah eh eh / Yeshua/ Lion of Judah",
+                "url": "https://youtu.be/kwWIz0Vo7K4?is=7zx6rEDBKUkvmCbB"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Sylvie Tagbo - QUE MA VIE SOIT UNE FLEUR (Live ICC)",
+                "url": "https://youtu.be/kQMPv7yJjzI?is=Nqzxn14oNXBpOKho"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Geneviève Brou - Jésus a ma vie (version louange)",
+                "url": "https://youtu.be/3af967l18Uo?is=JMzcglL8wKwPVIj-"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Je sais que Jésus est la vie",
+                "url": "https://youtu.be/D9Q4qu0bZSU?is=ertxklPvz2inI9DT"
+            }
+        ]
+    }
+]
+        ;
 
     const STORAGE_KEY = 'abraham-berne-mygod-v9';
     const ADMIN_PASSWORD = '1234';
@@ -1955,5 +4577,6 @@
     updateLockIcon();
     render();
 </script>
-</body>
-</html>
+
+
+</body></html>
