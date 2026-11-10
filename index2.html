@@ -1,0 +1,4215 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Abraham Berne myGod</title>
+    
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & TOKENS ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        :root {
+            --bg: #0a0a0c;
+            --bg-1: #101014;
+            --bg-2: #16161c;
+            --bg-3: #1e1e26;
+            --bg-4: #282833;
+            --border: rgba(255, 255, 255, 0.07);
+            --border-strong: rgba(255, 255, 255, 0.14);
+            --text: #f5f5f7;
+            --text-2: #a8a8b3;
+            --text-3: #6a6a75;
+            --gold: #e8c86a;
+            --gold-2: #d4a935;
+            --gold-glow: rgba(232, 200, 106, 0.25);
+            --red: #f87171;
+            --green: #4ade80;
+            --blue: #60a5fa;
+            --radius-s: 10px;
+            --radius: 16px;
+            --radius-l: 22px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.6);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-top: env(safe-area-inset-top, 0px);
+            --content-max: 1180px;
+            --content-pad: 16px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        html { height: 100%; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            font-size: 15px;
+            line-height: 1.5;
+            background-image:
+                radial-gradient(ellipse 80% 40% at 50% -10%, rgba(232, 200, 106, 0.08), transparent),
+                radial-gradient(ellipse 60% 30% at 100% 100%, rgba(212, 169, 53, 0.04), transparent);
+        }
+        .hidden { display: none !important; }
+        .gold { color: var(--gold); }
+
+        /* === HEADER === */
+        header {
+            flex-shrink: 0;
+            z-index: 40;
+            padding: calc(14px + var(--safe-top)) var(--content-pad) 14px;
+            background: rgba(10, 10, 12, 0.72);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+        }
+        .header-inner {
+            max-width: var(--content-max); margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        }
+        .brand { display: flex; align-items: center; gap: 14px; }
+        .logo {
+            width: 40px; height: 40px; border-radius: 12px;
+            display: grid; place-items: center;
+            background: linear-gradient(145deg, #f0d580, #b88f1a);
+            color: #0a0a0c; font-weight: 800; font-size: 19px;
+            box-shadow: 0 4px 16px rgba(212, 169, 53, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            flex-shrink: 0;
+            letter-spacing: -0.02em;
+        }
+        .brand-text { display: flex; flex-direction: column; }
+        .brand h1 { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+        .brand .tag { font-size: 10px; color: var(--text-3); font-weight: 600; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.08em; }
+        .header-actions { display: flex; align-items: center; gap: 6px; }
+        .btn-lock {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-2);
+            border-radius: 50%;
+            width: 38px; height: 38px;
+            display: grid; place-items: center;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-lock:hover { background: rgba(255, 255, 255, 0.08); color: var(--text); }
+        .btn-lock.locked {
+            background: rgba(232, 200, 106, 0.15);
+            border-color: rgba(232, 200, 106, 0.4);
+            color: var(--gold);
+            box-shadow: 0 0 20px rgba(232, 200, 106, 0.15);
+        }
+        .btn-reset-icon {
+            background: transparent;
+            border: none;
+            color: var(--text-3);
+            width: 38px; height: 38px;
+            display: grid; place-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 50%;
+        }
+        .btn-reset-icon:hover { background: rgba(248, 113, 113, 0.1); color: var(--red); }
+
+        /* === MAIN CONTENT === */
+        .scroll-container {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: calc(90px + var(--safe-bottom));
+        }
+        main {
+            max-width: var(--content-max);
+            margin: 0 auto;
+            padding: 28px var(--content-pad) 0;
+            animation: fadeIn 0.35s ease-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        h2.page-title { font-size: clamp(24px, 4vw, 32px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 6px; line-height: 1.15; }
+        p.page-sub { color: var(--text-2); font-size: 14px; margin-bottom: 28px; max-width: 60ch; }
+        .section { font-size: 14px; font-weight: 600; color: var(--text-2); margin: 32px 0 14px; display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+        .section::before { content: ""; width: 3px; height: 14px; background: var(--gold); border-radius: 2px; }
+
+        /* === CARDS & UTILS === */
+        .card { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; transition: all 0.2s; }
+        .card.clickable { cursor: pointer; }
+        .card.clickable:hover { border-color: var(--border-strong); background: var(--bg-3); transform: translateY(-1px); }
+        .card.clickable:active { transform: scale(0.985); }
+        .grid { display: grid; gap: 12px; }
+        .g3 { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+        .g4 { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+
+        /* === STATS === */
+        .stat { background: linear-gradient(160deg, var(--bg-2), var(--bg-3)); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 16px; text-align: center; position: relative; overflow: hidden; }
+        .stat::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.6; }
+        .stat .n { font-size: clamp(24px, 3vw, 32px); font-weight: 800; color: var(--gold); letter-spacing: -0.03em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+        .stat .l { font-size: 11px; color: var(--text-2); margin-top: 6px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+
+        /* === SUNDAY CARD (LIST) === */
+        .scard { cursor: pointer; padding: 18px; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius); transition: all 0.2s; position: relative; overflow: hidden; }
+        .scard::after { content: ""; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--gold), transparent); opacity: 0.5; }
+        .scard:hover { border-color: var(--gold-glow); background: var(--bg-3); transform: translateY(-2px); box-shadow: var(--shadow); }
+        .scard:active { transform: scale(0.99); }
+        .scard .date { font-size: 15px; font-weight: 600; margin-bottom: 10px; color: var(--text); letter-spacing: -0.01em; }
+        .scard .pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+        .pill { padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+        .pill-a { background: rgba(232, 200, 106, 0.15); color: var(--gold); }
+        .pill-l { background: rgba(96, 165, 250, 0.15); color: var(--blue); }
+        .scard .singers { font-size: 12px; color: var(--text-2); line-height: 1.4; font-weight: 400; }
+
+        /* === TINDER CARDS (HOME) === */
+        .tinder-container { position: relative; width: 100%; max-width: 420px; margin: 0 auto 24px; height: 480px; perspective: 1000px; }
+        .tinder-card {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(160deg, var(--bg-2), var(--bg-3));
+            border: 1px solid var(--border-strong); border-radius: var(--radius-l);
+            padding: 24px; display: flex; flex-direction: column;
+            box-shadow: var(--shadow-lg); cursor: grab;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform-origin: center bottom;
+            user-select: none;
+            will-change: transform;
+        }
+        .tinder-card:active { cursor: grabbing; }
+        .tinder-card.swipe-left { transform: translateX(-120%) rotate(-15deg); opacity: 0; }
+        .tinder-card.swipe-right { transform: translateX(120%) rotate(15deg); opacity: 0; }
+        .tinder-card .card-date { font-size: 22px; font-weight: 700; color: var(--gold); margin-bottom: 6px; letter-spacing: -0.02em; line-height: 1.2; }
+        .tinder-card .card-singers { font-size: 13px; color: var(--text-2); margin-bottom: 18px; font-weight: 500; line-height: 1.4; }
+        .tinder-card .card-songs { flex: 1; overflow-y: auto; padding-right: 8px; margin-right: -8px; display: flex; flex-direction: column; gap: 12px; }
+        .tinder-card .card-songs::-webkit-scrollbar { width: 4px; }
+        .tinder-card .card-songs::-webkit-scrollbar-thumb { background: var(--bg-4); border-radius: 4px; }
+        .tinder-card .song-preview { font-size: 13px; padding-bottom: 12px; border-bottom: 1px solid var(--border); line-height: 1.45; font-weight: 400; color: var(--text); text-align: left; }
+        .tinder-card .song-preview:last-child { border-bottom: none; padding-bottom: 0; }
+        .tinder-card .card-actions { margin-top: 18px; display: flex; gap: 8px; flex-shrink: 0; }
+        .tinder-card .card-actions .btn { flex: 1; }
+        .tinder-nav { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: -10px; margin-bottom: 24px; color: var(--text-3); font-size: 13px; }
+        .tinder-nav button { background: var(--bg-2); border: 1px solid var(--border); color: var(--text); width: 42px; height: 42px; border-radius: 50%; cursor: pointer; display: grid; place-items: center; font-size: 18px; transition: all 0.2s; }
+        .tinder-nav button:hover { background: var(--bg-3); border-color: var(--gold); }
+        .tinder-nav button:active { transform: scale(0.9); }
+        .tinder-nav .counter { font-weight: 600; min-width: 60px; text-align: center; font-variant-numeric: tabular-nums; }
+
+        /* === FORMS === */
+        .field { margin-bottom: 14px; }
+        .field label { display: block; font-size: 12px; color: var(--text-2); margin-bottom: 6px; font-weight: 500; letter-spacing: 0.02em; }
+        input, select, textarea { width: 100%; padding: 12px 14px; background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius-s); color: var(--text); font-size: 14px; font-family: inherit; transition: all 0.15s; font-weight: 400; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); background: var(--bg-2); box-shadow: 0 0 0 3px var(--gold-glow); }
+
+        /* === BUTTONS === */
+        .btn { border: none; border-radius: 12px; padding: 12px 20px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: inherit; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; line-height: 1.2; min-height: 44px; }
+        .btn:active { transform: scale(0.97); }
+        .btn-primary { background: linear-gradient(160deg, #f0d580, var(--gold-2)); color: #0a0a0c; box-shadow: 0 4px 16px rgba(212, 169, 53, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3); }
+        .btn-primary:hover { filter: brightness(1.05); }
+        .btn-ghost { background: var(--bg-3); color: var(--text); border: 1px solid var(--border); }
+        .btn-ghost:hover { background: var(--bg-4); }
+        .btn-danger { background: rgba(248, 113, 113, 0.1); color: var(--red); border: 1px solid rgba(248, 113, 113, 0.2); }
+        .btn-danger:hover { background: rgba(248, 113, 113, 0.15); }
+        .btn-sm { padding: 8px 14px; font-size: 12px; min-height: 36px; border-radius: 10px; }
+        .btn-icon { padding: 0; width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; }
+        .btn-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* === SONG ROW === */
+        .song-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; background: var(--bg-1); border: 1px solid var(--border); margin-bottom: 8px; transition: all 0.15s; }
+        .song-item:hover { border-color: var(--border-strong); }
+        .song-thumb { width: 56px; height: 56px; border-radius: 8px; background: var(--bg-3); flex-shrink: 0; object-fit: cover; display: grid; place-items: center; color: var(--text-3); font-size: 20px; overflow: hidden; }
+        .song-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .song-info { flex: 1; min-width: 0; }
+        .song-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.35; }
+        .song-meta { font-size: 11px; color: var(--text-2); display: flex; gap: 8px; flex-wrap: wrap; }
+        .song-meta .singer { color: var(--gold); font-weight: 500; }
+
+        /* === MODAL === */
+        .modal { position: fixed; inset: 0; z-index: 100; display: flex; align-items: flex-end; justify-content: center; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); animation: modalBg 0.2s; overflow: hidden; }
+        @keyframes modalBg { from { opacity: 0; } to { opacity: 1; } }
+        .modal-sheet { background: var(--bg-2); border-radius: 24px 24px 0 0; width: 100%; max-width: 600px; max-height: 85vh; overflow-y: auto; padding: 8px 20px calc(24px + var(--safe-bottom)); box-shadow: var(--shadow-lg); animation: sheetUp 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2); position: relative; -webkit-overflow-scrolling: touch; }
+        @keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .modal-handle { width: 36px; height: 4px; background: var(--bg-4); border-radius: 2px; margin: 0 auto 16px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+        .modal-header h3 { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; flex: 1; }
+        .btn-close { background: var(--bg-3); border: none; color: var(--text-2); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: grid; place-items: center; flex-shrink: 0; transition: all 0.15s; }
+        .btn-close:hover { background: var(--bg-4); color: var(--text); }
+        .btn-close svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; }
+
+        /* === MODAL DE CONFIRMATION === */
+        .confirm-sheet {
+            background: var(--bg-2);
+            border-radius: 24px;
+            width: calc(100% - 32px);
+            max-width: 400px;
+            margin: auto;
+            padding: 28px 24px;
+            box-shadow: var(--shadow-lg);
+            animation: confirmPop 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+            text-align: center;
+        }
+        @keyframes confirmPop { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .confirm-icon { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 16px; background: rgba(248, 113, 113, 0.12); border: 1px solid rgba(248, 113, 113, 0.25); }
+        .confirm-icon svg { width: 32px; height: 32px; stroke: var(--red); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .confirm-icon.warning { background: rgba(232, 200, 106, 0.12); border-color: rgba(232, 200, 106, 0.25); }
+        .confirm-icon.warning svg { stroke: var(--gold); }
+        .confirm-title { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
+        .confirm-message { font-size: 14px; color: var(--text-2); line-height: 1.5; margin-bottom: 24px; }
+        .confirm-message b { color: var(--text); font-weight: 600; }
+        .confirm-actions { display: flex; gap: 10px; }
+        .confirm-actions .btn { flex: 1; }
+        .confirm-actions .btn-danger-confirm { background: linear-gradient(160deg, #f87171, #dc2626); color: #fff; box-shadow: 0 4px 16px rgba(220, 38, 38, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2); }
+        .confirm-actions .btn-danger-confirm:hover { filter: brightness(1.05); }
+
+        /* === CALENDAR === */
+        .cal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+        .month-card { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+        .month-title { font-size: 13px; font-weight: 700; color: var(--gold); text-transform: capitalize; margin-bottom: 12px; letter-spacing: 0.02em; }
+        .mgrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+        .day { aspect-ratio: 1; display: grid; place-items: center; border-radius: 7px; font-size: 11px; background: var(--bg-1); color: var(--text-3); font-weight: 500; }
+        .day.has { background: linear-gradient(160deg, var(--gold), var(--gold-2)); color: #0a0a0c; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(212, 169, 53, 0.3); transition: all 0.15s; }
+        .day.has:hover { transform: scale(1.08); }
+        .day.dow { background: transparent; color: var(--text-3); font-weight: 600; }
+
+        /* === PROJECTION === */
+        .proj { background: #000; color: #fff; min-height: 80vh; padding: 48px 32px; text-align: center; border-radius: var(--radius); margin-top: 16px; }
+        .proj h1 { font-size: clamp(24px, 5vw, 42px); color: var(--gold); margin-bottom: 8px; font-weight: 800; letter-spacing: -0.02em; }
+        .proj .date { font-size: clamp(14px, 2.5vw, 18px); color: #ccc; margin-bottom: 24px; }
+        .proj .singers-line { font-size: clamp(16px, 3vw, 22px); color: var(--gold); margin-bottom: 32px; font-weight: 600; }
+        .proj h2 { font-size: clamp(18px, 3.5vw, 24px); color: var(--gold); margin: 32px 0 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(232, 200, 106, 0.3); letter-spacing: 0.08em; }
+        .proj .song-block { margin-bottom: 20px; }
+        .proj .song-block .title { font-size: clamp(16px, 3vw, 22px); line-height: 1.4; margin-bottom: 4px; font-weight: 500; }
+        .proj .song-block .singer { font-size: clamp(12px, 2vw, 15px); color: var(--gold); font-weight: 600; }
+
+        /* === SINGER BADGES === */
+        .singer-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+        .singer-badge { background: var(--bg-2); border: 1px solid var(--border); border-radius: 50px; padding: 10px 20px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; color: var(--text); }
+        .singer-badge:hover { border-color: var(--gold); background: var(--bg-3); }
+        .singer-badge.active { background: var(--gold); color: #0a0a0c; border-color: var(--gold); font-weight: 600; }
+        .singer-badge .count { background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+
+        /* === EMPTY === */
+        .empty { text-align: center; padding: 48px 20px; color: var(--text-3); font-size: 14px; }
+        .empty svg { width: 48px; height: 48px; stroke: currentColor; fill: none; stroke-width: 1.5; opacity: 0.5; margin-bottom: 12px; }
+
+        /* === BOTTOM NAV === */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; display: flex; justify-content: space-around; align-items: center; padding: 8px 8px calc(8px + var(--safe-bottom)); background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(28px) saturate(180%); -webkit-backdrop-filter: blur(28px) saturate(180%); border-top: 1px solid rgba(255, 255, 255, 0.06); }
+        .nav-item { background: transparent; border: none; color: var(--text-3); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 4px; font-size: 10px; font-weight: 500; cursor: pointer; transition: all 0.2s; border-radius: 12px; flex: 1; max-width: 70px; font-family: inherit; }
+        .nav-item svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .nav-item.active { color: var(--gold); }
+
+        /* === TOAST === */
+        .toast { position: fixed; bottom: calc(90px + var(--safe-bottom)); left: 50%; transform: translateX(-50%); background: var(--bg-4); color: var(--text); padding: 12px 24px; border-radius: 12px; font-size: 13px; font-weight: 500; box-shadow: var(--shadow-lg); z-index: 200; animation: toastIn 0.3s ease-out; border: 1px solid var(--border-strong); max-width: 90vw; text-align: center; }
+        @keyframes toastIn { from { opacity: 0; transform: translate(-50%, 16px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+        /* === MODAL SPECIFICS === */
+        .reset-modal-icon { text-align: center; margin-bottom: 16px; }
+        .reset-modal-icon svg { width: 48px; height: 48px; stroke: var(--red); fill: none; stroke-width: 1.5; }
+        .export-textarea { width: 100%; height: 200px; font-family: monospace; font-size: 12px; background: var(--bg-1); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 12px; resize: vertical; }
+        .dup-list { max-height: 300px; overflow-y: auto; margin-top: 12px; border: 1px solid var(--border); border-radius: 12px; }
+        .dup-item { display: flex; align-items: center; gap: 10px; padding: 12px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+        .dup-item:last-child { border-bottom: none; }
+        .dup-item:hover { background: var(--bg-3); }
+        .dup-item input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--gold); cursor: pointer; }
+        .dup-item label { flex: 1; font-size: 14px; cursor: pointer; margin: 0; }
+
+        /* === CUSTOM SELECT === */
+        .custom-select { position: relative; width: 100%; }
+        .custom-select-trigger { width: 100%; padding: 8px 10px; background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius-s); color: var(--text); font-size: 12px; font-family: inherit; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .custom-select-trigger:focus { outline: none; border-color: var(--gold); }
+        .custom-select-options { position: absolute; bottom: calc(100% + 4px); left: 0; right: 0; z-index: 10; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-s); box-shadow: var(--shadow-lg); max-height: 200px; overflow-y: auto; display: none; flex-direction: column; }
+        .custom-select.open .custom-select-options { display: flex; }
+        .custom-option { padding: 10px 12px; font-size: 13px; color: var(--text); cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.15s; }
+        .custom-option:last-child { border-bottom: none; }
+        .custom-option:hover { background: var(--bg-3); }
+        .custom-option.selected { background: rgba(232, 200, 106, 0.1); color: var(--gold); font-weight: 600; }
+        .custom-option.other { color: var(--gold); font-weight: 600; }
+
+        /* ============================================================
+           RESPONSIVE — AMÉLIORATION WEB / TABLETTE
+           On garde le comportement mobile intact, on embellit le desktop.
+           ============================================================ */
+
+        /* Tablette : plus d'air, titre plus grand, grille stats à 3 col */
+        @media (min-width: 720px) {
+            :root { --content-pad: 24px; }
+            body { font-size: 15.5px; }
+            .brand h1 { font-size: 16px; }
+            .logo { width: 44px; height: 44px; font-size: 21px; border-radius: 14px; }
+            .btn-lock, .btn-reset-icon { width: 42px; height: 42px; }
+            .grid.g4 { grid-template-columns: repeat(3, 1fr); }
+            h2.page-title { font-size: 32px; }
+            .tinder-container { height: 520px; max-width: 460px; }
+            .modal-sheet { border-radius: 24px; max-width: 640px; margin: auto; }
+            .modal { align-items: center; padding: 24px; }
+        }
+
+        /* Desktop : layout plus généreux, nav en barre horizontale élargie */
+        @media (min-width: 1024px) {
+            :root { --content-pad: 40px; }
+
+            /* Header plus aéré */
+            header { padding: calc(18px + var(--safe-top)) var(--content-pad) 18px; }
+            .brand { gap: 16px; }
+            .brand h1 { font-size: 17px; }
+            .brand .tag { font-size: 11px; }
+
+            /* Contenu : plus d'espace, titres plus grands */
+            main { padding-top: 40px; }
+            h2.page-title { font-size: 36px; }
+            p.page-sub { font-size: 15px; margin-bottom: 36px; }
+            .section { font-size: 13px; margin: 40px 0 18px; }
+
+            /* Stats : 4 colonnes fixes */
+            .grid.g4 { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+            .stat { padding: 24px 20px; }
+            .stat .n { font-size: 34px; }
+
+            /* Cartes dimanche : 2 colonnes */
+            #sundayList { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            #sundayList .scard { margin-bottom: 0 !important; }
+
+            /* Tinder card : reste centrée mais plus grande et plus propre */
+            .tinder-container { height: 560px; max-width: 520px; margin-bottom: 32px; }
+            .tinder-card { padding: 32px; }
+            .tinder-card .card-date { font-size: 26px; }
+            .tinder-card .card-singers { font-size: 14px; margin-bottom: 22px; }
+            .tinder-card .song-preview { font-size: 14px; padding-bottom: 14px; }
+            .tinder-nav { gap: 24px; margin-bottom: 32px; }
+            .tinder-nav button { width: 46px; height: 46px; font-size: 20px; }
+
+            /* Formulaires : champs plus hauts et plus confortables */
+            input, select, textarea { padding: 14px 16px; font-size: 15px; }
+            .field label { font-size: 13px; }
+            .btn { padding: 14px 24px; font-size: 15px; }
+            .btn-sm { padding: 10px 16px; font-size: 13px; min-height: 40px; }
+
+            /* Cartes générales : padding plus généreux */
+            .card { padding: 22px; }
+            .scard { padding: 22px; }
+            .scard .date { font-size: 16px; }
+
+            /* Recherche / dimanches */
+            #filterQ, #searchQ { max-width: 520px; }
+
+            /* Par chantre : grille responsive plus large */
+            .singer-grid { gap: 12px; }
+            .singer-badge { padding: 12px 22px; font-size: 14.5px; }
+
+            /* Projection : plus imposant et centré */
+            .proj { padding: 72px 56px; }
+            .proj h1 { font-size: 48px; }
+            .proj .song-block .title { font-size: 24px; }
+
+            /* Nav bottom : devient une barre flottante centrée et élargie */
+            .bottom-nav {
+                max-width: 720px;
+                margin: 0 auto;
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                bottom: 20px;
+                padding: 10px 16px;
+                box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.02);
+                gap: 4px;
+            }
+            .nav-item { padding: 10px 12px; font-size: 11px; max-width: 100px; border-radius: 14px; }
+            .nav-item svg { width: 22px; height: 22px; }
+            .nav-item:hover { color: var(--text); background: rgba(255, 255, 255, 0.04); }
+            .nav-item.active { background: rgba(232, 200, 106, 0.08); }
+
+            /* On garde le scroll-padding pour ne pas cacher la nav flottante */
+            .scroll-container { padding-bottom: calc(120px + var(--safe-bottom)); }
+
+            /* Modal : plus large */
+            .modal-sheet { max-width: 720px; }
+            .confirm-sheet { max-width: 440px; }
+
+            /* Song item : plus aéré */
+            .song-item { padding: 14px 16px; }
+            .song-thumb { width: 64px; height: 64px; border-radius: 10px; }
+            .song-title { font-size: 15px; }
+        }
+
+        /* Très grand écran : on garde le confort sans étirer */
+        @media (min-width: 1400px) {
+            :root { --content-max: 1240px; }
+        }
+
+        /* Respect de prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+            }
+        }
+  
+    .abmg-wa-float {
+    position: fixed;
+    bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+    right: 16px;
+    z-index: 45;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(16, 16, 20, 0.94);
+    border: 1px solid rgba(232, 200, 106, 0.32);
+    color: #25D366;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+.abmg-wa-float:hover,
+.abmg-wa-float:focus-visible {
+    transform: scale(1.06);
+    border-color: rgba(232, 200, 106, 0.7);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55), 0 0 0 3px rgba(232, 200, 106, 0.15);
+    outline: none;
+}
+.abmg-wa-float:active { transform: scale(0.96); }
+.abmg-wa-float svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+    fill: currentColor;
+}
+@media (min-width: 1024px) {
+    .abmg-wa-float {
+        bottom: 24px;
+        right: 24px;
+        width: 44px;
+        height: 44px;
+    }
+    .abmg-wa-float svg { width: 22px; height: 22px; }
+}
+  
+  
+    </style>
+</head>
+<body>
+<script>try{localStorage.removeItem("abraham-berne-mygod-v9");}catch(e){}</script>
+<script>try{localStorage.removeItem("abraham-berne-mygod-v9");}catch(e){}</script>
+
+<header>
+    <div class="header-inner">
+        <div class="brand">
+            <div class="logo">A</div>
+            <div class="brand-text">
+                <h1>Abraham Berne <span class="gold">myGod</span></h1>
+                <div class="tag">Programme musical</div>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="btn-reset-icon" id="exportBtn" onclick="exportHTML()" title="Exporter le HTML mis à jour" aria-label="Exporter le HTML">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+            </button>
+            <button class="btn-reset-icon" id="resetBtn" onclick="confirmReset()" title="Réinitialiser tout le code" aria-label="Réinitialiser">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path>
+                </svg>
+            </button>
+            <button class="btn-lock locked" id="lockBtn" onclick="promptLock()" title="Déverrouiller pour modifier" aria-label="Verrouiller/Déverrouiller">
+                <svg id="lockIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="scroll-container">
+    <main id="view">
+            <h2 class="page-title">Bienvenue</h2>
+            <p class="page-sub">Programme musical du groupe Abraham Berne</p>
+            <div class="grid g4" style="margin-bottom:28px">
+                <div class="stat"><div class="n">56</div><div class="l">Dimanches</div></div>
+                <div class="stat"><div class="n">4</div><div class="l">Chantres</div></div>
+                <div class="stat"><div class="n">178</div><div class="l">Chants</div></div>
+            </div>
+            <h3 class="section">Programme du jour</h3>
+            <div class="tinder-container" id="tinderContainer"><div class="tinder-card" data-index="1" style="z-index: 10; opacity: 1; transition: transform 0.3s, opacity 0.3s;">
+                <div class="card-date">dimanche 22 novembre 2026</div>
+                <div class="card-singers">Pélagie · Prunelle · Rebecca · Naomie</div>
+                <div class="card-songs">
+                    <div class="song-preview">Samuel Shukrani's- PAPA OH</div><div class="song-preview">JE VIENS POUR TE LOUER | Derek-Jones (Contemplation Live)</div><div class="song-preview">FAIS MOI VOIR TA GLOIRE /Vteam à C'NIGHT (Lead : YANNICK BITTY)</div><div class="song-preview">Tu es yaweh</div>
+                    <div class="song-preview">Rosny Kayiba ft Deborah Lukalu - Je Vais Le Louer</div><div class="song-preview">Ensemble louons le Seigneur</div>
+                    
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-ghost btn-sm" data-action="details">Détails</button>
+                    <button class="btn btn-primary btn-sm" data-action="edit">Modifier</button>
+                </div>
+            </div><div class="tinder-card" data-index="2" style="z-index: 9; transform: scale(0.95) translateY(10px); opacity: 0.7;">
+                <div class="card-date">dimanche 29 novembre 2026</div>
+                <div class="card-singers">Rebecca · Pélagie · Prunelle · Naomie</div>
+                <div class="card-songs">
+                    <div class="song-preview">Je veux chanter un chant d'amour - Hosanna clips - EDEN</div><div class="song-preview">Eden t'adorer</div><div class="song-preview">Je ne desire que toi</div><div class="song-preview">Jonathan C. Gambela - Sabaoth (clip officiel)</div>
+                    <div class="song-preview">EDEN - Yessu Osseye</div><div class="song-preview">Il n'y a personne comme Jésus</div>
+                    
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-ghost btn-sm" data-action="details">Détails</button>
+                    <button class="btn btn-primary btn-sm" data-action="edit">Modifier</button>
+                </div>
+            </div><div class="tinder-card" data-index="3" style="z-index: 8; transform: scale(0.9) translateY(20px); opacity: 0.4;">
+                <div class="card-date">dimanche 6 décembre 2026</div>
+                <div class="card-singers">Prunelle · Naomie · Pélagie · Rebecca</div>
+                <div class="card-songs">
+                    <div class="song-preview">Hamos Ki-Say - Ton Nom est Yeshua (Live recording)</div><div class="song-preview">Emmanuel - Hosanna clips - Dena Mwana</div><div class="song-preview">EDEN - ESPRIT DE DIEU</div><div class="song-preview">Nous te couronnons</div>
+                    <div class="song-preview">Colombe Merveille - Emme- moi</div><div class="song-preview">Shekina - Brûle en moi</div>
+                    
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-ghost btn-sm" data-action="details">Détails</button>
+                    <button class="btn btn-primary btn-sm" data-action="edit">Modifier</button>
+                </div>
+            </div></div>
+            <div class="tinder-nav">
+                <button id="prevBtn" aria-label="Précédent">←</button>
+                <span class="counter" id="tinderCounter">2/56</span>
+                <button id="nextBtn" aria-label="Suivant">→</button>
+            </div>
+        <div>
+                <h3 class="section">Actions rapides</h3>
+                <div class="grid g3">
+                    <div class="card clickable" onclick="openNewSunday()">
+                        <div style="font-size:20px;margin-bottom:8px">➕</div>
+                        <div style="font-weight:600;margin-bottom:4px">Nouveau dimanche</div>
+                        <div style="font-size:12px;color:var(--text-2)">Créer un programme</div>
+                    </div>
+                    <div class="card clickable" onclick="document.querySelector('[data-view=projection]').click()">
+                        <div style="font-size:20px;margin-bottom:8px">📽️</div>
+                        <div style="font-weight:600;margin-bottom:4px">Projection</div>
+                        <div style="font-size:12px;color:var(--text-2)">Mode culte</div>
+                    </div>
+                </div>
+            </div></main>
+</div>
+
+<nav class="bottom-nav">
+    <button class="nav-item active" data-view="home">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span>Accueil</span>
+    </button>
+    <button class="nav-item" data-view="sundays">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        <span>Dimanches</span>
+    </button>
+    <button class="nav-item" data-view="calendar">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        <span>Calendrier</span>
+    </button>
+    <button class="nav-item" data-view="singer">
+        <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+        <span>Chantres</span>
+    </button>
+    <button class="nav-item" data-view="search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>Recherche</span>
+    </button>
+    <button class="nav-item" data-view="projection">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        <span>Proj.</span>
+    </button>
+</nav>
+
+<div id="modal" class="modal hidden">
+    <div class="modal-sheet" id="modalSheet">
+        <div class="modal-handle"></div>
+        <div id="modalBody">
+            <div class="modal-header">
+                <h3>dimanche 22 novembre 2026</h3>
+                <button class="btn-close" onclick="closeModal()" aria-label="Fermer">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div style="font-size:13px;color:var(--text-2);margin-bottom:16px">
+                <b>Chantres:</b> Pélagie · Prunelle · Rebecca · Naomie
+            </div>
+            <h3 class="section" style="margin-top:8px">Adoration</h3>
+            
+                <div class="song-item">
+                    <div class="song-thumb"><img src="https://img.youtube.com/vi/Sru8S_qoiHc/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>
+                    <div class="song-info">
+                        <div class="song-title">Samuel Shukrani's- PAPA OH</div>
+                        <div class="song-meta">
+                            <span class="singer">Pélagie</span>
+                            <span>Adoration</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        <a href="https://youtu.be/Sru8S_qoiHc" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>
+                        <button class="btn btn-ghost btn-icon" data-edit-cat="a" data-edit-title="Samuel Shukrani's- PAPA OH" title="Modifier">✎</button>
+                    </div>
+                </div>
+            
+                <div class="song-item">
+                    <div class="song-thumb"><img src="https://img.youtube.com/vi/ZcwHRUPE30M/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>
+                    <div class="song-info">
+                        <div class="song-title">JE VIENS POUR TE LOUER | Derek-Jones (Contemplation Live)</div>
+                        <div class="song-meta">
+                            <span class="singer">Pélagie</span>
+                            <span>Adoration</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        <a href="https://youtu.be/ZcwHRUPE30M?is=p4W-kHgrj6--AcAy" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>
+                        <button class="btn btn-ghost btn-icon" data-edit-cat="a" data-edit-title="JE VIENS POUR TE LOUER | Derek-Jones (Contemplation Live)" title="Modifier">✎</button>
+                    </div>
+                </div>
+            
+                <div class="song-item">
+                    <div class="song-thumb"><img src="https://img.youtube.com/vi/YX0s-i1h6R4/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>
+                    <div class="song-info">
+                        <div class="song-title">FAIS MOI VOIR TA GLOIRE /Vteam à C'NIGHT (Lead : YANNICK BITTY)</div>
+                        <div class="song-meta">
+                            <span class="singer">Prunelle</span>
+                            <span>Adoration</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        <a href="https://youtu.be/YX0s-i1h6R4" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>
+                        <button class="btn btn-ghost btn-icon" data-edit-cat="a" data-edit-title="FAIS MOI VOIR TA GLOIRE /Vteam à C'NIGHT (Lead : YANNICK BITTY)" title="Modifier">✎</button>
+                    </div>
+                </div>
+            
+                <div class="song-item">
+                    <div class="song-thumb"><img src="https://img.youtube.com/vi/Dk2FHyotslo/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>
+                    <div class="song-info">
+                        <div class="song-title">Tu es yaweh</div>
+                        <div class="song-meta">
+                            <span class="singer">Prunelle</span>
+                            <span>Adoration</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        <a href="https://youtu.be/Dk2FHyotslo" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>
+                        <button class="btn btn-ghost btn-icon" data-edit-cat="a" data-edit-title="Tu es yaweh" title="Modifier">✎</button>
+                    </div>
+                </div>
+            
+            <h3 class="section">Louange</h3>
+            
+                <div class="song-item">
+                    <div class="song-thumb"><img src="https://img.youtube.com/vi/O98lxBb98Ck/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>
+                    <div class="song-info">
+                        <div class="song-title">Rosny Kayiba ft Deborah Lukalu - Je Vais Le Louer</div>
+                        <div class="song-meta">
+                            <span class="singer">Rebecca</span>
+                            <span>Louange</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        <a href="https://youtu.be/O98lxBb98Ck" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>
+                        <button class="btn btn-ghost btn-icon" data-edit-cat="l" data-edit-title="Rosny Kayiba ft Deborah Lukalu - Je Vais Le Louer" title="Modifier">✎</button>
+                    </div>
+                </div>
+            
+                <div class="song-item">
+                    <div class="song-thumb"><img src="https://img.youtube.com/vi/VJzfosG3dPs/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>
+                    <div class="song-info">
+                        <div class="song-title">Ensemble louons le Seigneur</div>
+                        <div class="song-meta">
+                            <span class="singer">Naomie</span>
+                            <span>Louange</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        <a href="https://youtu.be/VJzfosG3dPs" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>
+                        <button class="btn btn-ghost btn-icon" data-edit-cat="l" data-edit-title="Ensemble louons le Seigneur" title="Modifier">✎</button>
+                    </div>
+                </div>
+            
+            <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-primary" style="flex:1" onclick="openEditor('2026-11-22')">✎ Modifier le programme</button>
+                <button class="btn btn-ghost" onclick="projFromModal('2026-11-22')">📽️ Projeter</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast hidden">✓ Programme enregistré</div>
+
+<script>
+    const SEED_SINGERS = [
+    "Prunelle",
+    "Pélagie",
+    "Naomie",
+    "Rebecca"
+];
+    const SEED_SUNDAYS = [
+    {
+        "date": "2026-11-15",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "JE VEUX BOIRE À TA SOURCE, PLUS DE TOI ENCORE...",
+                "url": "https://youtu.be/y2Cauq-RuGA"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Guy Christ Quel est ton problème",
+                "url": "https://youtu.be/n08-cH_3L3k?is=I31zUEY2_uLtHt0f"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "LES CHANTRES DE LA FOI | PUISSANT SAUVEUR YESHUA",
+                "url": "https://youtu.be/a6Vwr5GB-d4"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "MELODIE VENUE DU CIEL (Marcel Boungou) || Marie Zamor",
+                "url": "https://youtu.be/wzyPsl-Dq9A?is=R0OWhc_XWF-rBwkB"
+            }
+        ]
+    },
+    {
+        "date": "2026-11-22",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Samuel Shukrani's- PAPA OH",
+                "url": "https://youtu.be/Sru8S_qoiHc"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "JE VIENS POUR TE LOUER | Derek-Jones (Contemplation Live)",
+                "url": "https://youtu.be/ZcwHRUPE30M?is=p4W-kHgrj6--AcAy"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "FAIS MOI VOIR TA GLOIRE /Vteam à C'NIGHT (Lead : YANNICK BITTY)",
+                "url": "https://youtu.be/YX0s-i1h6R4"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Tu es yaweh",
+                "url": "https://youtu.be/Dk2FHyotslo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Rosny Kayiba ft Deborah Lukalu - Je Vais Le Louer",
+                "url": "https://youtu.be/O98lxBb98Ck"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Ensemble louons le Seigneur",
+                "url": "https://youtu.be/VJzfosG3dPs"
+            }
+        ]
+    },
+    {
+        "date": "2026-11-29",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Je veux chanter un chant d'amour - Hosanna clips - EDEN",
+                "url": "https://youtu.be/lcSxoPhcVGk?is=GfCwCYaf_UVIE2dg"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Eden t'adorer",
+                "url": "https://youtu.be/uqccle_B0lo"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Je ne desire que toi",
+                "url": "https://youtu.be/VtwscHxXCV0"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Jonathan C. Gambela - Sabaoth (clip officiel)",
+                "url": "https://youtu.be/_iA52WcFQJc"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "EDEN - Yessu Osseye",
+                "url": "https://youtu.be/bmEm03K_GH8"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Il n'y a personne comme Jésus",
+                "url": "https://youtu.be/uYahuAoG3UA"
+            }
+        ]
+    },
+    {
+        "date": "2026-12-06",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Hamos Ki-Say - Ton Nom est Yeshua (Live recording)",
+                "url": "https://youtu.be/JYsTzcY3mTI?is=qLqCCccrTTXWds25"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Emmanuel - Hosanna clips - Dena Mwana",
+                "url": "https://youtu.be/NU4p2Ol2KLY?is=WZne-sj6LMNoTbI1"
+            },
+            {
+                "singer": "Naomie",
+                "title": "EDEN - ESPRIT DE DIEU",
+                "url": "https://youtu.be/AsLyhA8N_B8"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Nous te couronnons",
+                "url": "https://youtu.be/pOTbbTE1Wq0"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Colombe Merveille - Emme- moi",
+                "url": "https://youtu.be/znvfLXEqcKc?is=pcwPPZYw32mwfc48"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Shekina - Brûle en moi",
+                "url": "https://youtu.be/LF8fBEIsFaE?is=ekzAbc1l5pEu9cfz"
+            }
+        ]
+    },
+    {
+        "date": "2026-12-13",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Je veux chanter un chant d'amour - Hosanna clips - EDEN",
+                "url": "https://youtu.be/XGlEp2rzT6M?is=xFYheJrHJvHzvzDp"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Les Cieux proclament (À jamais tu seras) - Momentum Musique",
+                "url": "https://youtu.be/Fy4gRLVuQJg?is=F4NgdLxd-3DeLXwG"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Eden lago ayons",
+                "url": "https://youtu.be/pZDy24ZLL8U?is=t4jXyeTWDe7nyf_P"
+            },
+            {
+                "singer": "Naomie",
+                "title": "J'ENTRE DANS LE SAINT / JE M'ATTENDS À TOI - Laura Dambury",
+                "url": "https://youtu.be/5Nuw51jYBfs?is=xiXDZrvyVAVFcEn5"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Infiniment grand (version louange)",
+                "url": "https://youtu.be/BY_GKE9toFM"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Dorcas Kaja - Il est bon de louer Dieu",
+                "url": "https://youtu.be/lLhPhAfQ6Ew?is=SsFbx-6d23taaue1"
+            }
+        ]
+    },
+    {
+        "date": "2026-12-20",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Marie Adé Tu es plus grand",
+                "url": "https://youtu.be/1a6D-7DALZY"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Dena Mwana - \"Utilise-moi\" (clip Officiel)",
+                "url": "https://youtu.be/FH1MpS-cKSM?is=xnEXd4RxvA2Wc-oo"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Ne t'inquiète de rien",
+                "url": "https://youtu.be/TtmWGV1ugsg?is=8J6vssb-Reijuljl"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "YESHUA - Seigneur fais- moi voir ta gloire / Tu es l'amour de mon âme - Grace Jocktane",
+                "url": "https://youtu.be/CcJ_8A82vjE"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Constance - Owa Dewo",
+                "url": "https://youtu.be/_KeJV5u5xzE?is=qK_mhaxOpohxMzyg"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Pasteur Guy - Je suis dans la joie",
+                "url": "https://youtu.be/lYWS3GMDS-E?is=u9UwJc7LOGfzN62M"
+            }
+        ]
+    },
+    {
+        "date": "2026-12-27",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Jésus fait des miracles : Kacou Severin & Koné Fontaly",
+                "url": "https://youtu.be/cFO2gyvw3E4?is=yriooy6MGA2UbaN_"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Si le Dieu Des Esprits Des Prophets par Kouassi & living Gospel",
+                "url": "https://youtu.be/TxX6EnpSY4I?is=eublrUMchFi538Fv"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Inonde ce lieu de ta présence - Samuel Joseph",
+                "url": "https://youtu.be/snKoJTmVrxg?is=1FAgeaOCIybaf2Xi"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Le ciel est ouvert / Leve menm devan majeste / Mizerikod / Nous te rendons la Gloire - Grace Jocktane",
+                "url": "https://youtu.be/aDfLR-94U8E"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "DEBORAH LUKALU - Ma Consolation (Mungu wa Maajabu Live)",
+                "url": "https://youtu.be/pDqW-f2x6kI?is=LPnZQCtBNMs5NnyQ"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Je veux me rejouir",
+                "url": "https://youtu.be/aweO0-Qh6mU"
+            }
+        ]
+    },
+    {
+        "date": "2027-01-03",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Je n'ai que toi",
+                "url": "https://youtu.be/UjD_jKmP8Lk"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Quand il descend",
+                "url": "https://youtu.be/sc6i40B4nUY"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Ouvre La Porte - Anthony & Keren Lambert Feat. Renaissance Worship",
+                "url": "https://youtu.be/sX46whPXlIQ?is=3UHglNB6yYt0onqv"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "DIEU QUI GARDE L'ALLIANCE I",
+                "url": "https://youtu.be/Cc7vOmqE7fo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Dena Mwana - Je Bénirai L'Éternel",
+                "url": "https://youtu.be/XR9vBZa9cjo?is=of4guvOp1e8b-Czj"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Oh mon Dieu, qui est bon comme toi - Impact Gospel",
+                "url": "https://youtu.be/_o7YezvIGVU?is=o_Yrer9eiLxvqxC-"
+            }
+        ]
+    },
+    {
+        "date": "2027-01-10",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Lumiere du monde",
+                "url": "https://youtu.be/g0zwmV5Api4"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "MA SEULE FONDATION (Firm Foundation) LIVE | Victoire Musique feat. Carl Handy Corvil",
+                "url": "https://youtu.be/laJDVDKGcL4?is=O-Zx2xNqeF29kXCj"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Adoration spontanée : ah eh eh / Yeshua/ Lion of Judah",
+                "url": "https://youtu.be/kwWIz0Vo7K4?is=KfLKXYjsR6lqoqM0"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Sylvie Tagbo - QUE MA VIE SOIT UNE FLEUR (Live ICC)",
+                "url": "https://youtu.be/kQMPv7yJjzI?is=a5qHr3eUw4DkYps5"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "DEBORAH LUKALU feat. Lord Lombo - Tu es puissant / Call Me Favour",
+                "url": "https://youtu.be/OL6k-hRRIvQ?is=dfimQi26_nd_TeN0"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Comment ne pas te louer",
+                "url": "https://youtu.be/Wv_KsPW0tIY?is=uR8H8hU9Mshy-zzC"
+            }
+        ]
+    },
+    {
+        "date": "2027-01-17",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Jésus tu as les paroles de la vie",
+                "url": "https://youtu.be/Mn4oFz7umBo"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Hamos Ki- Say - YAHVÉ SHAMMA feat Larissa Doh",
+                "url": "https://youtu.be/ghQ-gK9UvlM?is=BrmzwM4FDKxz8XLK"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Dans Ton sanctuaire - Gael Music- Live 2005",
+                "url": "https://youtu.be/Bo1WV6jfdEY"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "À jamais tu es Saint",
+                "url": "https://youtu.be/v2iRuO_u4aY"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Onel Mala - Vêtu de gloire",
+                "url": "https://youtu.be/z9Y7ZIIjFJg?is=EFvtM24DIYcCD9Dm"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Nous te louons (louange)",
+                "url": "https://youtu.be/1Mbxr8XrsWs?is=nR4g41d9T_1zkblH"
+            }
+        ]
+    },
+    {
+        "date": "2027-01-24",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Rachel Anyeme - MIRACLE (Official Lyrics)",
+                "url": "https://youtu.be/t4k4yL8igGQ?is=hJqKiCM0-MCJnUbp"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Tu es tout pour moi",
+                "url": "https://youtu.be/jBvHEu0mutw"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Adonai / Je T'adore - Athoms Mbuma",
+                "url": "https://youtu.be/kQ-YDqAdL64"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Oui je le vois",
+                "url": "https://youtu.be/-RFlJr6FdGk?is=as-LsEmyL08N4r19"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Otis Endie - Ce que sa bouche a dit, sa main l'accomplit",
+                "url": "https://youtu.be/SMrNUnLeNds?is=CEe_C-xEdMhCDudu"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Nadège Mbuma - Compilation Louange",
+                "url": "https://youtu.be/xxWs03eFZyU?is=ceoQjLKWz-trha4U"
+            }
+        ]
+    },
+    {
+        "date": "2027-01-31",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Bénis L'Éternel - Jonathan Munchongwa, Steev Y., SimianeMusic",
+                "url": "https://youtu.be/1ieckehNEO8?is=hRPxFs6f7hYeernr"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Tu es plus grand - Hosanna clips - Athoms et Nadège Mbuma",
+                "url": "https://youtu.be/CeKM7ctnRus?is=EZDmJIO5dPeB5vAe"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Dena Mwana - Souffle (Official video)",
+                "url": "https://youtu.be/NM-eXztJFc4?is=UobXs92BPVAD0yhy"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Jonathan C. Gambela - L'entrée du Roi (Clip Officiel)",
+                "url": "https://youtu.be/Oc8_5tVTnX0?is=Sx4AkpYnUz5odIBW"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Temps de louange avec Deborah Lukalu",
+                "url": "https://youtu.be/_qlTkwXqtHM?is=NeYbiFYuofdKMqSx"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Il n'y a personne comme Jésus",
+                "url": "https://youtu.be/uYahuAoG3UA"
+            }
+        ]
+    },
+    {
+        "date": "2027-02-07",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Je suis née pour le louer",
+                "url": "https://youtu.be/AHq7jl_55NE"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Digne est l'Agneau (Hillsong) - Momentum Musique feat Laetitia Perraud",
+                "url": "https://youtu.be/eusI00d92tI?is=72DDS_XhWiuq7GTS"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Mireille Basiwa, puiser, plus de toi encore",
+                "url": "https://youtu.be/C2ZYnxiUAmc?is=ezFiDpBBd3D8jQvf"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Elyah/ Adonai/Yeshua/Toi seul es Dieu - RuthDaniel LHOMME | CEEV Musique",
+                "url": "https://youtu.be/0qcpfQyFnRk"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Koné Fontaly - Lago Sounagno",
+                "url": "https://youtu.be/CdxWp8MbFU8"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Dieu de miracles - Schekina",
+                "url": "https://youtu.be/eZB_j8084OM?is=kIpxAkMMe3SoeOqI"
+            }
+        ]
+    },
+    {
+        "date": "2027-02-14",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "NOUS TE COURONNONS (We crown You) || Dena Mwana & Plénitude Music",
+                "url": "https://youtu.be/dx_H0LSQEyg?is=aPSa1iuVTknyI-7g"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "JE VEUX PRIER | Derek- Jones feat. Olivia Kouamé (Live recording)",
+                "url": "https://youtu.be/w47Br8srwmE?is=rJYIKM6P4Dtm4tsd"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Qui peut encore dire ! - Josué le Sage",
+                "url": "https://youtu.be/d3AN5N_NwuU"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Je Lève Les Yeux",
+                "url": "https://youtu.be/F2bH2CBluPA"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Naomie",
+                "title": "Vibrez pour Dieu",
+                "url": "https://youtu.be/wPXItafwCnI?is=2saFIxop6dLSgCXn"
+            }
+        ]
+    },
+    {
+        "date": "2027-02-21",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "MOI ET MA MAISON (Live au Dôme de Paris) | REACH WORSHIP",
+                "url": "https://youtu.be/TjKRyzy7yCY?is=68XdqIrKEHRtXur0"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Dena Mwana - Saint Esprit (Officiel)",
+                "url": "https://youtu.be/JPyyX4zFraU?is=gI3JS5TiaoHGpfEL"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Il veille sur moi - Marius Psalmiste",
+                "url": "https://youtu.be/620s-RmQMkA?is=ZzlhndS2TIexPFmR"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Jésus Christ est ressuscité",
+                "url": "https://youtu.be/j8BCTovMrtM?is=u8r7xOFEZcLnaS6P"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Jésus oh tu m'as sauvé / Il a reçu le nom / Des cris de joie",
+                "url": "https://youtu.be/vt3ek0dZkKY"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Sandrine Droubly - Prends ma main",
+                "url": "https://youtu.be/gAkPDaTkTT0?is=l4yRk2fvbEwWh2-K"
+            }
+        ]
+    },
+    {
+        "date": "2027-02-28",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Infiniment grand (version louange)",
+                "url": "https://youtu.be/BY_GKE9toFM"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "DANY KASONGO Adullam & je viens puiser",
+                "url": "https://youtu.be/L52u3RD7qJM"
+            },
+            {
+                "singer": "Naomie",
+                "title": "À jamais tu seras",
+                "url": "https://youtu.be/kMaz2rRMcGw"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Nous venons puiser plus de toi",
+                "url": "https://youtu.be/x1iOQ8WLzek"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Fais- le savoir / Ça y est / Yékélé Kélé",
+                "url": "https://youtu.be/FO6ui2XR5UM?is=qLIoTZYA4FabCNEP"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Ano Mira - Écris mon nom",
+                "url": "https://youtu.be/VmILxj-eO_g?is=EvCeC2Eq1nmyPNeN"
+            }
+        ]
+    },
+    {
+        "date": "2027-03-07",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Lyrique Ramène moi sur ta parole",
+                "url": "https://youtu.be/43GUKWN0YPc?is=l1fBxaimx20BfKJ-"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "EH BABA (IL EST HORS DE QUESTION) - Enock Bahwere",
+                "url": "https://youtu.be/up2iOpUUlbk?is=I17kn6ctmOI5tr1s"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Je louerai l'Éternel",
+                "url": "https://youtu.be/CZ_Pa_KsZIQ"
+            },
+            {
+                "singer": "Naomie",
+                "title": "DANIEL BANAM - EL YAH | Live recording",
+                "url": "https://youtu.be/JTsyX2Ta1TU?is=JSU7lcPOED1ifz8A"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Il y a une prophétie sur ma vie / Hosanna / L'Éternel est bon",
+                "url": "https://youtu.be/yqpPWheYcBo"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Appelle, il te répondra (Cameroun)",
+                "url": "https://youtu.be/no6JW1kjuDw?is=KUR0m_6zhOu3adCs"
+            }
+        ]
+    },
+    {
+        "date": "2027-03-14",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "EDEN \"OUI DIEU\"",
+                "url": "https://youtu.be/QTwASEijcFI?is=1E_GiWM5YWe3vh_I"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Mains Levées (Wide as the sky) Adoration LIVE - Dena Mwana & Victoire Musique",
+                "url": "https://youtu.be/CTG01ZSvfSE"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Moment d'adoration | Mon Seul Désir - Grace Jocktane à Évidence",
+                "url": "https://youtu.be/bc7H1nIPdSw"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Hosanna (Jésus Nous T'élevons Plus Haut) (Live)",
+                "url": "https://youtu.be/oVUrVQXnXLM?is=1JGD7dJUC0617Jcn"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Chant d'amour - Rhema Loseke",
+                "url": "https://youtu.be/9nfi9cIq4UM?is=kukxuGvMu6v67m6q"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Contemplation Night - Larissa Doh Ôti (à partir de 12 min)",
+                "url": "https://youtu.be/qZRkiD_t1D4?is=RIEcpiur7kZo7s1v"
+            }
+        ]
+    },
+    {
+        "date": "2027-03-21",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Alliance de grâce feat Colombe Merveille - Oins-moi",
+                "url": "https://youtu.be/xuvt0Ff657U?is=TjBf8ooRhmtPeyYN"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Seigneur Nul n'est comme toi",
+                "url": "https://youtu.be/1rpvn3_FtmU"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Tu sais satisfaire",
+                "url": "https://youtu.be/vEK1V-Zu0KU"
+            },
+            {
+                "singer": "Naomie",
+                "title": "À la croix | NV Worship avec Jean Jean",
+                "url": "https://youtu.be/U5eof6t4TZ0"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Lisanga — Il m'a étonné",
+                "url": "https://youtu.be/wCzeQqZfMmM"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Les messagers du Sinaï - La foi en Dieu / Ceux qui se confient en l'Éternel",
+                "url": "https://youtu.be/im0ol1iltNk?is=_J0EehpPpqOLx4OI"
+            }
+        ]
+    },
+    {
+        "date": "2027-03-28",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Je m'abandonne | NV Worship",
+                "url": "https://youtu.be/CfdbjdzQgDY?is=yXGwyI932zA3mKx6"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Emmanuel est là (ft Zoé Déborah)] Universal worship x Everlasting",
+                "url": "https://youtu.be/iz4aRPHipxM"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Tu es là présent permis nous waymaker",
+                "url": "https://youtu.be/3EL5mryrdT4"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Attire-moi à toi",
+                "url": "https://youtu.be/3d6aqphOOxo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Louange avec l'archevêque Kodja Guy Vincent",
+                "url": "https://youtu.be/hJluVYqMH0s?is=7hQ0BiTy6_a1Germ"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Marie-Anne Abia - L'Heure de la Victoire",
+                "url": "https://youtu.be/c5XSO7CKXr4?is=l-MRBHWPotG70qHj"
+            }
+        ]
+    },
+    {
+        "date": "2027-04-04",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Jonathan C. Gambela - Onction (official video)",
+                "url": "https://youtu.be/_O8psLIwTLw?is=NlUFtlZwPfuJkuSL"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "QUE TA GLOIRE DESCENDE | Derek-Jones feat. Estelle Essouma (official video)",
+                "url": "https://youtu.be/4KpGzx8HCQQ?is=v_RT4RiEcQY7ZTPD"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "ÉMERVEILLÉ EN TA PRÉSENCE ! / LE NOM DE JÉSUS",
+                "url": "https://youtu.be/iM2Qc5WizR4"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Change mon histoire guy Christ",
+                "url": "https://youtu.be/s9k1c6rRBBo?is=j1qD9U2EEwO9ii64"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Louez l'Éternel / Non je ne mourrai pas ",
+                "url": "https://youtu.be/-ig5Bg87f34?is=mwr9jn1NGprnyvJw"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Ma vie est entre tes mains",
+                "url": "https://youtu.be/8lbbH29jp-I?is=pmGf1uDFZNerCkhn"
+            }
+        ]
+    },
+    {
+        "date": "2027-05-02",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Constance Père nous t'adorons",
+                "url": "https://youtu.be/4KRxebXkvas"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Je sais que tu es là eden",
+                "url": "https://youtu.be/b6OXKeEDfZQ?is=WRijBVzqUlJGLaH_"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "IL ENTEND LES CRIS | REACH WORSHIP (feat. Patrick Isaac II)",
+                "url": "https://youtu.be/d88iuud_TlI?is=z2GskoEFo1C24Yq9"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "L'hymne - MLK Choir",
+                "url": "https://youtu.be/ic8NMqgPGdQ"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Guy Vincent Kodja - J'ai vu la puissance de Dieu",
+                "url": "https://youtu.be/f1s_s8YDtR0?is=SdB5EvLLg3iD3Bjd"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Louange en semaine (de 0 à 9 min)",
+                "url": "https://youtu.be/bzDwd7P_ol8?is=Axa-m2OpIkULNIIQ"
+            }
+        ]
+    },
+    {
+        "date": "2027-05-09",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "JE VEUX BOIRE À TA SOURCE, PLUS DE TOI ENCORE...",
+                "url": "https://youtu.be/y2Cauq-RuGA"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Guy Christ Quel est ton problème",
+                "url": "https://youtu.be/n08-cH_3L3k?is=I31zUEY2_uLtHt0f"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "LES CHANTRES DE LA FOI | PUISSANT SAUVEUR YESHUA",
+                "url": "https://youtu.be/a6Vwr5GB-d4"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "MELODIE VENUE DU CIEL (Marcel Boungou) || Marie Zamor",
+                "url": "https://youtu.be/wzyPsl-Dq9A?is=R0OWhc_XWF-rBwkB"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Apopola - Kodja Guy Vincent ft. Dezy Champion",
+                "url": "https://youtu.be/Ka9eeMi_3ew?is=hZkoY7p06TT5C4f6"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Medley louange - Groupe Prodige (à partir de 12 min)",
+                "url": "https://youtu.be/TQCVS7tRO5Y?is=03n7CdsBO00j_sSL"
+            }
+        ]
+    },
+    {
+        "date": "2027-05-16",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Samuel Shukrani's- PAPA OH",
+                "url": "https://youtu.be/Sru8S_qoiHc"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "JE VIENS POUR TE LOUER | Derek-Jones (Contemplation Live)",
+                "url": "https://youtu.be/ZcwHRUPE30M?is=p4W-kHgrj6--AcAy"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "FAIS MOI VOIR TA GLOIRE /Vteam à C'NIGHT (Lead : YANNICK BITTY)",
+                "url": "https://youtu.be/YX0s-i1h6R4"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Tu es yaweh",
+                "url": "https://youtu.be/Dk2FHyotslo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Bartimée - Chantre MariElo",
+                "url": "https://youtu.be/GnhG1nBxbb8?is=RqxutV9qhdqi-Ldf"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Geneviève Brou - Je marche avec assurance",
+                "url": "https://youtu.be/LfwArPn6hOs"
+            }
+        ]
+    },
+    {
+        "date": "2027-05-23",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Je veux chanter un chant d'amour - Hosanna clips - EDEN",
+                "url": "https://youtu.be/lcSxoPhcVGk?is=GfCwCYaf_UVIE2dg"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Eden t'adorer",
+                "url": "https://youtu.be/uqccle_B0lo"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Je ne desire que toi",
+                "url": "https://youtu.be/VtwscHxXCV0"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Jonathan C. Gambela - Sabaoth (clip officiel)",
+                "url": "https://youtu.be/_iA52WcFQJc"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Jésus ou Rien",
+                "url": "https://youtu.be/Qk8bp3Z-c0o"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Geneviève Brou - Jésus a ma vie (version louange)",
+                "url": "https://youtu.be/3af967l18Uo?is=JMzcglL8wKwPVIj-"
+            }
+        ]
+    },
+    {
+        "date": "2027-05-30",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Hamos Ki-Say - Ton Nom est Yeshua (Live recording)",
+                "url": "https://youtu.be/JYsTzcY3mTI?is=qLqCCccrTTXWds25"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Emmanuel - Hosanna clips - Dena Mwana",
+                "url": "https://youtu.be/NU4p2Ol2KLY?is=WZne-sj6LMNoTbI1"
+            },
+            {
+                "singer": "Naomie",
+                "title": "EDEN - ESPRIT DE DIEU",
+                "url": "https://youtu.be/AsLyhA8N_B8"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Nous te couronnons",
+                "url": "https://youtu.be/pOTbbTE1Wq0"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "J'ai décidé de suivre Jésus",
+                "url": "https://youtu.be/EV0LLJhCOpo?is=f6CcpSeEtP8gK3Yq"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Geneviève Brou - J'ai un Dieu puissant là-haut",
+                "url": "https://youtu.be/XhB6xxa77QE?is=GPqmpdPEpRSf8gl_"
+            }
+        ]
+    },
+    {
+        "date": "2027-06-06",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Je veux chanter un chant d'amour - Hosanna clips - EDEN",
+                "url": "https://youtu.be/lcSxoPhcVGk?is=GfCwCYaf_UVIE2dg"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Les Cieux proclament (À jamais tu seras) - Momentum Musique",
+                "url": "https://youtu.be/Fy4gRLVuQJg?is=F4NgdLxd-3DeLXwG"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Eden lago ayons",
+                "url": "https://youtu.be/pZDy24ZLL8U?is=t4jXyeTWDe7nyf_P"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "J'ENTRE DANS LE SAINT / JE M'ATTENDS À TOI - Laura Dambury",
+                "url": "https://youtu.be/5Nuw51jYBfs?is=xiXDZrvyVAVFcEn5"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Marina",
+                "url": "https://youtu.be/D4zeEAWKcZY"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Geneviève Brou - Elishama",
+                "url": "https://youtu.be/BYHQ_3w24SU"
+            }
+        ]
+    },
+    {
+        "date": "2027-06-13",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Marie Adé Tu es plus grand",
+                "url": "https://youtu.be/1a6D-7DALZY"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Dena Mwana - \"Utilise-moi\" (clip Officiel)",
+                "url": "https://youtu.be/FH1MpS-cKSM?is=xnEXd4RxvA2Wc-oo"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Ne t'inquiète de rien",
+                "url": "https://youtu.be/TtmWGV1ugsg?is=8J6vssb-Reijuljl"
+            },
+            {
+                "singer": "Naomie",
+                "title": "YESHUA - Seigneur fais- moi voir ta gloire / Tu es l'amour de mon âme - Grace Jocktane",
+                "url": "https://youtu.be/CcJ_8A82vjE"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Asaph du Ciel - La Louange des aigles",
+                "url": "https://youtu.be/jJKcCxW2IkM?is=T7QfVJfnKSLGxjPY"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Qui peut encore dire",
+                "url": "https://youtu.be/JwSxC3WjdEo"
+            }
+        ]
+    },
+    {
+        "date": "2027-06-20",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Jésus fait des miracles : Kacou Severin & Koné Fontaly",
+                "url": "https://youtu.be/cFO2gyvw3E4?is=yriooy6MGA2UbaN_"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Si le Dieu Des Esprits Des Prophets par Kouassi & living Gospel",
+                "url": "https://youtu.be/TxX6EnpSY4I?is=eublrUMchFi538Fv"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Inonde ce lieu de ta présence - Samuel Joseph",
+                "url": "https://youtu.be/snKoJTmVrxg?is=1FAgeaOCIybaf2Xi"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Le ciel est ouvert / Leve menm devan majeste / Mizerikod / Nous te rendons la Gloire - Grace Jocktane",
+                "url": "https://youtu.be/aDfLR-94U8E"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Je chanterai de tout cœur",
+                "url": "https://youtu.be/nde-Px_5l2I"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Kollins Newman feat. Flamme de Vie - Louange prophétique",
+                "url": "https://youtu.be/5jJla4Ta1Ho"
+            }
+        ]
+    },
+    {
+        "date": "2027-06-27",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Je n'ai que toi",
+                "url": "https://youtu.be/UjD_jKmP8Lk"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Quand il descend",
+                "url": "https://youtu.be/sc6i40B4nUY"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Ouvre La Porte - Anthony & Keren Lambert Feat. Renaissance Worship",
+                "url": "https://youtu.be/sX46whPXlIQ?is=3UHglNB6yYt0onqv"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "DIEU QUI GARDE L'ALLIANCE I",
+                "url": "https://youtu.be/Cc7vOmqE7fo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Ensemble louons le Seigneur",
+                "url": "https://youtu.be/VJzfosG3dPs"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Louange prophetique Acte 2 (à partir de 7 min 23)",
+                "url": "https://youtu.be/gKlpkclKcxE?is=G8xTQAvb3QqAoydx"
+            }
+        ]
+    },
+    {
+        "date": "2027-07-04",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Lumiere du monde",
+                "url": "https://youtu.be/g0zwmV5Api4"
+            },
+            {
+                "singer": "Naomie",
+                "title": "MA SEULE FONDATION (Firm Foundation) LIVE | Victoire Musique feat. Carl Handy Corvil",
+                "url": "https://youtu.be/laJDVDKGcL4?is=O-Zx2xNqeF29kXCj"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Adoration spontanée : ah eh eh / Yeshua/ Lion of Judah",
+                "url": "https://youtu.be/kwWIz0Vo7K4?is=KfLKXYjsR6lqoqM0"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Sylvie Tagbo - QUE MA VIE SOIT UNE FLEUR (Live ICC)",
+                "url": "https://youtu.be/kQMPv7yJjzI?is=a5qHr3eUw4DkYps5"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Il n'y a personne comme Jésus",
+                "url": "https://youtu.be/uYahuAoG3UA"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Louange prophetique à Bouaké (à partir de 2 min)",
+                "url": "https://youtu.be/MSjV2ISLMUw"
+            }
+        ]
+    },
+    {
+        "date": "2027-07-11",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Jésus tu as les paroles de la vie",
+                "url": "https://youtu.be/Mn4oFz7umBo"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Hamos Ki- Say - YAHVÉ SHAMMA feat Larissa Doh",
+                "url": "https://youtu.be/ghQ-gK9UvlM?is=BrmzwM4FDKxz8XLK"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Dans Ton sanctuaire - Gael Music- Live 2005",
+                "url": "https://youtu.be/Bo1WV6jfdEY"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "À jamais tu es Saint",
+                "url": "https://youtu.be/v2iRuO_u4aY"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Shekina - Brûle en moi",
+                "url": "https://youtu.be/LF8fBEIsFaE?is=ekzAbc1l5pEu9cfz"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Armand Koffi - Medley Louange",
+                "url": "https://youtu.be/HLdcialIjb0?is=pJA8V18xTYt-oj8O"
+            }
+        ]
+    },
+    {
+        "date": "2027-07-18",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Rachel Anyeme - MIRACLE (Official Lyrics)",
+                "url": "https://youtu.be/t4k4yL8igGQ?is=hJqKiCM0-MCJnUbp"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Tu es tout pour moi",
+                "url": "https://youtu.be/jBvHEu0mutw"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Adonai / Je T'adore - Athoms Mbuma",
+                "url": "https://youtu.be/kQ-YDqAdL64"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Oui je le vois",
+                "url": "https://youtu.be/-RFlJr6FdGk?is=as-LsEmyL08N4r19"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Dorcas Kaja - Il est bon de louer Dieu",
+                "url": "https://youtu.be/lLhPhAfQ6Ew?is=SsFbx-6d23taaue1"
+            },
+            {
+                "singer": "Naomie",
+                "title": "New Praise Family - Ivoirian Medley 2 (à partir de 10 min)",
+                "url": "https://youtu.be/0Hr_6bfuQfA"
+            }
+        ]
+    },
+    {
+        "date": "2027-07-25",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Bénis L'Éternel - Jonathan Munchongwa, Steev Y., SimianeMusic",
+                "url": "https://youtu.be/1ieckehNEO8?is=hRPxFs6f7hYeernr"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Tu es plus grand - Hosanna clips - Athoms et Nadège Mbuma",
+                "url": "https://youtu.be/CeKM7ctnRus?is=EZDmJIO5dPeB5vAe"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Dena Mwana - Souffle (Official video)",
+                "url": "https://youtu.be/NM-eXztJFc4?is=UobXs92BPVAD0yhy"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Jonathan C. Gambela - L'entrée du Roi (Clip Officiel)",
+                "url": "https://youtu.be/Oc8_5tVTnX0?is=Sx4AkpYnUz5odIBW"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Pasteur Guy - Je suis dans la joie",
+                "url": "https://youtu.be/lYWS3GMDS-E?is=u9UwJc7LOGfzN62M"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "New Praise Family - Ivoirian Medley 1",
+                "url": "https://youtu.be/ZT3bDHRxQNI"
+            }
+        ]
+    },
+    {
+        "date": "2027-08-01",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Je suis née pour le louer",
+                "url": "https://youtu.be/AHq7jl_55NE"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Digne est l'Agneau (Hillsong) - Momentum Musique feat Laetitia Perraud",
+                "url": "https://youtu.be/eusI00d92tI?is=72DDS_XhWiuq7GTS"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Mireille Basiwa, puiser, plus de toi encore",
+                "url": "https://youtu.be/C2ZYnxiUAmc?is=ezFiDpBBd3D8jQvf"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Elyah/ Adonai/Yeshua/Toi seul es Dieu - RuthDaniel LHOMME | CEEV Musique",
+                "url": "https://youtu.be/0qcpfQyFnRk"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Je veux me réjouir",
+                "url": "https://youtu.be/aNL4VlDL57k?is=NdCnfo8Gp4Lgqe5Y"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Daniel Nortey - J'ai choisi Jésus",
+                "url": "https://youtu.be/LEQ4JImQ_3k?is=v8EH1ccaRGY1S5tw"
+            }
+        ]
+    },
+    {
+        "date": "2027-08-08",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "NOUS TE COURONNONS (We crown You) || Dena Mwana & Plénitude Music",
+                "url": "https://youtu.be/dx_H0LSQEyg?is=aPSa1iuVTknyI-7g"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "JE VEUX PRIER | Derek- Jones feat. Olivia Kouamé (Live recording)",
+                "url": "https://youtu.be/w47Br8srwmE?is=rJYIKM6P4Dtm4tsd"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Je Lève Les Yeux",
+                "url": "https://youtu.be/F2bH2CBluPA"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Grâce valerie J'aime ta présence",
+                "url": "https://youtu.be/WjMBgdawTVM?is=NtuS5sFMWGw-NV5R"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Oh mon Dieu, qui est bon comme toi - Impact Gospel",
+                "url": "https://youtu.be/I86F3XhZD98?is=-gh-4YPflNWaf60o"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Jésus m'a libéré (Medley)",
+                "url": "https://youtu.be/jqrogd61BZA"
+            }
+        ]
+    },
+    {
+        "date": "2027-08-15",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "MOI ET MA MAISON (Live au Dôme de Paris) | REACH WORSHIP",
+                "url": "https://youtu.be/TjKRyzy7yCY?is=68XdqIrKEHRtXur0"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Dena Mwana - Saint Esprit (Officiel)",
+                "url": "https://youtu.be/JPyyX4zFraU?is=gI3JS5TiaoHGpfEL"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Il veille sur moi - Marius Psalmiste",
+                "url": "https://youtu.be/620s-RmQMkA?is=ZzlhndS2TIexPFmR"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Jésus Christ est ressuscité",
+                "url": "https://youtu.be/j8BCTovMrtM?is=u8r7xOFEZcLnaS6P"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Comment ne pas te louer",
+                "url": "https://youtu.be/Wv_KsPW0tIY?is=uR8H8hU9Mshy-zzC"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "La trompette sonnera",
+                "url": "https://youtu.be/hSfKhJFOZfc"
+            }
+        ]
+    },
+    {
+        "date": "2027-08-22",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Infiniment grand (version louange)",
+                "url": "https://youtu.be/BY_GKE9toFM"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "DANY KASONGO Adullam & je viens puiser",
+                "url": "https://youtu.be/L52u3RD7qJM"
+            },
+            {
+                "singer": "Naomie",
+                "title": "À jamais tu seras",
+                "url": "https://youtu.be/kMaz2rRMcGw"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Nous venons puiser plus de toi",
+                "url": "https://youtu.be/x1iOQ8WLzek"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Nous te louons (louange)",
+                "url": "https://youtu.be/1Mbxr8XrsWs?is=nR4g41d9T_1zkblH"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "La nouvelle Jérusalem",
+                "url": "https://youtu.be/3u9_SXVc3h0"
+            }
+        ]
+    },
+    {
+        "date": "2027-08-29",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Lyrique Ramène moi sur ta parole",
+                "url": "https://youtu.be/43GUKWN0YPc?is=l1fBxaimx20BfKJ-"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "EH BABA (IL EST HORS DE QUESTION) - Enock Bahwere",
+                "url": "https://youtu.be/up2iOpUUlbk?is=I17kn6ctmOI5tr1s"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Je louerai l'Éternel",
+                "url": "https://youtu.be/CZ_Pa_KsZIQ"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "DANIEL BANAM - EL YAH | Live recording",
+                "url": "https://youtu.be/JTsyX2Ta1TU?is=JSU7lcPOED1ifz8A"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Nadège Mbuma - Compilation Louange",
+                "url": "https://youtu.be/xxWs03eFZyU?is=ceoQjLKWz-trha4U"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Rabbi, il agira",
+                "url": "https://youtu.be/ZDgdMfTpLhw?is=o--E3uvgVusuXW56"
+            }
+        ]
+    },
+    {
+        "date": "2027-09-05",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "EDEN \"OUI DIEU\"",
+                "url": "https://youtu.be/QTwASEijcFI?is=1E_GiWM5YWe3vh_I"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Mains Levées (Wide as the sky) Adoration LIVE - Dena Mwana & Victoire Musique",
+                "url": "https://youtu.be/CTG01ZSvfSE"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Moment d'adoration | Mon Seul Désir - Grace Jocktane à Évidence",
+                "url": "https://youtu.be/bc7H1nIPdSw"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Hosanna (Jésus Nous T'élevons Plus Haut) (Live)",
+                "url": "https://youtu.be/oVUrVQXnXLM?is=1JGD7dJUC0617Jcn"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Il n'y a personne comme Jésus",
+                "url": "https://youtu.be/uYahuAoG3UA"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Sans toi, qui serais-je ?",
+                "url": "https://youtu.be/Ia60SQBnhmo?is=MBVQdhm9doY4NK8_"
+            }
+        ]
+    },
+    {
+        "date": "2027-09-12",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Alliance de grâce feat Colombe Merveille - Oins-moi",
+                "url": "https://youtu.be/xuvt0Ff657U?is=TjBf8ooRhmtPeyYN"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Seigneur Nul n'est comme toi",
+                "url": "https://youtu.be/1rpvn3_FtmU"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Tu sais satisfaire",
+                "url": "https://youtu.be/vEK1V-Zu0KU"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "À la croix | NV Worship avec Jean Jean",
+                "url": "https://youtu.be/U5eof6t4TZ0"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Dieu de miracles - Schekina",
+                "url": "https://youtu.be/eZB_j8084OM?is=kIpxAkMMe3SoeOqI"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Je ne peux pas le laisser",
+                "url": "https://youtu.be/w5bZ1MzjgeE"
+            }
+        ]
+    },
+    {
+        "date": "2027-09-19",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Je m'abandonne | NV Worship",
+                "url": "https://youtu.be/CfdbjdzQgDY?is=yXGwyI932zA3mKx6"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Emmanuel est là (ft Zoé Déborah)] Universal worship x Everlasting",
+                "url": "https://youtu.be/iz4aRPHipxM"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Tu es là présent permis nous waymaker",
+                "url": "https://youtu.be/3EL5mryrdT4"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Attire-moi à toi",
+                "url": "https://youtu.be/3d6aqphOOxo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Vibrez pour Dieu",
+                "url": "https://youtu.be/wPXItafwCnI?is=2saFIxop6dLSgCXn"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Si Jésus dit oui",
+                "url": "https://youtu.be/qS5KrQD8qOw"
+            }
+        ]
+    },
+    {
+        "date": "2027-09-26",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Jonathan C. Gambela - Onction (official video)",
+                "url": "https://youtu.be/_O8psLIwTLw?is=NlUFtlZwPfuJkuSL"
+            },
+            {
+                "singer": "Naomie",
+                "title": "QUE TA GLOIRE DESCENDE | Derek-Jones feat. Estelle Essouma (official video)",
+                "url": "https://youtu.be/4KpGzx8HCQQ?is=v_RT4RiEcQY7ZTPD"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Si mon peuple ( Adoration ) ",
+                "url": "https://youtu.be/lEw5IsvCq1w?is=QET7pJ6iIViANuoY"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "ÉMERVEILLÉ EN TA PRÉSENCE ! / LE NOM DE JÉSUS",
+                "url": "https://youtu.be/iM2Qc5WizR4"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Sandrine Droubly - Prends ma main",
+                "url": "https://youtu.be/gAkPDaTkTT0?is=l4yRk2fvbEwWh2-K"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Eden il est vivant ",
+                "url": "https://youtu.be/W8xYgVjFFUA?is=KlPGc3Zm3j7z3Z2f"
+            }
+        ]
+    },
+    {
+        "date": "2027-10-03",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "TU ES SAINT & CEST TOI - Derek- Jones (Contemplation Live)",
+                "url": "https://youtu.be/e2tR4pq7lmQ"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Eden même si une mère abandonne son enfant",
+                "url": "https://youtu.be/D88zQyEjTxk"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Pape Jey - Adullam (Live Expérience)",
+                "url": "https://youtu.be/jHHpsGEMg7w"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "SI LA MER SE DÉCHAÎNE",
+                "url": "https://youtu.be/NiBZ7rroSVA"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Ano Mira - Écris mon nom",
+                "url": "https://youtu.be/VmILxj-eO_g?is=EvCeC2Eq1nmyPNeN"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Souffle ton esprit",
+                "url": "https://youtu.be/Eo0MJdbNHjk"
+            }
+        ]
+    },
+    {
+        "date": "2027-10-10",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Au Contrôle / À jamais Tu es saint - Athoms Mbuma, Marie Zamor - EMCI Musique",
+                "url": "https://youtu.be/l2Z8uMVKx9E"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Deborah Lukalu - A Genoux - [Live]",
+                "url": "https://youtu.be/q1qEBJSEWVw?is=TB7x3QfS8DV7GOpG"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "MON ÂME BÉNIT LE SEIGNEUR - Chantre Mire",
+                "url": "https://youtu.be/2Tewk9bLbk8?is=9p6G3QBLZ3FfLrZh"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Koné Fontali je veux faire ton œuvre lyrics",
+                "url": "https://youtu.be/G97fm_mgm3s"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Appelle, il te répondra (Cameroun)",
+                "url": "https://youtu.be/no6JW1kjuDw?is=KUR0m_6zhOu3adCs"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Ton grand amour",
+                "url": "https://youtu.be/FPeLrT8iqJc?is=t7aYnqcPDRQjR8c9"
+            }
+        ]
+    },
+    {
+        "date": "2027-10-17",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Mon meilleur ami",
+                "url": "https://youtu.be/krPDnnW6OOM"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Amour extravagant",
+                "url": "https://youtu.be/C7Co5SLVbY4"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Yeshua d'âge en âge",
+                "url": "https://youtu.be/EV9w0jpGrTo?is=OGinftdFJOFiPGMA"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Que t'es vives eaux",
+                "url": "https://youtu.be/ZgWF5Xj_qB4"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Contemplation Night - Larissa Doh Ôti (à partir de 12 min)",
+                "url": "https://youtu.be/qZRkiD_t1D4?is=RIEcpiur7kZo7s1v"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "J'ai l'assurance de mon salut",
+                "url": "https://youtu.be/gAt9vCfwF5Q?is=5vq60iC-IJiRCtnQ"
+            }
+        ]
+    },
+    {
+        "date": "2027-10-24",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Constance Père nous t'adorons",
+                "url": "https://youtu.be/4KRxebXkvas"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Je sais que tu es là eden",
+                "url": "https://youtu.be/b6OXKeEDfZQ?is=WRijBVzqUlJGLaH_"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "IL ENTEND LES CRIS | REACH WORSHIP (feat. Patrick Isaac II)",
+                "url": "https://youtu.be/d88iuud_TlI?is=z2GskoEFo1C24Yq9"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "L'hymne - MLK Choir",
+                "url": "https://youtu.be/ic8NMqgPGdQ"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Les messagers du Sinaï - La foi en Dieu / Ceux qui se confient en l'Éternel",
+                "url": "https://youtu.be/im0ol1iltNk?is=_J0EehpPpqOLx4OI"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Le temps de Dieu",
+                "url": "https://youtu.be/pYt-vnh4ols"
+            }
+        ]
+    },
+    {
+        "date": "2027-10-31",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "JE VEUX BOIRE À TA SOURCE, PLUS DE TOI ENCORE...",
+                "url": "https://youtu.be/y2Cauq-RuGA"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Guy Christ Quel est ton problème",
+                "url": "https://youtu.be/n08-cH_3L3k?is=I31zUEY2_uLtHt0f"
+            },
+            {
+                "singer": "Naomie",
+                "title": "LES CHANTRES DE LA FOI | PUISSANT SAUVEUR YESHUA",
+                "url": "https://youtu.be/a6Vwr5GB-d4"
+            },
+            {
+                "singer": "Naomie",
+                "title": "MELODIE VENUE DU CIEL (Marcel Boungou) || Marie Zamor",
+                "url": "https://youtu.be/wzyPsl-Dq9A?is=R0OWhc_XWF-rBwkB"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Apopola - Kodja Guy Vincent ft. Dezy Champion",
+                "url": "https://youtu.be/Ka9eeMi_3ew?is=hZkoY7p06TT5C4f6"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Medley louange - Groupe Prodige (à partir de 12 min)",
+                "url": "https://youtu.be/TQCVS7tRO5Y?is=03n7CdsBO00j_sSL"
+            }
+        ]
+    },
+    {
+        "date": "2027-11-07",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Samuel Shukrani's- PAPA OH",
+                "url": "https://youtu.be/Sru8S_qoiHc"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "JE VIENS POUR TE LOUER | Derek-Jones (Contemplation Live)",
+                "url": "https://youtu.be/ZcwHRUPE30M?is=p4W-kHgrj6--AcAy"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "FAIS MOI VOIR TA GLOIRE /Vteam à C'NIGHT (Lead : YANNICK BITTY)",
+                "url": "https://youtu.be/YX0s-i1h6R4"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Tu es yaweh",
+                "url": "https://youtu.be/Dk2FHyotslo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Bartimée - Chantre MariElo",
+                "url": "https://youtu.be/GnhG1nBxbb8?is=RqxutV9qhdqi-Ldf"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Geneviève Brou - Je marche avec assurance",
+                "url": "https://youtu.be/LfwArPn6hOs"
+            }
+        ]
+    },
+    {
+        "date": "2027-11-14",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Je veux chanter un chant d'amour - Hosanna clips - EDEN",
+                "url": "https://youtu.be/lcSxoPhcVGk?is=GfCwCYaf_UVIE2dg"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Eden t'adorer",
+                "url": "https://youtu.be/uqccle_B0lo"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Je ne desire que toi",
+                "url": "https://youtu.be/VtwscHxXCV0"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Jonathan C. Gambela - Sabaoth (clip officiel)",
+                "url": "https://youtu.be/_iA52WcFQJc"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Jésus ou Rien",
+                "url": "https://youtu.be/Qk8bp3Z-c0o"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Geneviève Brou - Jésus a ma vie (version louange)",
+                "url": "https://youtu.be/3af967l18Uo?is=JMzcglL8wKwPVIj-"
+            }
+        ]
+    },
+    {
+        "date": "2027-11-21",
+        "adoration": [
+            {
+                "singer": "Rebecca",
+                "title": "Hamos Ki-Say - Ton Nom est Yeshua (Live recording)",
+                "url": "https://youtu.be/JYsTzcY3mTI?is=qLqCCccrTTXWds25"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Emmanuel - Hosanna clips - Dena Mwana",
+                "url": "https://youtu.be/NU4p2Ol2KLY?is=WZne-sj6LMNoTbI1"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "EDEN - ESPRIT DE DIEU",
+                "url": "https://youtu.be/AsLyhA8N_B8"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Nous te couronnons",
+                "url": "https://youtu.be/pOTbbTE1Wq0"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "J'ai décidé de suivre Jésus",
+                "url": "https://youtu.be/EV0LLJhCOpo?is=f6CcpSeEtP8gK3Yq"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Geneviève Brou - J'ai un Dieu puissant là-haut",
+                "url": "https://youtu.be/XhB6xxa77QE?is=GPqmpdPEpRSf8gl_"
+            }
+        ]
+    },
+    {
+        "date": "2027-11-28",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Je veux chanter un chant d'amour - Hosanna clips - EDEN",
+                "url": "https://youtu.be/XGlEp2rzT6M?is=xFYheJrHJvHzvzDp"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Les Cieux proclament (À jamais tu seras) - Momentum Musique",
+                "url": "https://youtu.be/Fy4gRLVuQJg?is=F4NgdLxd-3DeLXwG"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Eden lago ayons",
+                "url": "https://youtu.be/pZDy24ZLL8U?is=t4jXyeTWDe7nyf_P"
+            },
+            {
+                "singer": "Naomie",
+                "title": "J'ENTRE DANS LE SAINT / JE M'ATTENDS À TOI - Laura Dambury",
+                "url": "https://youtu.be/5Nuw51jYBfs?is=xiXDZrvyVAVFcEn5"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Marina",
+                "url": "https://youtu.be/D4zeEAWKcZY"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Geneviève Brou - Elishama",
+                "url": "https://youtu.be/BYHQ_3w24SU"
+            }
+        ]
+    },
+    {
+        "date": "2027-12-05",
+        "adoration": [
+            {
+                "singer": "Prunelle",
+                "title": "Marie Adé Tu es plus grand",
+                "url": "https://youtu.be/1a6D-7DALZY"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Dena Mwana - \"Utilise-moi\" (clip Officiel)",
+                "url": "https://youtu.be/FH1MpS-cKSM?is=xnEXd4RxvA2Wc-oo"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Ne t'inquiète de rien",
+                "url": "https://youtu.be/TtmWGV1ugsg?is=8J6vssb-Reijuljl"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "YESHUA - Seigneur fais- moi voir ta gloire / Tu es l'amour de mon âme - Grace Jocktane",
+                "url": "https://youtu.be/CcJ_8A82vjE"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Asaph du Ciel - La Louange des aigles",
+                "url": "https://youtu.be/jJKcCxW2IkM?is=T7QfVJfnKSLGxjPY"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Qui peut encore dire",
+                "url": "https://youtu.be/JwSxC3WjdEo"
+            }
+        ]
+    },
+    {
+        "date": "2027-12-12",
+        "adoration": [
+            {
+                "singer": "Pélagie",
+                "title": "Jésus fait des miracles : Kacou Severin & Koné Fontaly",
+                "url": "https://youtu.be/cFO2gyvw3E4?is=yriooy6MGA2UbaN_"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Si le Dieu Des Esprits Des Prophets par Kouassi & living Gospel",
+                "url": "https://youtu.be/TxX6EnpSY4I?is=eublrUMchFi538Fv"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Inonde ce lieu de ta présence - Samuel Joseph",
+                "url": "https://youtu.be/snKoJTmVrxg?is=1FAgeaOCIybaf2Xi"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Le ciel est ouvert / Leve menm devan majeste / Mizerikod / Nous te rendons la Gloire - Grace Jocktane",
+                "url": "https://youtu.be/aDfLR-94U8E"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Prunelle",
+                "title": "Medley louange - Groupe Prodige (à partir de 12 min)",
+                "url": "https://youtu.be/TQCVS7tRO5Y?is=03n7CdsBO00j_sSL"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Medley Gospel Retro - Africa New Gospel",
+                "url": "https://youtu.be/-SRWgA_fyQ4"
+            }
+        ]
+    },
+    {
+        "date": "2027-12-19",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Je n'ai que toi",
+                "url": "https://youtu.be/UjD_jKmP8Lk"
+            },
+            {
+                "singer": "Naomie",
+                "title": "Quand il descend",
+                "url": "https://youtu.be/sc6i40B4nUY"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Ouvre La Porte - Anthony & Keren Lambert Feat. Renaissance Worship",
+                "url": "https://youtu.be/sX46whPXlIQ?is=3UHglNB6yYt0onqv"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "DIEU QUI GARDE L'ALLIANCE I",
+                "url": "https://youtu.be/Cc7vOmqE7fo"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Pélagie",
+                "title": "Geneviève Brou - Je marche avec assurance",
+                "url": "https://youtu.be/LfwArPn6hOs"
+            },
+            {
+                "singer": "Rebecca",
+                "title": "Moi je ne souffrirai jamais (Il y a un nom / Jésus est merveilleux)",
+                "url": "https://youtu.be/5XVUXX9_t-k"
+            }
+        ]
+    },
+    {
+        "date": "2027-12-26",
+        "adoration": [
+            {
+                "singer": "Naomie",
+                "title": "Lumiere du monde",
+                "url": "https://youtu.be/g0zwmV5Api4"
+            },
+            {
+                "singer": "Naomie",
+                "title": "MA SEULE FONDATION (Firm Foundation) LIVE | Victoire Musique feat. Carl Handy Corvil",
+                "url": "https://youtu.be/laJDVDKGcL4?is=O-Zx2xNqeF29kXCj"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Adoration spontanée : ah eh eh / Yeshua/ Lion of Judah",
+                "url": "https://youtu.be/kwWIz0Vo7K4?is=KfLKXYjsR6lqoqM0"
+            },
+            {
+                "singer": "Pélagie",
+                "title": "Sylvie Tagbo - QUE MA VIE SOIT UNE FLEUR (Live ICC)",
+                "url": "https://youtu.be/kQMPv7yJjzI?is=a5qHr3eUw4DkYps5"
+            }
+        ],
+        "louange": [
+            {
+                "singer": "Rebecca",
+                "title": "Geneviève Brou - Jésus a ma vie (version louange)",
+                "url": "https://youtu.be/3af967l18Uo?is=JMzcglL8wKwPVIj-"
+            },
+            {
+                "singer": "Prunelle",
+                "title": "Je sais que Jésus est la vie",
+                "url": "https://youtu.be/D9Q4qu0bZSU?is=ertxklPvz2inI9DT"
+            }
+        ]
+    }
+]
+        ;
+
+    const STORAGE_KEY = 'abraham-berne-mygod-v9';
+    const ADMIN_PASSWORD = '1234';
+    let STATE = { singers: [], sundays: [] };
+    let currentView = 'home';
+    let currentTinderIndex = 0;
+    let isAdmin = false;
+    let sortedSundays = [];
+    let projectionDate = null;
+    let swipeLocked = false;
+
+    function clone(o) { return JSON.parse(JSON.stringify(o)); }
+
+    /* ===== STORAGE (avec validation stricte) ===== */
+    function load() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (parsed && Array.isArray(parsed.singers) && Array.isArray(parsed.sundays)) {
+                    STATE = parsed;
+                    STATE.sundays = STATE.sundays.filter(s => s && typeof s.date === 'string');
+                    STATE.sundays.forEach(s => {
+                        if (!Array.isArray(s.adoration)) s.adoration = [];
+                        if (!Array.isArray(s.louange)) s.louange = [];
+                    });
+                    return;
+                }
+            }
+        } catch (e) {
+            console.warn('localStorage corrompu, réinitialisation', e);
+            setTimeout(() => toast('⚠️ Données corrompues. Réinitialisation.'), 100);
+        }
+        STATE = { singers: clone(SEED_SINGERS), sundays: clone(SEED_SUNDAYS) };
+        save();
+    }
+
+    function save() {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
+            return true;
+        } catch (e) {
+            console.error('Erreur de sauvegarde localStorage', e);
+            setTimeout(() => toast('❌ Échec de sauvegarde (stockage plein ?)'), 50);
+            return false;
+        }
+    }
+
+    const $ = s => document.querySelector(s);
+    const $$ = s => [...document.querySelectorAll(s)];
+    const esc = s => String(s || "").replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function fmtDate(iso) {
+        const d = new Date(iso + 'T12:00:00');
+        return d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    function ytId(url) {
+        if (!url) return null;
+        const m = String(url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
+        return m ? m[1] : null;
+    }
+
+    function ytThumb(url) {
+        const id = ytId(url);
+        return id ? `https://img.youtube.com/vi/${id}/mqdefault.jpg` : null;
+    }
+
+    let toastTimer;
+    function toast(msg, ms = 2200) {
+        const t = $("#toast");
+        if (!t) return;
+        t.textContent = msg;
+        t.classList.remove('hidden');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.add('hidden'), ms);
+    }
+
+    function openModal(html, opts = {}) {
+        $("#modalBody").innerHTML = html;
+        $("#modal").classList.remove('hidden');
+        $("#modalSheet").style.borderRadius = opts.center ? '24px' : '';
+        $("#modalSheet").style.margin = opts.center ? 'auto' : '';
+    }
+
+    function closeModal() {
+        $("#modal").classList.add('hidden');
+        $("#modalSheet").style.borderRadius = '';
+        $("#modalSheet").style.margin = '';
+    }
+
+    /* ===== CONFIRMATION CUSTOM ===== */
+    function showConfirm(opts) {
+        const {
+            title = 'Confirmer',
+            message = 'Êtes-vous sûr ?',
+            confirmText = 'Confirmer',
+            cancelText = 'Annuler',
+            danger = true,
+            onConfirm = () => {},
+            onCancel = () => {}
+        } = opts;
+
+        const iconSvg = danger
+            ? '<svg viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
+            : '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+
+        openModal(`
+            <div class="confirm-sheet">
+                <div class="confirm-icon ${danger ? '' : 'warning'}">${iconSvg}</div>
+                <div class="confirm-title">${esc(title)}</div>
+                <div class="confirm-message">${message}</div>
+                <div class="confirm-actions">
+                    <button class="btn btn-ghost" id="confirmCancelBtn">${esc(cancelText)}</button>
+                    <button class="btn ${danger ? 'btn-danger-confirm' : 'btn-primary'}" id="confirmOkBtn">${esc(confirmText)}</button>
+                </div>
+            </div>
+        `, { center: true });
+
+        const cleanup = () => { closeModal(); };
+        const okBtn = $("#confirmOkBtn");
+        const cancelBtn = $("#confirmCancelBtn");
+        if (okBtn) okBtn.onclick = () => { cleanup(); onConfirm(); };
+        if (cancelBtn) cancelBtn.onclick = () => { cleanup(); onCancel(); };
+    }
+
+    $("#modal").addEventListener('click', e => {
+        if (e.target.id === 'modal') closeModal();
+    });
+
+    /* ===== LOCK/UNLOCK ===== */
+    window.promptLock = function () {
+        if (isAdmin) {
+            isAdmin = false;
+            updateLockIcon();
+            render();
+            toast('Mode lecture seule activé');
+        } else {
+            openModal(`
+                <div class="modal-header">
+                    <h3>Administration</h3>
+                    <button class="btn-close" onclick="closeModal()" aria-label="Fermer">
+                        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <p style="font-size:13px;color:var(--text-2);margin-bottom:16px">Entrez le code pour déverrouiller les modifications.</p>
+                <div class="field">
+                    <input type="password" id="adminPwd" placeholder="Code secret" style="text-align:center;letter-spacing:4px;font-size:18px;padding:14px;" autocomplete="off">
+                </div>
+                <button class="btn btn-primary" style="width:100%" onclick="validateLock()">Déverrouiller</button>
+            `);
+            setTimeout(() => {
+                const inp = $("#adminPwd");
+                if (inp && document.body.contains(inp)) {
+                    inp.focus();
+                    inp.addEventListener('keypress', (e) => { if (e.key === 'Enter') validateLock(); });
+                }
+            }, 100);
+        }
+    }
+
+    window.validateLock = function () {
+        const inp = $("#adminPwd");
+        if (!inp) return;
+        const pwd = inp.value;
+        if (pwd === ADMIN_PASSWORD) {
+            isAdmin = true;
+            updateLockIcon();
+            closeModal();
+            render();
+            toast('Mode édition déverrouillé');
+        } else {
+            toast('Code incorrect');
+            inp.value = "";
+            inp.focus();
+        }
+    }
+
+    function updateLockIcon() {
+        const btn = $('#lockBtn');
+        const icon = $('#lockIcon');
+        if (isAdmin) {
+            btn.classList.add('locked');
+            icon.innerHTML = '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path>';
+            $('#exportBtn').classList.remove('hidden');
+            $('#resetBtn').classList.remove('hidden');
+        } else {
+            btn.classList.remove('locked');
+            icon.innerHTML = '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>';
+            $('#exportBtn').classList.add('hidden');
+            $('#resetBtn').classList.add('hidden');
+        }
+    }
+
+    /* ===== NAVIGATION ===== */
+    $$('.nav-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+            $$('.nav-item').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentView = btn.dataset.view;
+            render();
+            document.querySelector('.scroll-container').scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+
+    function render() {
+        closeModal();
+        const view = $('#view');
+        switch (currentView) {
+            case 'home': return renderHome(view);
+            case 'sundays': return renderSundays(view);
+            case 'calendar': return renderCalendar(view);
+            case 'singer': return renderBySinger(view);
+            case 'search': return renderSearch(view);
+            case 'projection': return renderProjection(view);
+        }
+    }
+
+    /* ===== HOME ===== */
+    function renderHome(view) {
+        sortedSundays = [...STATE.sundays].sort((a, b) => a.date.localeCompare(b.date));
+        const today = new Date().toISOString().slice(0, 10);
+        let startIndex = sortedSundays.findIndex(s => s.date >= today);
+        if (startIndex === -1) startIndex = sortedSundays.length - 1;
+        currentTinderIndex = Math.max(0, startIndex);
+
+        const songSet = new Set();
+        STATE.sundays.forEach(s => { [...(s.adoration || []), ...(s.louange || [])].forEach(x => songSet.add(x.title.trim().toLowerCase())); });
+
+        view.innerHTML = `
+            <h2 class="page-title">Bienvenue</h2>
+            <p class="page-sub">Programme musical du groupe Abraham Berne</p>
+            <div class="grid g4" style="margin-bottom:28px">
+                <div class="stat"><div class="n">${STATE.sundays.length}</div><div class="l">Dimanches</div></div>
+                <div class="stat"><div class="n">${STATE.singers.length}</div><div class="l">Chantres</div></div>
+                <div class="stat"><div class="n">${songSet.size}</div><div class="l">Chants</div></div>
+            </div>
+            <h3 class="section">Programme du jour</h3>
+            <div class="tinder-container" id="tinderContainer"></div>
+            <div class="tinder-nav">
+                <button id="prevBtn" aria-label="Précédent">←</button>
+                <span class="counter" id="tinderCounter">1/${sortedSundays.length || 1}</span>
+                <button id="nextBtn" aria-label="Suivant">→</button>
+            </div>
+        `;
+
+        const container = $("#tinderContainer");
+        const counter = $("#tinderCounter");
+
+        if (sortedSundays.length === 0) {
+            container.innerHTML = '<div class="empty" style="margin-top:100px">Aucun dimanche</div>';
+            return;
+        }
+
+        function createCard(sunday, index) {
+            const card = document.createElement('div');
+            card.className = 'tinder-card';
+            card.dataset.index = index;
+
+            const actionButtons = isAdmin ?
+                `<div class="card-actions">
+                    <button class="btn btn-ghost btn-sm" data-action="details">Détails</button>
+                    <button class="btn btn-primary btn-sm" data-action="edit">Modifier</button>
+                </div>` :
+                `<div class="card-actions">
+                    <button class="btn btn-ghost btn-sm" data-action="details" style="flex:1">Voir les détails</button>
+                </div>`;
+
+            card.innerHTML = `
+                <div class="card-date">${fmtDate(sunday.date)}</div>
+                <div class="card-singers">${esc([...new Set([...(sunday.adoration || []), ...(sunday.louange || [])].map(x => x.singer))].join(' · '))}</div>
+                <div class="card-songs">
+                    ${(sunday.adoration || []).map(x => `<div class="song-preview">${esc(x.title)}</div>`).join('')}
+                    ${(sunday.louange || []).map(x => `<div class="song-preview">${esc(x.title)}</div>`).join('')}
+                    ${((!sunday.adoration || sunday.adoration.length === 0) && (!sunday.louange || sunday.louange.length === 0)) ? '<div style="color:var(--text-3);text-align:center;padding:20px;">Aucun chant</div>' : ''}
+                </div>
+                ${actionButtons}
+            `;
+
+            card.querySelector('[data-action="details"]').onclick = (e) => {
+                e.stopPropagation();
+                openSunday(sunday.date);
+            };
+
+            if (isAdmin) {
+                card.querySelector('[data-action="edit"]').onclick = (e) => {
+                    e.stopPropagation();
+                    openEditor(sunday.date);
+                };
+            }
+
+            return card;
+        }
+
+        function renderCards() {
+            container.innerHTML = "";
+            const maxCards = Math.min(3, sortedSundays.length);
+            for (let i = 0; i < maxCards; i++) {
+                const idx = (currentTinderIndex + i) % sortedSundays.length;
+                const card = createCard(sortedSundays[idx], idx);
+                if (i === 0) {
+                    card.style.zIndex = 10;
+                    card.style.transform = 'scale(1)';
+                    card.style.opacity = '1';
+                } else if (i === 1) {
+                    card.style.zIndex = 9;
+                    card.style.transform = 'scale(0.95) translateY(10px)';
+                    card.style.opacity = '0.7';
+                } else {
+                    card.style.zIndex = 8;
+                    card.style.transform = 'scale(0.9) translateY(20px)';
+                    card.style.opacity = '0.4';
+                }
+                container.appendChild(card);
+            }
+            counter.textContent = `${currentTinderIndex + 1}/${sortedSundays.length}`;
+            if (container.firstElementChild) attachSwipe(container.firstElementChild);
+        }
+
+        function attachSwipe(card) {
+            if (!card) return;
+            let startX = 0, currentX = 0, isDragging = false;
+
+            const onStart = (e) => {
+                if (swipeLocked) return;
+                isDragging = true;
+                startX = e.touches ? e.touches[0].clientX : e.clientX;
+                card.style.transition = 'none';
+            };
+
+            const onMove = (e) => {
+                if (!isDragging) return;
+                currentX = (e.touches ? e.touches[0].clientX : e.clientX) - startX;
+                card.style.transform = `translateX(${currentX}px) rotate(${currentX * 0.05}deg)`;
+            };
+
+            const onEnd = () => {
+                if (!isDragging) return;
+                isDragging = false;
+                card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+
+                if (Math.abs(currentX) > 80) {
+                    swipeLocked = true;
+                    if (currentX > 0) {
+                        card.classList.add('swipe-right');
+                        setTimeout(() => {
+                            currentTinderIndex = (currentTinderIndex - 1 + sortedSundays.length) % sortedSundays.length;
+                            swipeLocked = false;
+                            renderCards();
+                        }, 300);
+                    } else {
+                        card.classList.add('swipe-left');
+                        setTimeout(() => {
+                            currentTinderIndex = (currentTinderIndex + 1) % sortedSundays.length;
+                            swipeLocked = false;
+                            renderCards();
+                        }, 300);
+                    }
+                } else {
+                    card.style.transform = '';
+                }
+                currentX = 0;
+            };
+
+            card.addEventListener('touchstart', onStart, { passive: true });
+            card.addEventListener('touchmove', onMove, { passive: true });
+            card.addEventListener('touchend', onEnd);
+            card.addEventListener('mousedown', onStart);
+            const moveHandler = (e) => { if (isDragging) onMove(e); };
+            const upHandler = () => { if (isDragging) onEnd(); };
+            document.addEventListener('mousemove', moveHandler);
+            document.addEventListener('mouseup', upHandler);
+            const observer = new MutationObserver(() => {
+                if (!document.body.contains(card)) {
+                    document.removeEventListener('mousemove', moveHandler);
+                    document.removeEventListener('mouseup', upHandler);
+                    observer.disconnect();
+                }
+            });
+            observer.observe(container, { childList: true });
+        }
+
+        $('#prevBtn').onclick = () => {
+            if (swipeLocked) return;
+            currentTinderIndex = (currentTinderIndex - 1 + sortedSundays.length) % sortedSundays.length;
+            renderCards();
+        };
+        $('#nextBtn').onclick = () => {
+            if (swipeLocked) return;
+            currentTinderIndex = (currentTinderIndex + 1) % sortedSundays.length;
+            renderCards();
+        };
+
+        renderCards();
+
+        const actionsDiv = document.createElement('div');
+        let quickActions = '';
+        if (isAdmin) {
+            quickActions = `
+                <h3 class="section">Actions rapides</h3>
+                <div class="grid g3">
+                    <div class="card clickable" onclick="openNewSunday()">
+                        <div style="font-size:20px;margin-bottom:8px">➕</div>
+                        <div style="font-weight:600;margin-bottom:4px">Nouveau dimanche</div>
+                        <div style="font-size:12px;color:var(--text-2)">Créer un programme</div>
+                    </div>
+                    <div class="card clickable" onclick="document.querySelector('[data-view=projection]').click()">
+                        <div style="font-size:20px;margin-bottom:8px">📽️</div>
+                        <div style="font-weight:600;margin-bottom:4px">Projection</div>
+                        <div style="font-size:12px;color:var(--text-2)">Mode culte</div>
+                    </div>
+                </div>
+            `;
+        } else {
+            quickActions = `
+                <h3 class="section">Actions rapides</h3>
+                <div class="grid g3">
+                    <div class="card clickable" onclick="document.querySelector('[data-view=projection]').click()">
+                        <div style="font-size:20px;margin-bottom:8px">📽️</div>
+                        <div style="font-weight:600;margin-bottom:4px">Projection</div>
+                        <div style="font-size:12px;color:var(--text-2)">Mode culte</div>
+                    </div>
+                </div>
+            `;
+        }
+        actionsDiv.innerHTML = quickActions;
+        view.appendChild(actionsDiv);
+    }
+
+    /* ===== DIMANCHES ===== */
+    function renderSundays(view) {
+        view.innerHTML = `
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+                <div>
+                    <h2 class="page-title">Dimanches</h2>
+                    <p class="page-sub" style="margin-bottom:0">${STATE.sundays.length} programmes</p>
+                </div>
+                ${isAdmin ? '<button class="btn btn-primary btn-sm" onclick="openNewSunday()">+ Nouveau</button>' : ''}
+            </div>
+            <div class="field">
+                <input type="search" id="filterQ" placeholder="Rechercher un titre, chantre ou date...">
+            </div>
+            <div id="sundayList"></div>
+        `;
+
+        const draw = () => {
+            const q = ($("#filterQ")?.value || "").toLowerCase().trim();
+            const sorted = [...STATE.sundays].sort((a, b) => a.date.localeCompare(b.date));
+            const list = sorted.filter(s => {
+                if (!q) return true;
+                if (s.date.includes(q)) return true;
+                const dateFr = fmtDate(s.date).toLowerCase();
+                if (dateFr.includes(q)) return true;
+                return [...(s.adoration || []), ...(s.louange || [])].some(x =>
+                    (x.title || "").toLowerCase().includes(q) || (x.singer || "").toLowerCase().includes(q)
+                );
+            });
+
+            $("#sundayList").innerHTML = list.length === 0 ?
+                '<div class="empty"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>Aucun résultat</div>' :
+                list.map(s => {
+                    const singers = [...new Set([...(s.adoration || []), ...(s.louange || [])].map(x => x.singer))];
+                    return `
+                        <div class="scard" style="margin-bottom:10px" onclick="openSunday('${s.date}')">
+                            <div class="date">${fmtDate(s.date)}</div>
+                            <div class="pills">
+                                <span class="pill pill-a">${(s.adoration || []).length}A</span>
+                                <span class="pill pill-l">${(s.louange || []).length}L</span>
+                            </div>
+                            <div class="singers">${esc(singers.join(' · '))}</div>
+                        </div>
+                    `;
+                }).join('');
+        };
+
+        $("#filterQ").addEventListener('input', draw);
+        draw();
+    }
+
+    /* ===== CALENDRIER ===== */
+    function renderCalendar(view) {
+        view.innerHTML = `
+            <h2 class="page-title">Calendrier</h2>
+            <p class="page-sub">Touchez un dimanche doré</p>
+            <div class="cal-grid" id="calGrid"></div>
+        `;
+
+        const byMonth = {};
+        STATE.sundays.forEach(s => {
+            const k = s.date.slice(0, 7);
+            if (!byMonth[k]) byMonth[k] = [];
+            byMonth[k].push(s);
+        });
+
+        const keys = Object.keys(byMonth).sort();
+
+        $('#calGrid').innerHTML = keys.map(k => {
+            const [y, m] = k.split('-').map(Number);
+            const md = new Date(y, m - 1, 1);
+            const title = md.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+            const first = new Date(y, m - 1, 1).getDay();
+            const last = new Date(y, m, 0).getDate();
+            const hasDates = new Set(byMonth[k].map(s => Number(s.date.slice(8, 10))));
+
+            let cells = ['D', 'L', 'M', 'M', 'J', 'V', 'S'].map(d => `<div class="day dow">${d}</div>`).join('');
+            for (let i = 0; i < first; i++) cells += '<div></div>';
+            for (let d = 1; d <= last; d++) {
+                if (hasDates.has(d)) {
+                    const iso = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                    cells += `<div class="day has" onclick="openSunday('${iso}')">${d}</div>`;
+                } else {
+                    cells += `<div class="day">${d}</div>`;
+                }
+            }
+            return `<div class="month-card"><div class="month-title">${title}</div><div class="mgrid">${cells}</div></div>`;
+        }).join('');
+    }
+
+    /* ===== PAR CHANTRE ===== */
+    function renderBySinger(view) {
+        const allSingers = new Set(STATE.singers);
+        STATE.sundays.forEach(s => {
+            [...(s.adoration || []), ...(s.louange || [])].forEach(x => {
+                if (x.singer) allSingers.add(x.singer);
+            });
+        });
+        const singersList = [...allSingers];
+
+        view.innerHTML = `
+            <h2 class="page-title">Par chantre</h2>
+            <p class="page-sub">Affectations individuelles</p>
+            <div class="singer-grid" id="singerGrid"></div>
+            <div id="singerContent" style="margin-top:24px"></div>
+        `;
+
+        const grid = $("#singerGrid");
+        const content = $("#singerContent");
+
+        grid.innerHTML = singersList.map(name => {
+            const count = STATE.sundays.reduce((acc, s) => {
+                return acc + [...(s.adoration || []), ...(s.louange || [])].filter(x => x.singer === name).length;
+            }, 0);
+            return `<div class="singer-badge" data-singer="${esc(name)}">${esc(name)}<span class="count">${count}</span></div>`;
+        }).join('');
+
+        const badges = $$('.singer-badge');
+        if (badges.length > 0) {
+            badges[0].classList.add('active');
+            drawSingerContent(badges[0].dataset.singer);
+        }
+
+        badges.forEach(b => {
+            b.addEventListener('click', () => {
+                badges.forEach(x => x.classList.remove('active'));
+                b.classList.add('active');
+                drawSingerContent(b.dataset.singer);
+            });
+        });
+
+        function drawSingerContent(name) {
+            const list = STATE.sundays.map(s => ({
+                date: s.date,
+                songs: [...(s.adoration || []).map(x => ({ ...x, cat: 'a' })), ...(s.louange || []).map(x => ({ ...x, cat: 'l' }))]
+                    .filter(x => x.singer === name)
+            })).filter(s => s.songs.length > 0).sort((a, b) => a.date.localeCompare(b.date));
+
+            const totalSongs = list.reduce((acc, s) => acc + s.songs.length, 0);
+
+            content.innerHTML = `
+                <div class="grid g4" style="margin-bottom:16px">
+                    <div class="stat"><div class="n">${list.length}</div><div class="l">Dimanches</div></div>
+                    <div class="stat"><div class="n">${totalSongs}</div><div class="l">Chants</div></div>
+                </div>
+                ${list.length === 0 ? '<div class="empty">Aucune affectation</div>' : list.map(s => `
+                    <div class="card" style="margin-bottom:10px">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px">
+                            <div style="font-weight:600;font-size:14px">${fmtDate(s.date)}</div>
+                            <button class="btn btn-ghost btn-sm" onclick="openSunday('${s.date}')">Voir →</button>
+                        </div>
+                        ${s.songs.map(x => `
+                            <div style="padding:8px 0;border-top:1px solid var(--border)">
+                                <div style="font-size:10px;color:${x.cat === 'a' ? 'var(--gold)' : 'var(--blue)'};font-weight:700;letter-spacing:.06em;margin-bottom:3px">${x.cat === 'a' ? 'ADORATION' : 'LOUANGE'}</div>
+                                <div style="font-size:13px;color:var(--text)">${esc(x.title)}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `).join('')}
+            `;
+        }
+    }
+
+    /* ===== RECHERCHE ===== */
+    function renderSearch(view) {
+        view.innerHTML = `
+            <h2 class="page-title">Recherche</h2>
+            <p class="page-sub">Trouver un chant ou un chantre</p>
+            <div class="field">
+                <input type="search" id="searchQ" placeholder="🔍 Titre, chantre, date...">
+            </div>
+            <div id="searchResults"></div>
+        `;
+
+        let searchTimer;
+        const draw = () => {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(() => {
+                const q = ($('#searchQ')?.value || "").toLowerCase().trim();
+                const results = $('#searchResults');
+                if (!results) return;
+                if (!q) {
+                    results.innerHTML = '<div class="empty">Tapez pour rechercher</div>';
+                    return;
+                }
+
+                const hits = [];
+                STATE.sundays.forEach(s => {
+                    [...(s.adoration || []).map(x => ({ ...x, cat: 'Adoration' })), ...(s.louange || []).map(x => ({ ...x, cat: 'Louange' }))].forEach(x => {
+                        const dateFr = fmtDate(s.date).toLowerCase();
+                        if ((x.title || "").toLowerCase().includes(q) || (x.singer || "").toLowerCase().includes(q) || dateFr.includes(q) || s.date.includes(q)) {
+                            hits.push({ ...x, date: s.date });
+                        }
+                    });
+                });
+
+                results.innerHTML = hits.length === 0 ? '<div class="empty">Aucun résultat</div>' : hits.map(h => `
+                    <div class="card" style="margin-bottom:10px" onclick="openSunday('${h.date}')">
+                        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px">
+                            <span class="pill ${h.cat === 'Adoration' ? 'pill-a' : 'pill-l'}">${h.cat}</span>
+                            <span style="font-size:11px;color:var(--text-3)">${fmtDate(h.date)}</span>
+                        </div>
+                        <div style="font-weight:500;font-size:14px">${esc(h.title)}</div>
+                        <div style="font-size:12px;color:var(--gold);margin-top:4px">${esc(h.singer)}</div>
+                    </div>
+                `).join('');
+            }, 150);
+        };
+
+        $("#searchQ").addEventListener('input', draw);
+        draw();
+    }
+
+    /* ===== PROJECTION ===== */
+    function renderProjection(view, dateOverride) {
+        const today = new Date().toISOString().slice(0, 10);
+        const defaultDate = projectionDate || STATE.sundays.find(s => s.date >= today)?.date || STATE.sundays[0]?.date;
+        const date = dateOverride || defaultDate;
+        projectionDate = date;
+
+        if (!STATE.sundays.length) {
+            view.innerHTML = '<div class="empty">Aucun dimanche à projeter</div>';
+            return;
+        }
+
+        view.innerHTML = `
+            <h2 class="page-title">Projection</h2>
+            <p class="page-sub">Mode culte plein écran</p>
+            <div class="field">
+                <select id="projSel">
+                    ${STATE.sundays.map(s => `<option value="${s.date}" ${s.date === date ? 'selected' : ''}>${fmtDate(s.date)}</option>`).join('')}
+                </select>
+            </div>
+            <div id="projContent"></div>
+        `;
+
+        const draw = () => {
+            const d = $('#projSel').value;
+            projectionDate = d;
+            const s = STATE.sundays.find(x => x.date === d);
+            if (!s) return;
+            const singers = [...new Set([...(s.adoration || []), ...(s.louange || [])].map(x => x.singer))];
+
+            $('#projContent').innerHTML = `
+                <div class="proj">
+                    <h1>Abraham Berne <span class="gold">myGod</span></h1>
+                    <div class="date">${fmtDate(s.date)}</div>
+                    <div class="singers-line">${singers.map(esc).join(' · ')}</div>
+                    <h2>ADORATION</h2>
+                    ${(s.adoration || []).map(x => `<div class="song-block"><div class="title">${esc(x.title)}</div><div class="singer">— ${esc(x.singer)}</div></div>`).join('')}
+                    <h2>LOUANGE</h2>
+                    ${(s.louange || []).map(x => `<div class="song-block"><div class="title">${esc(x.title)}</div><div class="singer">— ${esc(x.singer)}</div></div>`).join('')}
+                </div>
+            `;
+        };
+
+        $('#projSel').addEventListener('change', draw);
+        draw();
+    }
+
+    /* ===== OPEN SUNDAY MODAL ===== */
+    window.openSunday = function (date) {
+        const s = STATE.sundays.find(x => x.date === date);
+        if (!s) return;
+        const singers = [...new Set([...(s.adoration || []), ...(s.louange || [])].map(x => x.singer))];
+
+        const songRow = (song, cat) => {
+            const id = ytId(song.url);
+            const thumb = ytThumb(song.url);
+            return `
+                <div class="song-item">
+                    ${thumb
+                        ? `<div class="song-thumb"><img src="${thumb}" alt="" onerror="this.parentElement.innerHTML='🎵'"></div>`
+                        : `<div class="song-thumb">🎵</div>`}
+                    <div class="song-info">
+                        <div class="song-title">${esc(song.title)}</div>
+                        <div class="song-meta">
+                            <span class="singer">${esc(song.singer)}</span>
+                            <span>${cat === 'a' ? 'Adoration' : 'Louange'}</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0">
+                        ${id ? `<a href="${esc(song.url)}" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a>` : `<span class="btn btn-ghost btn-icon" style="opacity:0.5">✕</span>`}
+                        ${isAdmin ? `<button class="btn btn-ghost btn-icon" data-edit-cat="${cat}" data-edit-title="${esc(song.title)}" title="Modifier">✎</button>` : ''}
+                    </div>
+                </div>
+            `;
+        };
+
+        openModal(`
+            <div class="modal-header">
+                <h3>${fmtDate(s.date)}</h3>
+                <button class="btn-close" onclick="closeModal()" aria-label="Fermer">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div style="font-size:13px;color:var(--text-2);margin-bottom:16px">
+                <b>Chantres:</b> ${singers.map(esc).join(' · ')}
+            </div>
+            <h3 class="section" style="margin-top:8px">Adoration</h3>
+            ${(s.adoration || []).map(x => songRow(x, 'a')).join('') || '<div class="empty">Aucun chant</div>'}
+            <h3 class="section">Louange</h3>
+            ${(s.louange || []).map(x => songRow(x, 'l')).join('') || '<div class="empty">Aucun chant</div>'}
+            <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap">
+                ${isAdmin ? `<button class="btn btn-primary" style="flex:1" onclick="openEditor('${date}')">✎ Modifier le programme</button>` : ''}
+                <button class="btn btn-ghost" onclick="projFromModal('${date}')">📽️ Projeter</button>
+            </div>
+        `);
+
+        $$('#modalBody [data-edit-cat]').forEach(btn => {
+            btn.onclick = () => {
+                openEditor(date);
+            };
+        });
+    };
+
+    window.projFromModal = function (date) {
+        projectionDate = date;
+        closeModal();
+        $$('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.view === 'projection'));
+        currentView = 'projection';
+        render();
+    };
+
+    window.closeModal = closeModal;
+
+    /* ===== EDITOR ===== */
+    window.openNewSunday = function () {
+        if (!isAdmin) return;
+        const today = new Date();
+        const daysUntilSunday = (7 - today.getDay()) % 7 || 7;
+        const nextSun = new Date(today);
+        nextSun.setDate(today.getDate() + daysUntilSunday);
+        const iso = nextSun.toISOString().slice(0, 10);
+        openEditor(null, iso);
+    };
+
+    window.openEditor = function (date, suggestedDate) {
+        if (!isAdmin) return;
+
+        const isNew = !date;
+        const s = isNew ? { date: suggestedDate || new Date().toISOString().slice(0, 10), adoration: [], louange: [] } : clone(STATE.sundays.find(x => x.date === date));
+
+        if (!s) return;
+
+        window._editorState = s;
+        window._editorOriginalDate = date;
+
+        openModal(`
+            <div class="modal-header">
+                <h3>${isNew ? 'Nouveau dimanche' : 'Modifier le programme'}</h3>
+                <button class="btn-close" onclick="closeModal()" aria-label="Fermer">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="field">
+                <label>Date du dimanche</label>
+                <input type="date" id="edDate" value="${s.date}">
+            </div>
+            <h3 class="section" style="margin-top:20px" id="edCountA">Adoration (${s.adoration.length})</h3>
+            <div id="edAdoration"></div>
+            <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="edAddSong('a')">+ Ajouter un chant d'adoration</button>
+            <h3 class="section" id="edCountL">Louange (${s.louange.length})</h3>
+            <div id="edLouange"></div>
+            <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="edAddSong('l')">+ Ajouter un chant de louange</button>
+            <div style="margin-top:24px;display:flex;gap:8px">
+                <button class="btn btn-ghost" style="flex:1" onclick="closeModal()">Annuler</button>
+                ${!isNew ? `<button class="btn btn-danger" onclick="deleteSunday('${s.date}')">Supprimer</button>` : ''}
+                <button class="btn btn-primary" style="flex:1.5" onclick="saveSunday(${isNew ? 'null' : `'${s.date}'`})">${isNew ? 'Créer' : 'Enregistrer'}</button>
+            </div>
+        `);
+
+        drawEditorLists();
+    };
+
+    function drawEditorLists() {
+        const s = window._editorState;
+
+        const renderList = (arr, cat) => arr.map((x, i) => `
+            <div class="song-item" style="padding:10px">
+                <div class="song-info">
+                    <input data-cat="${cat}" data-idx="${i}" data-field="title" value="${esc(x.title)}" style="margin-bottom:6px;font-size:13px;padding:8px 10px" placeholder="Titre">
+                    <div style="display:flex;gap:6px">
+                        <div class="custom-select" id="select_${cat}_${i}">
+                            <button class="custom-select-trigger" data-toggle-select="${cat}_${i}" type="button">
+                                ${esc(x.singer)}
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                            <div class="custom-select-options">
+                                ${STATE.singers.map(n => `<div class="custom-option ${n === x.singer ? 'selected' : ''}" data-select-singer="${esc(n)}" data-cat="${cat}" data-idx="${i}">${esc(n)}</div>`).join('')}
+                                <div class="custom-option other" data-custom-singer data-cat="${cat}" data-idx="${i}">➕ Autre chantre...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <input data-cat="${cat}" data-idx="${i}" data-field="url" value="${esc(x.url || '')}" placeholder="https://youtu.be/..." style="margin-top:6px;font-size:12px;padding:8px 10px">
+                </div>
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                    <button class="btn btn-ghost btn-icon" style="color:var(--gold)" data-dup-cat="${cat}" data-dup-idx="${i}" title="Dupliquer vers un autre dimanche">📋</button>
+                    <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-all-cat="${cat}" data-remove-all-idx="${i}" title="Supprimer partout">🗑️</button>
+                    <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-cat="${cat}" data-remove-idx="${i}" title="Retirer de ce dimanche">✕</button>
+                </div>
+            </div>
+        `).join('');
+
+        $('#edAdoration').innerHTML = renderList(s.adoration, 'a') || '<div class="empty" style="padding:12px">Aucun chant</div>';
+        $('#edLouange').innerHTML = renderList(s.louange, 'l') || '<div class="empty" style="padding:12px">Aucun chant</div>';
+
+        const countA = $('#edCountA');
+        const countL = $('#edCountL');
+        if (countA) countA.textContent = `Adoration (${s.adoration.length})`;
+        if (countL) countL.textContent = `Louange (${s.louange.length})`;
+
+        $$('#modalBody input[data-field]').forEach(el => {
+            el.oninput = el.onchange = (e) => {
+                const cat = e.target.dataset.cat;
+                const idx = Number(e.target.dataset.idx);
+                const field = e.target.dataset.field;
+                const arr = cat === 'a' ? s.adoration : s.louange;
+                if (arr[idx]) arr[idx][field] = e.target.value;
+            };
+        });
+
+        $$('#modalBody [data-toggle-select]').forEach(btn => {
+            btn.onclick = (e) => {
+                e.stopPropagation();
+                const key = btn.dataset.toggleSelect;
+                $$('#modalBody .custom-select.open').forEach(el => {
+                    if (el.id !== `select_${key}`) el.classList.remove('open');
+                });
+                const el = document.getElementById(`select_${key}`);
+                if (el) el.classList.toggle('open');
+            };
+        });
+
+        $$('#modalBody [data-select-singer]').forEach(opt => {
+            opt.onclick = (e) => {
+                e.stopPropagation();
+                selectSinger(opt.dataset.cat, Number(opt.dataset.idx), opt.dataset.selectSinger);
+            };
+        });
+        $$('#modalBody [data-custom-singer]').forEach(opt => {
+            opt.onclick = (e) => {
+                e.stopPropagation();
+                promptCustomSinger(opt.dataset.cat, Number(opt.dataset.idx));
+            };
+        });
+
+        $$('#modalBody [data-dup-cat]').forEach(btn => {
+            btn.onclick = () => edDuplicateSong(btn.dataset.dupCat, Number(btn.dataset.dupIdx));
+        });
+        $$('#modalBody [data-remove-all-cat]').forEach(btn => {
+            btn.onclick = () => edRemoveSongEverywhere(btn.dataset.removeAllCat, Number(btn.dataset.removeAllIdx));
+        });
+        $$('#modalBody [data-remove-cat]').forEach(btn => {
+            btn.onclick = () => edRemoveSong(btn.dataset.removeCat, Number(btn.dataset.removeIdx));
+        });
+
+        const edDate = $('#edDate');
+        if (edDate) {
+            edDate.onchange = (e) => {
+                window._editorState.date = e.target.value;
+            };
+        }
+    }
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.custom-select')) {
+            $$('.custom-select.open').forEach(el => el.classList.remove('open'));
+        }
+    });
+
+    window.toggleCustomSelect = function(cat, idx) {
+        const el = document.getElementById(`select_${cat}_${idx}`);
+        if (el) el.classList.toggle('open');
+    };
+
+    window.selectSinger = function(cat, idx, name) {
+        const s = window._editorState;
+        if (!s) return;
+        const arr = cat === 'a' ? s.adoration : s.louange;
+        if (arr[idx]) {
+            arr[idx].singer = name;
+            if (name && !STATE.singers.includes(name)) STATE.singers.push(name);
+        }
+
+        const el = document.getElementById(`select_${cat}_${idx}`);
+        if (el) el.classList.remove('open');
+
+        drawEditorLists();
+    };
+
+    window.promptCustomSinger = function(cat, idx) {
+        const s = window._editorState;
+        if (!s) return;
+        const arr = cat === 'a' ? s.adoration : s.louange;
+        if (!arr[idx]) return;
+
+        openModal(`
+            <div class="modal-header">
+                <h3>Chantre invité</h3>
+                <button class="btn-close" onclick="reopenEditor()" aria-label="Fermer">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <p style="font-size:14px;color:var(--text-2);margin-bottom:16px">Entrez le nom du chantre invité :</p>
+            <div class="field">
+                <input type="text" id="customSingerName" placeholder="Nom du chantre" style="font-size:16px;padding:12px;">
+            </div>
+            <div style="display:flex;gap:8px;margin-top:16px">
+                <button class="btn btn-ghost" style="flex:1" onclick="reopenEditor()">Annuler</button>
+                <button class="btn btn-primary" style="flex:1" onclick="validateCustomSinger('${cat}', ${idx})">Valider</button>
+            </div>
+        `);
+        setTimeout(() => {
+            const inp = $('#customSingerName');
+            if (inp && document.body.contains(inp)) {
+                inp.focus();
+                inp.addEventListener('keypress', (e) => { if (e.key === 'Enter') validateCustomSinger(cat, idx); });
+            }
+        }, 100);
+    };
+
+    window.reopenEditor = function() {
+        const s = window._editorState;
+        const orig = window._editorOriginalDate;
+        if (s) {
+            openModalFromState(s, orig);
+        } else {
+            closeModal();
+        }
+    };
+
+    function openModalFromState(s, originalDate) {
+        const isNew = !originalDate;
+
+        openModal(`
+            <div class="modal-header">
+                <h3>${isNew ? 'Nouveau dimanche' : 'Modifier le programme'}</h3>
+                <button class="btn-close" onclick="closeModal()" aria-label="Fermer">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="field">
+                <label>Date du dimanche</label>
+                <input type="date" id="edDate" value="${s.date}">
+            </div>
+            <h3 class="section" style="margin-top:20px" id="edCountA">Adoration (${s.adoration.length})</h3>
+            <div id="edAdoration"></div>
+            <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="edAddSong('a')">+ Ajouter un chant d'adoration</button>
+            <h3 class="section" id="edCountL">Louange (${s.louange.length})</h3>
+            <div id="edLouange"></div>
+            <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="edAddSong('l')">+ Ajouter un chant de louange</button>
+            <div style="margin-top:24px;display:flex;gap:8px">
+                <button class="btn btn-ghost" style="flex:1" onclick="closeModal()">Annuler</button>
+                ${!isNew ? `<button class="btn btn-danger" onclick="deleteSunday('${s.date}')">Supprimer</button>` : ''}
+                <button class="btn btn-primary" style="flex:1.5" onclick="saveSunday(${isNew ? 'null' : `'${originalDate}'`})">${isNew ? 'Créer' : 'Enregistrer'}</button>
+            </div>
+        `);
+
+        drawEditorLists();
+    }
+
+    window.validateCustomSinger = function(cat, idx) {
+        const s = window._editorState;
+        if (!s) return;
+        const arr = cat === 'a' ? s.adoration : s.louange;
+        if (!arr[idx]) return;
+
+        const inp = $('#customSingerName');
+        const name = inp ? inp.value.trim() : '';
+        if (name) {
+            arr[idx].singer = name;
+            if (!STATE.singers.includes(name)) STATE.singers.push(name);
+        } else {
+            arr[idx].singer = STATE.singers[0] || '';
+        }
+
+        openModalFromState(s, window._editorOriginalDate);
+    };
+
+    window.edAddSong = function (cat) {
+        if (!isAdmin) return;
+        const s = window._editorState;
+        if (!s) return;
+        const target = cat === 'a' ? s.adoration : s.louange;
+        target.push({ singer: STATE.singers[0] || '', title: '', url: '' });
+        drawEditorLists();
+    };
+
+    window.edRemoveSong = function (cat, idx) {
+        if (!isAdmin) return;
+        const s = window._editorState;
+        if (!s) return;
+        const target = cat === 'a' ? s.adoration : s.louange;
+        target.splice(idx, 1);
+        drawEditorLists();
+    };
+
+    window.edRemoveSongEverywhere = function (cat, idx) {
+        if (!isAdmin) return;
+        const s = window._editorState;
+        if (!s) return;
+        const target = cat === 'a' ? s.adoration : s.louange;
+        const songToDelete = target[idx];
+        if (!songToDelete) return;
+
+        const title = (songToDelete.title || '').trim();
+        const url = (songToDelete.url || '').trim();
+        const id = ytId(url);
+
+        showConfirm({
+            title: 'Supprimer partout ?',
+            message: `Le chant <b>"${esc(title || 'Sans titre')}"</b> sera supprimé de <b>tous les dimanches</b>. Cette action est irréversible.`,
+            confirmText: 'Supprimer partout',
+            cancelText: 'Annuler',
+            danger: true,
+            onConfirm: () => {
+                STATE.sundays.forEach(sunday => {
+                    sunday.adoration = (sunday.adoration || []).filter(x => {
+                        if (id && ytId(x.url) === id) return false;
+                        if (!id && (x.title || '').trim() === title) return false;
+                        return true;
+                    });
+                    sunday.louange = (sunday.louange || []).filter(x => {
+                        if (id && ytId(x.url) === id) return false;
+                        if (!id && (x.title || '').trim() === title) return false;
+                        return true;
+                    });
+                });
+
+                if (cat === 'a') {
+                    s.adoration.splice(idx, 1);
+                } else {
+                    s.louange.splice(idx, 1);
+                }
+
+                save();
+                openModalFromState(s, window._editorOriginalDate);
+                toast('✓ Chant supprimé partout');
+            }
+        });
+    };
+
+    window.edDuplicateSong = function(cat, idx) {
+        if (!isAdmin) return;
+        const s = window._editorState;
+        if (!s) return;
+        const target = cat === 'a' ? s.adoration : s.louange;
+        const song = target[idx];
+        if (!song || !(song.title || '').trim()) { toast('Veuillez d\'abord remplir le titre'); return; }
+
+        const allSundays = [...STATE.sundays].sort((a,b) => a.date.localeCompare(b.date));
+
+        let listHtml = allSundays.map((sd, i) => {
+            const isCurrent = sd.date === s.date;
+            return `
+            <div class="dup-item" ${isCurrent ? 'style="background:rgba(232,200,106,0.05);border-color:var(--gold)"' : ''}>
+                <input type="checkbox" id="dup_${i}" value="${sd.date}" ${isCurrent ? 'checked' : ''}>
+                <label for="dup_${i}">${fmtDate(sd.date)} ${isCurrent ? '(En cours)' : ''}</label>
+            </div>
+        `}).join('');
+
+        openModal(`
+            <div class="modal-header">
+                <h3>Dupliquer vers...</h3>
+                <button class="btn-close" onclick="reopenEditor()" aria-label="Fermer">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">
+                Sélectionnez les dimanches où ajouter <b>${esc(song.title)}</b>.
+            </p>
+            <div class="dup-list">
+                ${listHtml}
+            </div>
+            <div style="display:flex;gap:8px;margin-top:16px">
+                <button class="btn btn-ghost" style="flex:1" onclick="reopenEditor()">Annuler</button>
+                <button class="btn btn-primary" style="flex:1" onclick="confirmDuplicate('${cat}', ${idx})">Copier sur les dimanches cochés</button>
+            </div>
+        `);
+    };
+
+    window.confirmDuplicate = function(cat, idx) {
+        const s = window._editorState;
+        if (!s) return;
+        const target = cat === 'a' ? s.adoration : s.louange;
+        const song = target[idx];
+        if (!song) return;
+
+        const checked = $$('.dup-list input[type="checkbox"]:checked');
+        if (checked.length === 0) { toast('Aucun dimanche sélectionné'); return; }
+
+        let count = 0;
+        checked.forEach(cb => {
+            const date = cb.value;
+            const targetSunday = STATE.sundays.find(x => x.date === date);
+            if (targetSunday) {
+                const targetList = cat === 'a' ? (targetSunday.adoration || []) : (targetSunday.louange || []);
+                const songKey = (song.url && ytId(song.url)) ? ytId(song.url) : (song.title || '').trim().toLowerCase();
+                const isDuplicate = targetList.some(x => {
+                    const xKey = (x.url && ytId(x.url)) ? ytId(x.url) : (x.title || '').trim().toLowerCase();
+                    return xKey === songKey;
+                });
+
+                if (!isDuplicate) {
+                    const newSong = { ...song };
+                    if (cat === 'a') {
+                        targetSunday.adoration = targetSunday.adoration || [];
+                        targetSunday.adoration.push(newSong);
+                    } else {
+                        targetSunday.louange = targetSunday.louange || [];
+                        targetSunday.louange.push(newSong);
+                    }
+                    count++;
+                }
+            }
+        });
+
+        save();
+        if (count > 0) {
+            toast(`✓ Chant ajouté à ${count} dimanche(s)`);
+        } else {
+            toast('Chant déjà présent partout');
+        }
+        openModalFromState(s, window._editorOriginalDate);
+    };
+
+    /* ===== SAVE SUNDAY ===== */
+    window.saveSunday = function (originalDate) {
+        if (!isAdmin) return;
+        const s = window._editorState;
+        if (!s) return;
+
+        const newDate = $('#edDate') ? $('#edDate').value : s.date;
+        if (!newDate) {
+            toast('Date requise');
+            return;
+        }
+
+        const targetDate = originalDate || newDate;
+        if (newDate !== targetDate) {
+            const conflict = STATE.sundays.find(x => x.date === newDate && x.date !== targetDate);
+            if (conflict) {
+                toast('Un dimanche existe déjà à cette date');
+                return;
+            }
+        }
+        s.date = newDate;
+
+        s.adoration = (s.adoration || []).filter(x => (x.title || '').trim());
+        s.louange = (s.louange || []).filter(x => (x.title || '').trim());
+
+        const updateOtherOccurrences = (editedSongs) => {
+            editedSongs.forEach(song => {
+                if (!(song.title || '').trim()) return;
+                const targetYtId = ytId(song.url);
+
+                STATE.sundays.forEach(otherSunday => {
+                    if (otherSunday.date === targetDate) return;
+                    [...(otherSunday.adoration || []), ...(otherSunday.louange || [])].forEach(otherSong => {
+                        const otherYtId = ytId(otherSong.url);
+                        const isSameSong = targetYtId ? (otherYtId === targetYtId) : ((otherSong.title || '').trim() === (song.title || '').trim());
+
+                        if (isSameSong && (otherSong.title !== song.title || otherSong.url !== song.url)) {
+                            otherSong.title = song.title;
+                            otherSong.url = song.url;
+                        }
+                    });
+                });
+            });
+        };
+
+        updateOtherOccurrences(s.adoration);
+        updateOtherOccurrences(s.louange);
+
+        const idx = STATE.sundays.findIndex(x => x.date === targetDate);
+        if (idx >= 0) {
+            STATE.sundays[idx] = s;
+        } else {
+            STATE.sundays.push(s);
+        }
+        STATE.sundays.sort((a, b) => a.date.localeCompare(b.date));
+
+        if (!save()) return;
+        closeModal();
+        render();
+        toast('✓ Programme enregistré');
+    };
+
+    window.deleteSunday = function (date) {
+        if (!isAdmin) return;
+        const sunday = STATE.sundays.find(x => x.date === date);
+        const songCount = sunday ? ((sunday.adoration || []).length + (sunday.louange || []).length) : 0;
+
+        showConfirm({
+            title: 'Supprimer ce dimanche ?',
+            message: `Le programme du <b>${fmtDate(date)}</b> sera supprimé${songCount > 0 ? ` avec ses <b>${songCount} chant(s)</b>` : ''}. Cette action est irréversible.`,
+            confirmText: 'Supprimer',
+            cancelText: 'Annuler',
+            danger: true,
+            onConfirm: () => {
+                STATE.sundays = STATE.sundays.filter(x => x.date !== date);
+                save();
+                closeModal();
+                render();
+                toast('✓ Programme supprimé');
+            }
+        });
+    };
+
+    window.editSong = function (date, cat, title) {
+        if (!isAdmin) return;
+        openEditor(date);
+    };
+
+    /* ===== RESET & EXPORT ===== */
+    window.confirmReset = function () {
+        if (!isAdmin) { toast('Déverrouillez d\'abord le mode Admin'); return; }
+        showConfirm({
+            title: 'Réinitialiser tout le code ?',
+            message: 'Toutes vos modifications seront <b>définitivement perdues</b>. Le programme d\'origine sera restauré.',
+            confirmText: 'Réinitialiser',
+            cancelText: 'Annuler',
+            danger: true,
+            onConfirm: () => {
+                localStorage.removeItem(STORAGE_KEY);
+                STATE = { singers: clone(SEED_SINGERS), sundays: clone(SEED_SUNDAYS) };
+                save();
+                render();
+                toast('✓ Données réinitialisées');
+            }
+        });
+    };
+
+    /* ===== EXPORT HTML ===== */
+    window.exportHTML = function () {
+        if (!isAdmin) return;
+
+        try {
+            const doctype = '<!DOCTYPE html>\n';
+            let htmlContent = document.documentElement.outerHTML;
+
+            const seedSingersRegex = /const SEED_SINGERS = \[[\s\S]*?\];\s*\n/;
+            const seedSundaysRegex = /const SEED_SUNDAYS = \[[\s\S]*?\n\s*\];/;
+
+            const newSingers = `const SEED_SINGERS = ${JSON.stringify(STATE.singers, null, 4)};\n`;
+            const newSundays = `const SEED_SUNDAYS = ${JSON.stringify(STATE.sundays, null, 4)}\n        ;`;
+
+            htmlContent = htmlContent.replace(seedSingersRegex, newSingers);
+            htmlContent = htmlContent.replace(seedSundaysRegex, newSundays);
+
+            const resetScript = '<script>try{localStorage.removeItem("' + STORAGE_KEY + '");}catch(e){}</' + 'script>';
+            htmlContent = htmlContent.replace('<body>', '<body>\n' + resetScript);
+
+            const fullHtml = doctype + htmlContent;
+            const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const fileName = `abraham-berne-mygod-${new Date().toISOString().slice(0, 10)}.html`;
+
+            const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+            if (isMobile) {
+                showExportFallbackModal(fullHtml, fileName);
+            } else {
+                toast('✅ HTML exporté');
+            }
+        } catch (err) {
+            console.error('Export error:', err);
+            toast('❌ Erreur lors de l\'export');
+        }
+    };
+
+    function showExportFallbackModal(htmlContent, fileName) {
+        const escapedHtml = htmlContent.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+        openModal(`
+            <div class="modal-header">
+                <h3>📥 Export HTML</h3>
+                <button class="btn-close" onclick="closeModal()" aria-label="Fermer">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <p style="font-size:14px;color:var(--text-2);margin-bottom:16px">
+                Si le téléchargement ne s'est pas lancé, copiez le code ci-dessous et collez-le dans un fichier <b>.html</b>.
+            </p>
+            <div class="field">
+                <textarea id="exportCodeArea" class="export-textarea" readonly>${escapedHtml}</textarea>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:16px">
+                <button class="btn btn-ghost" style="flex:1" onclick="closeModal()">Fermer</button>
+                <button class="btn btn-primary" style="flex:1" onclick="copyExportCode()">📋 Copier le code</button>
+            </div>
+        `);
+    }
+
+    window.copyExportCode = function () {
+        const textarea = document.getElementById('exportCodeArea');
+        if (!textarea) return;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(textarea.value).then(() => {
+                toast('✅ Code copié ! Collez-le dans un fichier .html');
+            }).catch(() => fallbackCopy(textarea));
+        } else {
+            fallbackCopy(textarea);
+        }
+
+        function fallbackCopy(textarea) {
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            try {
+                document.execCommand('copy');
+                toast('✅ Code copié ! Collez-le dans un fichier .html');
+            } catch (e) {
+                toast('❌ Échec de la copie. Sélectionnez le texte manuellement.');
+            }
+        }
+    };
+
+    window.addEventListener('error', (e) => {
+        console.error('Erreur JS:', e.error || e.message);
+    });
+    window.addEventListener('unhandledrejection', (e) => {
+        console.error('Promesse rejetée:', e.reason);
+    });
+
+    /* ===== INIT ===== */
+    load();
+    updateLockIcon();
+    render();
+</script>
+
+  <a href="https://wa.me/33769696285"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="abmg-wa-float"
+   aria-label="Contacter l'administrateur sur WhatsApp"
+   title="Contacter sur WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+  
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('./sw.js', { scope: './' })
+        .then(function (reg) {
+          document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState === 'visible' && reg.update) reg.update();
+          });
+        })
+        .catch(function (err) {
+          console.warn('[PWA] Enregistrement SW impossible :', err);
+        });
+    });
+  }
+</script>
+
+</body></html>
+
