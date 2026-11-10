@@ -276,74 +276,139 @@
         .custom-option.other { color: var(--gold); font-weight: 600; }
 
         /* =========================================================
-           REFONTE DESKTOP / TABLETTE (APPLE STORE STYLE)
-           ISOLATION TOTALE POUR NE PAS CASSER LE MOBILE
+           REFONTE DESKTOP & FOND ANIMÉ (ISOLATION TOTALE)
            ========================================================= */
         @media (min-width: 1024px) {
             :root {
-                /* On écrase les variables locales pour le desktop */
-                --bg: #f5f5f7; /* Gris très clair Apple */
+                --bg: #f5f5f7;
                 --bg-1: #ffffff;
                 --bg-2: #ffffff;
                 --bg-3: #f9f9fb;
                 --bg-4: #e8e8ed;
                 --border: rgba(0, 0, 0, 0.06);
                 --border-strong: rgba(0, 0, 0, 0.12);
-                --text: #1d1d1f; /* Noir Apple */
-                --text-2: #6e6e73; /* Gris Apple */
+                --text: #1d1d1f;
+                --text-2: #6e6e73;
                 --text-3: #86868b;
-                --gold: #c99d34; /* Or plus sobre */
+                --gold: #c99d34;
                 --gold-2: #b38b2a;
                 --gold-glow: rgba(201, 157, 52, 0.15);
                 --shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
                 --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
             }
 
+            /* FOND ANIMÉ CHRÉTIEN */
             body {
                 background-color: var(--bg);
                 background-image: none;
                 font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                position: relative;
+            }
+            /* Overlay de fond */
+            .bg-slideshow {
+                position: fixed;
+                inset: 0;
+                z-index: 0;
+                overflow: hidden;
+                pointer-events: none;
+                opacity: 0.15; /* Opacité très faible pour la lisibilité */
+                mix-blend-mode: multiply;
+            }
+            .bg-slide {
+                position: absolute;
+                inset: 0;
+                background-size: cover;
+                background-position: center;
+                opacity: 0;
+                animation: bgFade 32s infinite;
+                will-change: opacity, transform;
+            }
+            .bg-slide:nth-child(1) { animation-delay: 0s; }
+            .bg-slide:nth-child(2) { animation-delay: 8s; }
+            .bg-slide:nth-child(3) { animation-delay: 16s; }
+            .bg-slide:nth-child(4) { animation-delay: 24s; }
+
+            @keyframes bgFade {
+                0%, 20% { opacity: 0; transform: scale(1); }
+                25%, 45% { opacity: 1; transform: scale(1.05); }
+                50%, 100% { opacity: 0; transform: scale(1.1); }
             }
 
-            /* HEADER & NAVIGATION DESKTOP */
+            /* HEADER DESKTOP AVEC NAVIGATION INTÉGRÉE */
             header {
-                background: rgba(255, 255, 255, 0.8);
+                background: rgba(255, 255, 255, 0.85);
                 backdrop-filter: saturate(180%) blur(20px);
                 -webkit-backdrop-filter: saturate(180%) blur(20px);
                 border-bottom: 1px solid var(--border);
                 padding: 0 40px;
-                height: 64px;
+                height: 72px;
                 display: flex;
                 align-items: center;
+                position: sticky;
+                top: 0;
             }
             .header-inner {
                 max-width: 1200px;
                 width: 100%;
                 height: 100%;
                 margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
                 gap: 40px;
             }
             .brand { gap: 16px; }
             .logo {
-                width: 36px; height: 36px;
-                border-radius: 10px;
-                font-size: 18px;
+                width: 40px; height: 40px;
+                border-radius: 12px;
+                font-size: 20px;
                 background: linear-gradient(145deg, var(--gold), #b88f1a);
                 color: #fff;
                 box-shadow: 0 2px 8px rgba(201, 157, 52, 0.3);
             }
-            .brand h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
-            .brand .tag { font-size: 11px; color: var(--text-2); }
+            .brand h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+            .brand .tag { font-size: 12px; color: var(--text-2); }
+
+            /* NAVIGATION HORIZONTALE DESKTOP */
+            .desktop-nav {
+                display: flex;
+                gap: 8px;
+                margin-left: auto;
+                margin-right: 24px;
+                background: rgba(0, 0, 0, 0.03);
+                padding: 4px;
+                border-radius: 100px;
+            }
+            .desktop-nav .nav-item {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 16px;
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--text-2);
+                background: transparent;
+                border-radius: 100px;
+                cursor: pointer;
+                transition: all 0.2s;
+                max-width: none;
+                flex: none;
+            }
+            .desktop-nav .nav-item svg { width: 18px; height: 18px; }
+            .desktop-nav .nav-item:hover { color: var(--text); background: rgba(0,0,0,0.05); }
+            .desktop-nav .nav-item.active { color: var(--text); background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 
             /* CACHER LA NAV BOTTOM SUR DESKTOP */
             .bottom-nav { display: none !important; }
-            .scroll-container { padding-bottom: 40px; }
-            main { padding: 48px 40px 0 40px; max-width: 1200px; animation: none; }
+            
+            .scroll-container { padding-bottom: 40px; position: relative; z-index: 1; }
+            main { padding: 48px 40px 0 40px; max-width: 1200px; animation: fadeIn 0.4s ease-out; }
 
             h2.page-title { font-size: 48px; font-weight: 700; letter-spacing: -0.03em; color: var(--text); margin-bottom: 8px; }
             p.page-sub { font-size: 18px; color: var(--text-2); margin-bottom: 48px; max-width: 800px; }
             .section { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); margin: 56px 0 24px; }
-            .section::before { display: none; } /* Plus de barre sur desktop */
+            .section::before { display: none; }
 
             /* BOUTONS DESKTOP */
             .btn { border-radius: 100px; padding: 12px 24px; font-size: 15px; min-height: 48px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: all 0.2s ease; }
@@ -357,8 +422,8 @@
 
             /* STATS DESKTOP */
             .grid.g4 { grid-template-columns: repeat(3, 1fr); gap: 24px; }
-            .stat { background: #fff; border: 1px solid var(--border); border-radius: 24px; padding: 32px; text-align: left; box-shadow: 0 4px 24px rgba(0,0,0,0.02); transition: all 0.3s ease; }
-            .stat:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.06); transform: translateY(-2px); }
+            .stat { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 24px; padding: 32px; text-align: left; box-shadow: 0 4px 24px rgba(0,0,0,0.02); transition: all 0.3s ease; }
+            .stat:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.06); transform: translateY(-2px); background: rgba(255, 255, 255, 0.95); }
             .stat::before { display: none; }
             .stat .n { font-size: 40px; font-weight: 700; color: var(--text); letter-spacing: -0.03em; }
             .stat .l { font-size: 15px; color: var(--text-2); margin-top: 8px; font-weight: 500; }
@@ -366,7 +431,7 @@
             /* TINDER / PROGRAMME DU JOUR DESKTOP */
             .tinder-container { max-width: 800px; height: 520px; margin: 0 auto 48px; }
             .tinder-card {
-                background: #fff; border-radius: 32px; padding: 40px;
+                background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-radius: 32px; padding: 40px;
                 box-shadow: 0 20px 40px rgba(0,0,0,0.08);
                 border: 1px solid var(--border);
             }
@@ -382,10 +447,10 @@
 
             /* CARDS GLOBALES DESKTOP */
             .card, .scard, .month-card {
-                background: #fff; border-radius: 24px; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(0,0,0,0.02);
+                background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border-radius: 24px; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(0,0,0,0.02);
                 padding: 32px; transition: all 0.3s ease;
             }
-            .card:hover, .scard:hover, .month-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); border-color: var(--border-strong); }
+            .card:hover, .scard:hover, .month-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); border-color: var(--border-strong); background: rgba(255, 255, 255, 0.95); }
             
             #sundayList { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
             .scard::after { display: none; }
@@ -403,8 +468,8 @@
             .singer-badge.active .count { background: rgba(255, 255, 255, 0.2); color: #fff; }
 
             /* MODALS DESKTOP */
-            .modal { align-items: center; padding: 40px; }
-            .modal-sheet { border-radius: 32px; max-width: 720px; padding: 40px; max-height: 90vh; }
+            .modal { align-items: center; padding: 40px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px); }
+            .modal-sheet { border-radius: 32px; max-width: 720px; padding: 40px; max-height: 90vh; background: #fff; }
             .modal-handle { display: none; }
             .modal-header { margin-bottom: 32px; }
             .modal-header h3 { font-size: 28px; font-weight: 700; color: var(--text); }
@@ -438,7 +503,7 @@
             .day.has:hover { transform: scale(1.1); }
 
             /* CONFIRM MODAL DESKTOP */
-            .confirm-sheet { border-radius: 32px; padding: 40px 32px; }
+            .confirm-sheet { border-radius: 32px; padding: 40px 32px; background: #fff; }
             .confirm-icon { width: 72px; height: 72px; }
             .confirm-title { font-size: 24px; margin-bottom: 12px; }
             .confirm-message { font-size: 16px; margin-bottom: 32px; }
@@ -458,6 +523,14 @@
 </head>
 <body>
 
+<!-- FOND ANIMÉ CHRÉTIEN (Desktop seulement) -->
+<div class="bg-slideshow" aria-hidden="true">
+    <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1519638831568-d9897f54ed69?q=80&w=1920&auto=format&fit=crop');"></div>
+    <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=1920&auto=format&fit=crop');"></div>
+    <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1445445290350-18a3b86e0b5a?q=80&w=1920&auto=format&fit=crop');"></div>
+    <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=1920&auto=format&fit=crop');"></div>
+</div>
+
 <header>
     <div class="header-inner">
         <div class="brand">
@@ -467,6 +540,35 @@
                 <div class="tag">Programme musical</div>
             </div>
         </div>
+        
+        <!-- NAVIGATION DESKTOP -->
+        <nav class="desktop-nav">
+            <button class="nav-item active" data-view="home">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span>Accueil</span>
+            </button>
+            <button class="nav-item" data-view="sundays">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <span>Dimanches</span>
+            </button>
+            <button class="nav-item" data-view="calendar">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <span>Calendrier</span>
+            </button>
+            <button class="nav-item" data-view="singer">
+                <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                <span>Chantres</span>
+            </button>
+            <button class="nav-item" data-view="search">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <span>Recherche</span>
+            </button>
+            <button class="nav-item" data-view="projection">
+                <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                <span>Proj.</span>
+            </button>
+        </nav>
+
         <div class="header-actions">
             <button class="btn-reset-icon hidden" id="exportBtn" onclick="exportHTML()" title="Exporter le HTML mis à jour" aria-label="Exporter le HTML">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -494,6 +596,7 @@
     <main id="view"></main>
 </div>
 
+<!-- NAVIGATION MOBILE (Bottom) -->
 <nav class="bottom-nav">
     <button class="nav-item active" data-view="home">
         <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -786,15 +889,18 @@
     }
 
     /* ===== NAVIGATION ===== */
-    $$('.nav-item').forEach(btn => {
-        btn.addEventListener('click', () => {
-            $$('.nav-item').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentView = btn.dataset.view;
-            render();
-            document.querySelector('.scroll-container').scrollTo({ top: 0, behavior: 'smooth' });
+    function setupNav() {
+        $$('.nav-item').forEach(btn => {
+            btn.addEventListener('click', () => {
+                $$('.nav-item').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentView = btn.dataset.view;
+                render();
+                document.querySelector('.scroll-container').scrollTo({ top: 0, behavior: 'smooth' });
+            });
         });
-    });
+    }
+    setupNav();
 
     function render() {
         closeModal();
@@ -997,7 +1103,7 @@
                         <div style="font-weight:600;margin-bottom:4px">Nouveau dimanche</div>
                         <div style="font-size:12px;color:var(--text-2)">Créer un programme</div>
                     </div>
-                    <div class="card clickable" onclick="document.querySelector('[data-view=projection]').click()">
+                    <div class="card clickable" onclick="document.querySelector('.nav-item[data-view=projection]').click()">
                         <div style="font-size:20px;margin-bottom:8px">📽️</div>
                         <div style="font-weight:600;margin-bottom:4px">Projection</div>
                         <div style="font-size:12px;color:var(--text-2)">Mode culte</div>
@@ -1008,7 +1114,7 @@
             quickActions = `
                 <h3 class="section">Actions rapides</h3>
                 <div class="grid g3">
-                    <div class="card clickable" onclick="document.querySelector('[data-view=projection]').click()">
+                    <div class="card clickable" onclick="document.querySelector('.nav-item[data-view=projection]').click()">
                         <div style="font-size:20px;margin-bottom:8px">📽️</div>
                         <div style="font-weight:600;margin-bottom:4px">Projection</div>
                         <div style="font-size:12px;color:var(--text-2)">Mode culte</div>
