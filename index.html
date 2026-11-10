@@ -10,10 +10,10 @@
     <title>Abraham Berne myGod</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
     <style>
         /* =========================================================
-           BASE / MOBILE (INTACT)
+           BASE / MOBILE
            ========================================================= */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         :root {
@@ -61,7 +61,7 @@
         .hidden { display: none !important; }
         .gold { color: var(--gold); }
 
-        /* HEADER */
+        /* HEADER MOBILE */
         header {
             flex-shrink: 0;
             z-index: 40;
@@ -84,7 +84,9 @@
         .brand-text { display: flex; flex-direction: column; }
         .brand h1 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
         .brand .tag { font-size: 10px; color: var(--text-3); font-weight: 600; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
-        .header-actions { display: flex; align-items: center; gap: 8px; }
+        
+        /* ACTIONS HEADER (Cachées sur mobile) */
+        .header-actions { display: none; align-items: center; gap: 8px; }
         .btn-lock {
             background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-2);
             border-radius: 50%; width: 40px; height: 40px; display: grid; place-items: center; cursor: pointer;
@@ -101,6 +103,17 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
         h2.page-title { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
         p.page-sub { color: var(--text-2); font-size: 14px; margin-bottom: 24px; }
+        
+        /* Sous-titre Brush */
+        .brush-title {
+            font-family: 'Caveat', cursive;
+            font-size: 26px;
+            color: var(--text);
+            margin-top: -4px;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
         .section { font-size: 15px; font-weight: 700; color: var(--text); margin: 28px 0 12px; display: flex; align-items: center; gap: 8px; }
         .section::before { content: ""; width: 3px; height: 16px; background: var(--gold); border-radius: 2px; }
 
@@ -275,18 +288,8 @@
         .custom-option.selected { background: rgba(232, 200, 106, 0.1); color: var(--gold); font-weight: 600; }
         .custom-option.other { color: var(--gold); font-weight: 600; }
 
-        /* NOUVELLE POLICE BRUSH */
-        .brush-title {
-            font-family: 'Caveat', cursive;
-            font-size: 28px;
-            color: var(--gold);
-            margin-top: -8px;
-            margin-bottom: 28px;
-            line-height: 1.1;
-        }
-
         /* =========================================================
-           REFONTE DESKTOP (ISOLATION TOTALE)
+           REFONTE DESKTOP (APPLE STORE STYLE) & BACKGROUND WETRANSFER
            ========================================================= */
         @media (min-width: 1024px) {
             :root {
@@ -307,22 +310,21 @@
                 --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
             }
 
-            /* FOND ANIMÉ CHRÉTIEN DESKTOP */
             body {
                 background-color: var(--bg);
                 background-image: none;
                 font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
                 position: relative;
             }
+            
+            /* FOND ANIMÉ CHRÉTIEN (Effet WeTransfer) */
             .bg-slideshow {
                 position: fixed;
                 inset: 0;
                 z-index: 0;
                 overflow: hidden;
                 pointer-events: none;
-                background-color: #0b0f19;
-                opacity: 0.25;
-                mix-blend-mode: multiply;
+                background: #000;
             }
             .bg-slide {
                 position: absolute;
@@ -332,11 +334,32 @@
                 opacity: 0;
                 animation: bgFade 40s infinite;
                 will-change: opacity, transform;
+                /* Filtre pour assombrir et garantir la lisibilité du texte */
+                filter: brightness(0.4) contrast(1.1);
             }
+            .bg-slide:nth-child(1) { animation-delay: 0s; }
+            .bg-slide:nth-child(2) { animation-delay: 8s; }
+            .bg-slide:nth-child(3) { animation-delay: 16s; }
+            .bg-slide:nth-child(4) { animation-delay: 24s; }
+            .bg-slide:nth-child(5) { animation-delay: 32s; }
+
             @keyframes bgFade {
-                0%, 15% { opacity: 0; transform: scale(1); }
-                20%, 40% { opacity: 1; transform: scale(1.05); }
-                45%, 100% { opacity: 0; transform: scale(1.1); }
+                0%, 20% { opacity: 0; transform: scale(1); }
+                25%, 45% { opacity: 1; transform: scale(1.05); }
+                50%, 100% { opacity: 0; transform: scale(1.1); }
+            }
+
+            /* Overlay pour texte sur fond animé */
+            .scroll-container { position: relative; z-index: 1; }
+            main { 
+                background: rgba(255, 255, 255, 0.95); 
+                backdrop-filter: blur(20px); 
+                border-radius: 32px; 
+                margin-top: 24px; 
+                margin-bottom: 24px;
+                padding: 48px 40px; 
+                max-width: 1200px; 
+                box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             }
 
             /* HEADER DESKTOP */
@@ -349,8 +372,8 @@
                 height: 72px;
                 display: flex;
                 align-items: center;
-                position: sticky;
-                top: 0;
+                position: relative;
+                z-index: 10;
             }
             .header-inner {
                 max-width: 1200px;
@@ -374,7 +397,7 @@
             .brand h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
             .brand .tag { font-size: 12px; color: var(--text-2); }
 
-            /* NAVIGATION HORIZONTALE DESKTOP */
+            /* NAVIGATION DESKTOP */
             .desktop-nav {
                 display: flex;
                 gap: 8px;
@@ -404,24 +427,28 @@
             .desktop-nav .nav-item:hover { color: var(--text); background: rgba(0,0,0,0.05); }
             .desktop-nav .nav-item.active { color: var(--text); background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 
-            /* CACHER LA NAV BOTTOM SUR DESKTOP */
+            /* ACTIONS HEADER DESKTOP */
+            .header-actions { display: flex; }
+            .btn-lock { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.08); color: var(--text-2); }
+            .btn-lock:hover { background: rgba(0,0,0,0.08); color: var(--text); }
+            .btn-lock.locked { background: rgba(232, 200, 106, 0.15); border-color: rgba(232, 200, 106, 0.4); color: var(--gold); }
+            .btn-reset-icon { color: var(--text-3); }
+            .btn-reset-icon:hover { background: rgba(248, 113, 113, 0.1); color: var(--red); }
+
+            /* CACHER LA NAV BOTTOM */
             .bottom-nav { display: none !important; }
-            
-            .scroll-container { padding-bottom: 40px; position: relative; z-index: 1; }
-            main { padding: 48px 40px 0 40px; max-width: 1200px; animation: fadeIn 0.4s ease-out; }
+            .scroll-container { padding-bottom: 40px; }
 
             h2.page-title { font-size: 48px; font-weight: 700; letter-spacing: -0.03em; color: var(--text); margin-bottom: 8px; }
-            p.page-sub { font-size: 18px; color: var(--text-2); margin-bottom: 48px; max-width: 800px; }
-            
             .brush-title {
                 font-family: 'Caveat', cursive;
-                font-size: 42px;
-                color: var(--gold-2);
-                margin-top: -8px;
-                margin-bottom: 48px;
+                font-size: 32px;
+                color: var(--gold);
+                margin-top: -4px;
+                margin-bottom: 40px;
                 font-weight: 700;
             }
-
+            p.page-sub { font-size: 18px; color: var(--text-2); margin-bottom: 40px; max-width: 800px; }
             .section { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); margin: 56px 0 24px; }
             .section::before { display: none; }
 
@@ -437,8 +464,8 @@
 
             /* STATS DESKTOP */
             .grid.g4 { grid-template-columns: repeat(3, 1fr); gap: 24px; }
-            .stat { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 24px; padding: 32px; text-align: left; box-shadow: 0 4px 24px rgba(0,0,0,0.02); transition: all 0.3s ease; }
-            .stat:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.06); transform: translateY(-2px); background: rgba(255, 255, 255, 1); }
+            .stat { background: #fff; border: 1px solid var(--border); border-radius: 24px; padding: 32px; text-align: left; box-shadow: 0 4px 24px rgba(0,0,0,0.02); transition: all 0.3s ease; }
+            .stat:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.06); transform: translateY(-2px); }
             .stat::before { display: none; }
             .stat .n { font-size: 40px; font-weight: 700; color: var(--text); letter-spacing: -0.03em; }
             .stat .l { font-size: 15px; color: var(--text-2); margin-top: 8px; font-weight: 500; }
@@ -446,7 +473,7 @@
             /* TINDER / PROGRAMME DU JOUR DESKTOP */
             .tinder-container { max-width: 800px; height: 520px; margin: 0 auto 48px; }
             .tinder-card {
-                background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-radius: 32px; padding: 40px;
+                background: #fff; border-radius: 32px; padding: 40px;
                 box-shadow: 0 20px 40px rgba(0,0,0,0.08);
                 border: 1px solid var(--border);
             }
@@ -462,10 +489,10 @@
 
             /* CARDS GLOBALES DESKTOP */
             .card, .scard, .month-card {
-                background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-radius: 24px; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(0,0,0,0.02);
+                background: #fff; border-radius: 24px; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(0,0,0,0.02);
                 padding: 32px; transition: all 0.3s ease;
             }
-            .card:hover, .scard:hover, .month-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); border-color: var(--border-strong); background: rgba(255, 255, 255, 1); }
+            .card:hover, .scard:hover, .month-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); border-color: var(--border-strong); }
             
             #sundayList { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
             .scard::after { display: none; }
@@ -475,61 +502,37 @@
             .pill-l { background: rgba(96, 165, 250, 0.1); color: #3b82f6; }
             .scard .singers { font-size: 14px; margin-top: 12px; }
 
-            /* SECTION CHANTRES DESKTOP (REFONTE 3D FLIP) */
-            .singer-grid { 
-                display: grid; 
-                grid-template-columns: repeat(3, 1fr); 
-                gap: 24px; 
-                margin-top: 24px;
-            }
-            .singer-badge { 
-                background: linear-gradient(135deg, #ffffff, #f0f0f5); 
-                padding: 24px; 
-                font-size: 18px; 
-                font-weight: 600;
+            /* SINGER BADGES DESKTOP */
+            .singer-badge { background: #fff; padding: 12px 24px; font-size: 16px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+            .singer-badge:hover { border-color: var(--text-2); background: #fff; transform: translateY(-1px); }
+            .singer-badge.active { background: var(--text); color: #fff; border-color: var(--text); }
+            .singer-badge .count { background: rgba(0, 0, 0, 0.05); color: var(--text-2); }
+            .singer-badge.active .count { background: rgba(255, 255, 255, 0.2); color: #fff; }
+
+            /* AMÉLIORATION SECTION CHANTRE (Effet au survol) */
+            #singerContent .grid.g4 { margin-bottom: 24px; }
+            #singerContent .card {
+                padding: 24px;
                 border-radius: 20px;
-                border: 1px solid rgba(0,0,0,0.05);
-                box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 12px;
-                cursor: pointer;
-                transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, background 0.4s ease;
+                transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2), box-shadow 0.3s;
                 transform-style: preserve-3d;
+                perspective: 1000px;
             }
-            .singer-badge:hover { 
-                transform: translateY(-8px) rotateX(10deg) rotateY(-10deg) scale(1.02);
+            #singerContent .card:hover {
+                transform: scale(1.02) translateY(-4px) rotateY(4deg) rotateX(2deg);
                 box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-                background: #fff;
             }
-            .singer-badge.active { 
-                background: linear-gradient(135deg, #1d1d1f, #333336); 
-                color: #fff; 
-                border-color: #1d1d1f; 
-                transform: translateY(-5px);
-            }
-            .singer-badge .count { 
-                background: rgba(0, 0, 0, 0.05); 
-                color: var(--text-2);
-                padding: 6px 16px;
-                border-radius: 20px;
-                font-size: 14px;
-                margin-top: 8px;
-            }
-            .singer-badge.active .count { 
-                background: rgba(255, 255, 255, 0.15); 
-                color: #fff; 
+            #singerContent .card:active {
+                transform: scale(0.98);
             }
 
             /* MODALS DESKTOP */
-            .modal { align-items: center; padding: 40px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px); }
+            .modal { align-items: center; padding: 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); }
             .modal-sheet { border-radius: 32px; max-width: 720px; padding: 40px; max-height: 90vh; background: #fff; }
             .modal-handle { display: none; }
             .modal-header { margin-bottom: 32px; }
             .modal-header h3 { font-size: 28px; font-weight: 700; color: var(--text); }
-            .btn-close { width: 36px; height: 36px; background: var(--bg); color: var(--text-2); }
+            .btn-close { width: 36px; height: 36px; background: var(--bg-3); color: var(--text-2); }
             .btn-close:hover { background: var(--bg-4); color: var(--text); }
 
             /* FORMULAIRES DESKTOP */
@@ -539,7 +542,7 @@
             .song-item { background: var(--bg-3); border: 1px solid transparent; border-radius: 16px; padding: 16px; margin-bottom: 12px; }
             .song-item:hover { background: #fff; border-color: var(--border-strong); }
             
-            /* PROJECTION DESKTOP & SELECT DATE */
+            /* PROJECTION DESKTOP */
             .proj { padding: 80px 60px; border-radius: 32px; box-shadow: 0 24px 48px rgba(0,0,0,0.1); }
             .proj h1 { font-size: 56px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
             .proj .date { font-size: 24px; color: #a1a1a6; margin-bottom: 40px; }
@@ -549,31 +552,15 @@
             .proj .song-block .title { font-size: 28px; margin-bottom: 8px; }
             .proj .song-block .singer { font-size: 18px; }
 
-            /* AMÉLIORATION DU SELECTEUR DE DATE DE PROJECTION */
-            #projSel {
-                background: #ffffff !important;
-                border: 1px solid var(--border-strong) !important;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-                appearance: none;
-                background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%231d1d1f%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E") !important;
-                background-repeat: no-repeat, repeat !important;
-                background-position: right .7em top 50%, 0 0 !important;
-                background-size: .65em auto, 100% !important;
-                padding: 16px 24px;
-                font-weight: 500;
-                color: var(--text);
-                cursor: pointer;
-                max-width: 400px;
-            }
-
-            /* CALENDRIER DESKTOP */
+            /* CALENDRIER DESKTOP (Amélioration du fond) */
             .cal-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
-            .month-card { padding: 24px; }
-            .month-title { font-size: 20px; margin-bottom: 16px; }
-            .mgrid { gap: 6px; }
-            .day { font-size: 14px; border-radius: 10px; }
-            .day.dow { font-size: 13px; }
-            .day.has:hover { transform: scale(1.1); }
+            .month-card { padding: 24px; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); }
+            .month-title { font-size: 20px; margin-bottom: 16px; color: var(--gold-2); }
+            .mgrid { gap: 8px; }
+            .day { font-size: 14px; border-radius: 10px; background: rgba(0,0,0,0.04); color: var(--text); }
+            .day.dow { font-size: 13px; background: transparent; color: var(--text-2); }
+            .day.has { background: var(--text); color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+            .day.has:hover { transform: scale(1.1); background: var(--gold); color: #000; }
 
             /* CONFIRM MODAL DESKTOP */
             .confirm-sheet { border-radius: 32px; padding: 40px 32px; background: #fff; }
@@ -587,7 +574,6 @@
             main { max-width: 1400px; }
             .header-inner { max-width: 1400px; }
             .cal-grid { grid-template-columns: repeat(4, 1fr); }
-            .singer-grid { grid-template-columns: repeat(4, 1fr); }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -597,8 +583,10 @@
 </head>
 <body>
 
-<!-- FOND ANIMÉ CHRÉTIEN (Desktop seulement) -->
-<div class="bg-slideshow" id="bgSlideshow" aria-hidden="true"></div>
+<!-- BACKGROUND ANIMÉ DYNAMIQUE (Desktop) -->
+<div class="bg-slideshow" id="bgSlideshow" aria-hidden="true">
+    <!-- Les images seront injectées ici par le script -->
+</div>
 
 <header>
     <div class="header-inner">
@@ -638,6 +626,7 @@
             </button>
         </nav>
 
+        <!-- ACTIONS HEADER (Desktop) -->
         <div class="header-actions">
             <button class="btn-reset-icon hidden" id="exportBtn" onclick="exportHTML()" title="Exporter le HTML mis à jour" aria-label="Exporter le HTML">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -703,58 +692,6 @@
 <div id="toast" class="toast hidden"></div>
 
 <script>
-    /* =========================================
-       LOGIQUE DE FOND DYNAMIQUE (DESKTOP)
-       ========================================= */
-    const CHRISTIAN_IMAGES = [
-        "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1519638831568-d9897f54ed69?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1445445290350-18a3b86e0b5a?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1438032005730-c779502df39b?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1510933995909-cb6393d7c9d4?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1506377711776-db0ccaf8b97f?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1493749857330-5763e19fde77?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1541873066-6a9939e5e608?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1508234011441-514a739c9c0c?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1478147427282-58a87a120781?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1462897296050-3d67d95c52c1?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1534015694855-46820e1294fa?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1462927114214-6956d2fddd4e?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1522748906645-95d8adfd52c7?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1507692049790-de58290a4334?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1515161229275-0f5886cffc2c?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1506863530036-1efeddceb993?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1445445290350-18a3b86e0b5a?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=1920&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?q=80&w=1920&auto=format&fit=crop"
-    ];
-
-    function initBackground() {
-        const container = document.getElementById('bgSlideshow');
-        if (!container) return;
-        
-        // Mélanger le tableau
-        const shuffled = [...CHRISTIAN_IMAGES].sort(() => 0.5 - Math.random());
-        
-        // Créer 4 slides avec des images complètement aléatoires
-        const slides = shuffled.slice(0, 4);
-        
-        slides.forEach((url, index) => {
-            const div = document.createElement('div');
-            div.className = 'bg-slide';
-            div.style.backgroundImage = `url('${url}')`;
-            div.style.animationDelay = `${index * 10}s`;
-            container.appendChild(div);
-        });
-    }
-
-    /* =========================================
-       DONNÉES
-       ========================================= */
     const SEED_SINGERS = ['Prunelle', 'Pélagie', 'Naomie', 'Rebecca'];
 
     const SEED_SUNDAYS = [
@@ -828,7 +765,34 @@
 
     function clone(o) { return JSON.parse(JSON.stringify(o)); }
 
-    /* ===== STORAGE ===== */
+    /* ===== BACKGROUND DYNAMIQUE (Style WeTransfer) ===== */
+    function loadBackgroundImages() {
+        const container = document.getElementById('bgSlideshow');
+        if (!container) return;
+
+        // Sélection de mots-clés chrétiens (église, lumière, adoration, louange, bible, etc.)
+        const keywords = ['church,light', 'worship,god', 'praise,music', 'bible,glory', 'jesus,cross', 'gospel,concert', 'heaven,clouds', 'adoration,crowd'];
+        
+        // On sélectionne 5 mots-clés au hasard pour générer 5 images aléatoires
+        const shuffled = keywords.sort(() => 0.5 - Math.random());
+        const selectedKeywords = shuffled.slice(0, 5);
+
+        selectedKeywords.forEach((kw, index) => {
+            const div = document.createElement('div');
+            div.className = 'bg-slide';
+            
+            // Utilisation de l'API Unsplash "source.unsplash.com" qui renvoie une image aléatoire basée sur le mot-clé
+            // On ajoute un paramètre unique (sig=index) pour éviter la mise en cache et forcer une nouvelle image
+            const randomSeed = Math.floor(Math.random() * 100000);
+            div.style.backgroundImage = `url('https://source.unsplash.com/1920x1080/?${kw}&sig=${randomSeed}&${index}')`;
+            
+            container.appendChild(div);
+        });
+    }
+    // Exécuter après le chargement du DOM
+    document.addEventListener('DOMContentLoaded', loadBackgroundImages);
+
+    /* ===== STORAGE (avec validation stricte) ===== */
     function load() {
         try {
             const raw = localStorage.getItem(STORAGE_KEY);
@@ -1014,14 +978,15 @@
         $$('.nav-item').forEach(btn => {
             btn.addEventListener('click', () => {
                 $$('.nav-item').forEach(b => b.classList.remove('active'));
-                // Activer tous les boutons avec le même data-view (mobile ET desktop)
-                $$(`.nav-item[data-view="${btn.dataset.view}"]`).forEach(b => b.classList.add('active'));
+                // Active les boutons correspondants (desktop et mobile)
+                $$('.nav-item[data-view="' + btn.dataset.view + '"]').forEach(b => b.classList.add('active'));
                 currentView = btn.dataset.view;
                 render();
                 document.querySelector('.scroll-container').scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
     }
+    setupNav();
 
     function render() {
         closeModal();
@@ -1049,7 +1014,7 @@
 
         view.innerHTML = `
             <h2 class="page-title">Bienvenu(e)</h2>
-            <div class="brush-title">Programme musical annuel de la Cité des Élus</div>
+            <p class="brush-title">Programme musical annuel de la Cité des Élus</p>
             <div class="grid g4" style="margin-bottom:24px">
                 <div class="stat"><div class="n">${STATE.sundays.length}</div><div class="l">Dimanches</div></div>
                 <div class="stat"><div class="n">${STATE.singers.length}</div><div class="l">Chantres</div></div>
@@ -1350,7 +1315,7 @@
             <h2 class="page-title">Par chantre</h2>
             <p class="page-sub">Affectations individuelles</p>
             <div class="singer-grid" id="singerGrid"></div>
-            <div id="singerContent" style="margin-top:32px"></div>
+            <div id="singerContent" style="margin-top:24px"></div>
         `;
 
         const grid = $("#singerGrid");
@@ -1360,7 +1325,7 @@
             const count = STATE.sundays.reduce((acc, s) => {
                 return acc + [...(s.adoration || []), ...(s.louange || [])].filter(x => x.singer === name).length;
             }, 0);
-            return `<div class="singer-badge" data-singer="${esc(name)}">${esc(name)}<span class="count">${count} chants</span></div>`;
+            return `<div class="singer-badge" data-singer="${esc(name)}">${esc(name)}<span class="count">${count}</span></div>`;
         }).join('');
 
         const badges = $$('.singer-badge');
@@ -1387,15 +1352,15 @@
             const totalSongs = list.reduce((acc, s) => acc + s.songs.length, 0);
 
             content.innerHTML = `
-                <div class="grid g4" style="margin-bottom:16px">
-                    <div class="stat"><div class="n">${list.length}</div><div class="l">Dimanches</div></div>
-                    <div class="stat"><div class="n">${totalSongs}</div><div class="l">Chants</div></div>
+                <div class="grid g4" style="margin-bottom:24px">
+                    <div class="stat" style="padding:20px 16px"><div class="n">${list.length}</div><div class="l">Dimanches</div></div>
+                    <div class="stat" style="padding:20px 16px"><div class="n">${totalSongs}</div><div class="l">Chants</div></div>
                 </div>
-                ${list.length === 0 ? '<div class="empty">Aucune affectation</div>' : list.map(s => `
-                    <div class="card" style="margin-bottom:10px">
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px">
-                            <div style="font-weight:600;font-size:14px">${fmtDate(s.date)}</div>
-                            <button class="btn btn-ghost btn-sm" onclick="openSunday('${s.date}')">Voir →</button>
+                ${list.length === 0 ? '<div class="empty">Aucune affectation</div>' : `<div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:16px;">${list.map(s => `
+                    <div class="card" style="margin-bottom:0; padding:20px; cursor:pointer;" onclick="openSunday('${s.date}')">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px">
+                            <div style="font-weight:600;font-size:15px">${fmtDate(s.date)}</div>
+                            <button class="btn btn-ghost btn-sm">Voir →</button>
                         </div>
                         ${s.songs.map(x => `
                             <div style="padding:8px 0;border-top:1px solid var(--border)">
@@ -1404,7 +1369,7 @@
                             </div>
                         `).join('')}
                     </div>
-                `).join('')}
+                `).join('')}</div>`}
             `;
         }
     }
@@ -2181,14 +2146,8 @@
     });
 
     /* ===== INIT ===== */
-    // Initialiser le fond seulement sur desktop
-    if (window.innerWidth >= 1024) {
-        initBackground();
-    }
-    
     load();
     updateLockIcon();
-    setupNav();
     render();
 </script>
 </body>
