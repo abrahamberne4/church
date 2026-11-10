@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
     <style>
         /* =========================================================
-           BASE / MOBILE
+           BASE / MOBILE (Conservé selon vos souhaits)
            ========================================================= */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         :root {
@@ -85,7 +85,7 @@
         .brand h1 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
         .brand .tag { font-size: 10px; color: var(--text-3); font-weight: 600; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
         
-        /* BOUTON CADENAS MOBILE (Visible) */
+        /* BOUTON CADENAS MOBILE */
         .mobile-lock-btn {
             display: grid;
             place-items: center;
@@ -96,6 +96,7 @@
             color: var(--text-2);
             cursor: pointer;
             flex-shrink: 0;
+            transition: all 0.3s;
         }
         .mobile-lock-btn.locked {
             background: rgba(232, 200, 106, 0.15);
@@ -104,7 +105,7 @@
         }
         .mobile-lock-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-        /* ACTIONS HEADER DESKTOP (Cachées sur mobile) */
+        /* ACTIONS HEADER DESKTOP */
         .header-actions { display: none; align-items: center; gap: 8px; }
         .btn-lock {
             background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-2);
@@ -531,30 +532,69 @@
             .singer-badge .count { background: rgba(0, 0, 0, 0.05); color: var(--text-2); }
             .singer-badge.active .count { background: rgba(255, 255, 255, 0.2); color: #fff; }
 
-            /* EFFET 3D AU SURVOL POUR LES CARTES CHANTRE */
+            /* 3D FLIP CARDS POUR LA SECTION CHANTRES */
             #singerContent > div {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
                 gap: 24px;
+                perspective: 1500px;
             }
-            #singerContent .card {
-                padding: 24px;
-                border-radius: 20px;
-                transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2), box-shadow 0.4s;
-                transform-style: preserve-3d;
+            .flip-card {
+                background-color: transparent;
+                width: 100%;
+                height: 280px;
                 perspective: 1000px;
+                cursor: pointer;
+            }
+            .flip-card-inner {
                 position: relative;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+                transform-style: preserve-3d;
             }
-            #singerContent .card:hover {
-                transform: rotateY(6deg) rotateX(4deg) scale(1.02);
-                box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-                z-index: 10;
+            .flip-card:hover .flip-card-inner, .flip-card.flipped .flip-card-inner {
+                transform: rotateY(180deg);
             }
-            #singerContent .card > div > div:nth-child(2) {
-                transition: transform 0.4s ease;
+            .flip-card-front, .flip-card-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                border-radius: 24px;
+                border: 1px solid var(--border);
+                background: #fff;
+                box-shadow: 0 4px 24px rgba(0,0,0,0.02);
+                padding: 24px;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
             }
-            #singerContent .card:hover > div > div:nth-child(2) {
-                transform: translateZ(20px);
+            .flip-card-front {
+                align-items: center;
+                justify-content: center;
+            }
+            .flip-card-back {
+                transform: rotateY(180deg);
+                text-align: left;
+                overflow-y: auto;
+            }
+            .flip-card-back::-webkit-scrollbar { width: 4px; }
+            .flip-card-back::-webkit-scrollbar-thumb { background: var(--bg-4); border-radius: 4px; }
+            .flip-card .date-title {
+                font-size: 20px;
+                font-weight: 700;
+                color: var(--text);
+                margin-bottom: 8px;
+            }
+            .flip-card .hint {
+                font-size: 13px;
+                color: var(--text-3);
+                display: flex;
+                align-items: center;
+                gap: 6px;
             }
 
             /* MODALS DESKTOP */
@@ -686,9 +726,9 @@
             </button>
         </div>
 
-        <!-- BOUTON CADENAS MOBILE (Visible uniquement sur mobile) -->
+        <!-- BOUTON CADENAS MOBILE -->
         <button class="mobile-lock-btn" id="lockBtnMobile" onclick="promptLock()" aria-label="Verrouiller/Déverrouiller">
-            <svg id="lockIconMobile" viewBox="0 0 24 24" width="18" height="18">
+            <svg id="lockIconMobile" viewBox="0 0 24 24">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
             </svg>
@@ -816,25 +856,19 @@
         const container = document.getElementById('bgSlideshow');
         if (!container) return;
 
-        // Sélection de mots-clés chrétiens (église, lumière, adoration, louange, bible, etc.)
         const keywords = ['church,light', 'worship,god', 'praise,music', 'bible,glory', 'jesus,cross', 'gospel,concert', 'heaven,clouds', 'adoration,crowd'];
-        
-        // On génère 5 conteneurs pour les images
         for (let i = 0; i < 5; i++) {
             const div = document.createElement('div');
             div.className = 'bg-slide';
-            
-            // Sélection aléatoire d'un mot clé et d'un seed unique pour forcer une image différente à chaque chargement
             const kw = keywords[Math.floor(Math.random() * keywords.length)];
             const randomSeed = Math.floor(Math.random() * 999999);
             div.style.backgroundImage = `url('https://source.unsplash.com/1920x1080/?${kw}&sig=${randomSeed}_${i}')`;
-            
             container.appendChild(div);
         }
     }
     document.addEventListener('DOMContentLoaded', loadBackgroundImages);
 
-    /* ===== STORAGE (avec validation stricte) ===== */
+    /* ===== STORAGE ===== */
     function load() {
         try {
             const raw = localStorage.getItem(STORAGE_KEY);
@@ -1029,7 +1063,6 @@
         $$('.nav-item').forEach(btn => {
             btn.addEventListener('click', () => {
                 $$('.nav-item').forEach(b => b.classList.remove('active'));
-                // Active les boutons correspondants (desktop et mobile)
                 $$('.nav-item[data-view="' + btn.dataset.view + '"]').forEach(b => b.classList.add('active'));
                 currentView = btn.dataset.view;
                 render();
@@ -1352,7 +1385,7 @@
         }).join('');
     }
 
-    /* ===== PAR CHANTRE ===== */
+    /* ===== PAR CHANTRE (AVEC EFFET FLIP 3D) ===== */
     function renderBySinger(view) {
         const allSingers = new Set(STATE.singers);
         STATE.sundays.forEach(s => {
@@ -1398,7 +1431,7 @@
                 date: s.date,
                 songs: [...(s.adoration || []).map(x => ({ ...x, cat: 'a' })), ...(s.louange || []).map(x => ({ ...x, cat: 'l' }))]
                     .filter(x => x.singer === name)
-            })).filter(s => s.songs.length > 0).sort((a, b) => a.date.localeCompare(b.date)); // Le tri est bien a.date.localeCompare(b.date)
+            })).filter(s => s.songs.length > 0).sort((a, b) => a.date.localeCompare(b.date));
 
             const totalSongs = list.reduce((acc, s) => acc + s.songs.length, 0);
 
@@ -1408,17 +1441,32 @@
                     <div class="stat" style="padding:20px 16px"><div class="n">${totalSongs}</div><div class="l">Chants</div></div>
                 </div>
                 ${list.length === 0 ? '<div class="empty">Aucune affectation</div>' : `<div>${list.map(s => `
-                    <div class="card" style="margin-bottom:0;">
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px">
-                            <div style="font-weight:600;font-size:15px">${fmtDate(s.date)}</div>
-                            <button class="btn btn-ghost btn-sm" onclick="openSunday('${s.date}')">Voir →</button>
-                        </div>
-                        ${s.songs.map(x => `
-                            <div style="padding:8px 0;border-top:1px solid var(--border)">
-                                <div style="font-size:10px;color:${x.cat === 'a' ? 'var(--gold)' : 'var(--blue)'};font-weight:600;letter-spacing:.05em;margin-bottom:3px">${x.cat === 'a' ? 'ADORATION' : 'LOUANGE'}</div>
-                                <div style="font-size:13px;color:var(--text)">${esc(x.title)}</div>
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <!-- FACE AVANT -->
+                            <div class="flip-card-front">
+                                <div class="date-title">${fmtDate(s.date)}</div>
+                                <div style="font-size:14px;color:var(--text-2);margin-bottom:16px;">${s.songs.length} chant(s)</div>
+                                <div class="hint">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                    Voir le détail
+                                </div>
                             </div>
-                        `).join('')}
+                            <!-- FACE ARRIÈRE -->
+                            <div class="flip-card-back">
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:8px">
+                                    <div style="font-weight:600;font-size:15px">${fmtDate(s.date)}</div>
+                                </div>
+                                <div style="flex:1;overflow-y:auto;">
+                                    ${s.songs.map(x => `
+                                        <div style="padding:8px 0;border-bottom:1px solid var(--border);">
+                                            <div style="font-size:10px;color:${x.cat === 'a' ? 'var(--gold)' : 'var(--blue)'};font-weight:600;letter-spacing:.05em;margin-bottom:3px">${x.cat === 'a' ? 'ADORATION' : 'LOUANGE'}</div>
+                                            <div style="font-size:13px;color:var(--text);line-height:1.3;">${esc(x.title)}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 `).join('')}</div>`}
             `;
