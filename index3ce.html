@@ -595,15 +595,138 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
   <div class="modal-sheet" id="modalSheet" style="">
     <div class="modal-handle"></div>
     <div id="modalBody">
-    <div class="modal-header"><h3>dimanche 2 mai 2027</h3><button class="btn-close" onclick="closeModal()" aria-label="Fermer"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div>
-    <div style="font-size:13px;color:var(--text-2);margin-bottom:16px"><b>Chantres :</b> Naomie · Rebecca · Prunelle · Pélagie</div>
-    <h3 class="section" style="margin-top:8px">Adoration</h3>
-    <div class="song-item"><div class="song-thumb"><img src="https://img.youtube.com/vi/4KRxebXkvas/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div><div class="song-info"><div class="song-title">Constance Père nous t'adorons</div><div class="song-meta"><span class="singer">Naomie</span><span>Adoration</span></div></div><div style="display:flex;gap:6px;flex-shrink:0"><a href="https://youtu.be/4KRxebXkvas" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a><button class="btn btn-ghost btn-icon" data-edit-cat="a" data-edit-title="Constance Père nous t'adorons" title="Modifier">✎</button></div></div><div class="song-item"><div class="song-thumb"><img src="https://img.youtube.com/vi/b6OXKeEDfZQ/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div><div class="song-info"><div class="song-title">Je sais que tu es là eden</div><div class="song-meta"><span class="singer">Naomie</span><span>Adoration</span></div></div><div style="display:flex;gap:6px;flex-shrink:0"><a href="https://youtu.be/b6OXKeEDfZQ?is=A6GG6cfNZFa5LRdl" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a><button class="btn btn-ghost btn-icon" data-edit-cat="a" data-edit-title="Je sais que tu es là eden" title="Modifier">✎</button></div></div><div class="song-item"><div class="song-thumb"><img src="https://img.youtube.com/vi/d88iuud_TlI/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div><div class="song-info"><div class="song-title">IL ENTEND LES CRIS|REACH WORSHIP (feat. Patrick Isaac II)</div><div class="song-meta"><span class="singer">Rebecca</span><span>Adoration</span></div></div><div style="display:flex;gap:6px;flex-shrink:0"><a href="https://youtu.be/d88iuud_TlI?is=o5MgU5XzlLlJ0Svd" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a><button class="btn btn-ghost btn-icon" data-edit-cat="a" data-edit-title="IL ENTEND LES CRIS|REACH WORSHIP (feat. Patrick Isaac II)" title="Modifier">✎</button></div></div><div class="song-item"><div class="song-thumb"><img src="https://img.youtube.com/vi/ic8NMqgPGdQ/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div><div class="song-info"><div class="song-title">L'hymne - MLK Choir</div><div class="song-meta"><span class="singer">Rebecca</span><span>Adoration</span></div></div><div style="display:flex;gap:6px;flex-shrink:0"><a href="https://youtu.be/ic8NMqgPGdQ" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a><button class="btn btn-ghost btn-icon" data-edit-cat="a" data-edit-title="L'hymne - MLK Choir" title="Modifier">✎</button></div></div>
-    <h3 class="section">Louange</h3>
-    <div class="song-item"><div class="song-thumb"><img src="https://img.youtube.com/vi/f1s_s8YDtR0/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div><div class="song-info"><div class="song-title">Guy Vincent Kodja - J'ai vu la puissance de Dieu</div><div class="song-meta"><span class="singer">Prunelle</span><span>Louange</span></div></div><div style="display:flex;gap:6px;flex-shrink:0"><a href="https://youtu.be/f1s_s8YDtR0?is=SdB5EvLLg3iD3Bjd" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a><button class="btn btn-ghost btn-icon" data-edit-cat="l" data-edit-title="Guy Vincent Kodja - J'ai vu la puissance de Dieu" title="Modifier">✎</button></div></div><div class="song-item"><div class="song-thumb"><img src="https://img.youtube.com/vi/bzDwd7P_ol8/mqdefault.jpg" alt="" onerror="this.parentElement.innerHTML='🎵'"></div><div class="song-info"><div class="song-title">Louange en semaine (de 0 à 9 min)</div><div class="song-meta"><span class="singer">Pélagie</span><span>Louange</span></div></div><div style="display:flex;gap:6px;flex-shrink:0"><a href="https://youtu.be/bzDwd7P_ol8?is=Axa-m2OplkULNIIQ" target="_blank" rel="noopener" class="btn btn-primary btn-icon" title="Ouvrir sur YouTube">▶</a><button class="btn btn-ghost btn-icon" data-edit-cat="l" data-edit-title="Louange en semaine (de 0 à 9 min)" title="Modifier">✎</button></div></div>
-    <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn btn-primary" style="flex:1" onclick="openEditor('2027-05-02')">✎ Modifier</button>
-      <button class="btn btn-ghost" onclick="projFromModal('2027-05-02')">🖥️ Projeter</button>
+    <div class="modal-header"><h3>Modifier le programme</h3><button class="btn-close" onclick="closeModal()" aria-label="Fermer"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div>
+    <div class="field"><label>Date du dimanche</label><input type="date" id="edDate" value="2027-08-15"></div>
+    <h3 class="section" style="margin-top:20px" id="edCountA">Adoration (4)</h3>
+    <div id="edAdoration">
+    <div class="song-item" style="padding:10px">
+      <div class="song-info">
+        <input data-cat="a" data-idx="0" data-field="title" value="MOI ET MA MAISON (Live au Dôme de Paris) | REACH WORSHIP" style="margin-bottom:6px;font-size:13px;padding:8px 10px" placeholder="Titre">
+        <div style="display:flex;gap:6px">
+          <div class="custom-select" id="select_a_0">
+            <button class="custom-select-trigger" data-toggle-select="a_0" type="button">Prunelle<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            <div class="custom-select-options">
+              <div class="custom-option selected" data-select-singer="Prunelle" data-cat="a" data-idx="0">Prunelle</div><div class="custom-option " data-select-singer="Pélagie" data-cat="a" data-idx="0">Pélagie</div><div class="custom-option " data-select-singer="Naomie" data-cat="a" data-idx="0">Naomie</div><div class="custom-option " data-select-singer="Rebecca" data-cat="a" data-idx="0">Rebecca</div>
+              <div class="custom-option other" data-custom-singer="" data-cat="a" data-idx="0">+ Autre chantre...</div>
+            </div>
+          </div>
+          <input data-cat="a" data-idx="0" data-field="url" value="https://youtu.be/TjKRyzy7yCY?is=68XdqIrKEHRtXuro" placeholder="https://youtu.be/..." style="margin-top:6px;font-size:12px;padding:8px 10px">
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <button class="btn btn-ghost btn-icon" style="color:var(--gold)" data-dup-cat="a" data-dup-idx="0" title="Dupliquer">📋</button>
+        <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-all-cat="a" data-remove-all-idx="0" title="Supprimer partout">🗑️</button>
+        <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-cat="a" data-remove-idx="0" title="Retirer">✕</button>
+      </div>
+    </div>
+    <div class="song-item" style="padding:10px">
+      <div class="song-info">
+        <input data-cat="a" data-idx="1" data-field="title" value="Dena Mwana - Saint Esprit (Officiel)" style="margin-bottom:6px;font-size:13px;padding:8px 10px" placeholder="Titre">
+        <div style="display:flex;gap:6px">
+          <div class="custom-select" id="select_a_1">
+            <button class="custom-select-trigger" data-toggle-select="a_1" type="button">Prunelle<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            <div class="custom-select-options">
+              <div class="custom-option selected" data-select-singer="Prunelle" data-cat="a" data-idx="1">Prunelle</div><div class="custom-option " data-select-singer="Pélagie" data-cat="a" data-idx="1">Pélagie</div><div class="custom-option " data-select-singer="Naomie" data-cat="a" data-idx="1">Naomie</div><div class="custom-option " data-select-singer="Rebecca" data-cat="a" data-idx="1">Rebecca</div>
+              <div class="custom-option other" data-custom-singer="" data-cat="a" data-idx="1">+ Autre chantre...</div>
+            </div>
+          </div>
+          <input data-cat="a" data-idx="1" data-field="url" value="https://youtu.be/JPyyX4zFraU?is=gl3JS5TiaoHGpfEL" placeholder="https://youtu.be/..." style="margin-top:6px;font-size:12px;padding:8px 10px">
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <button class="btn btn-ghost btn-icon" style="color:var(--gold)" data-dup-cat="a" data-dup-idx="1" title="Dupliquer">📋</button>
+        <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-all-cat="a" data-remove-all-idx="1" title="Supprimer partout">🗑️</button>
+        <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-cat="a" data-remove-idx="1" title="Retirer">✕</button>
+      </div>
+    </div>
+    <div class="song-item" style="padding:10px">
+      <div class="song-info">
+        <input data-cat="a" data-idx="2" data-field="title" value="Il veille sur moi - Marius Psalmiste" style="margin-bottom:6px;font-size:13px;padding:8px 10px" placeholder="Titre">
+        <div style="display:flex;gap:6px">
+          <div class="custom-select" id="select_a_2">
+            <button class="custom-select-trigger" data-toggle-select="a_2" type="button">Naomie<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            <div class="custom-select-options">
+              <div class="custom-option " data-select-singer="Prunelle" data-cat="a" data-idx="2">Prunelle</div><div class="custom-option " data-select-singer="Pélagie" data-cat="a" data-idx="2">Pélagie</div><div class="custom-option selected" data-select-singer="Naomie" data-cat="a" data-idx="2">Naomie</div><div class="custom-option " data-select-singer="Rebecca" data-cat="a" data-idx="2">Rebecca</div>
+              <div class="custom-option other" data-custom-singer="" data-cat="a" data-idx="2">+ Autre chantre...</div>
+            </div>
+          </div>
+          <input data-cat="a" data-idx="2" data-field="url" value="https://youtu.be/620s-RmQMkA?is=ZzlhndS2TlexPFmR" placeholder="https://youtu.be/..." style="margin-top:6px;font-size:12px;padding:8px 10px">
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <button class="btn btn-ghost btn-icon" style="color:var(--gold)" data-dup-cat="a" data-dup-idx="2" title="Dupliquer">📋</button>
+        <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-all-cat="a" data-remove-all-idx="2" title="Supprimer partout">🗑️</button>
+        <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-cat="a" data-remove-idx="2" title="Retirer">✕</button>
+      </div>
+    </div>
+    <div class="song-item" style="padding:10px">
+      <div class="song-info">
+        <input data-cat="a" data-idx="3" data-field="title" value="Jésus Christ est ressuscité" style="margin-bottom:6px;font-size:13px;padding:8px 10px" placeholder="Titre">
+        <div style="display:flex;gap:6px">
+          <div class="custom-select" id="select_a_3">
+            <button class="custom-select-trigger" data-toggle-select="a_3" type="button">Naomie<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            <div class="custom-select-options">
+              <div class="custom-option " data-select-singer="Prunelle" data-cat="a" data-idx="3">Prunelle</div><div class="custom-option " data-select-singer="Pélagie" data-cat="a" data-idx="3">Pélagie</div><div class="custom-option selected" data-select-singer="Naomie" data-cat="a" data-idx="3">Naomie</div><div class="custom-option " data-select-singer="Rebecca" data-cat="a" data-idx="3">Rebecca</div>
+              <div class="custom-option other" data-custom-singer="" data-cat="a" data-idx="3">+ Autre chantre...</div>
+            </div>
+          </div>
+          <input data-cat="a" data-idx="3" data-field="url" value="https://youtu.be/j8BCTovMrtM?is=u8r7xOFEZcLnaS6P" placeholder="https://youtu.be/..." style="margin-top:6px;font-size:12px;padding:8px 10px">
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <button class="btn btn-ghost btn-icon" style="color:var(--gold)" data-dup-cat="a" data-dup-idx="3" title="Dupliquer">📋</button>
+        <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-all-cat="a" data-remove-all-idx="3" title="Supprimer partout">🗑️</button>
+        <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-cat="a" data-remove-idx="3" title="Retirer">✕</button>
+      </div>
+    </div></div>
+    <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="edAddSong('a')">+ Ajouter un chant d'adoration</button>
+    <h3 class="section" id="edCountL">Louange (2)</h3>
+    <div id="edLouange">
+    <div class="song-item" style="padding:10px">
+      <div class="song-info">
+        <input data-cat="l" data-idx="0" data-field="title" value="Comment ne pas te louer" style="margin-bottom:6px;font-size:13px;padding:8px 10px" placeholder="Titre">
+        <div style="display:flex;gap:6px">
+          <div class="custom-select" id="select_l_0">
+            <button class="custom-select-trigger" data-toggle-select="l_0" type="button">Pélagie<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            <div class="custom-select-options">
+              <div class="custom-option " data-select-singer="Prunelle" data-cat="l" data-idx="0">Prunelle</div><div class="custom-option selected" data-select-singer="Pélagie" data-cat="l" data-idx="0">Pélagie</div><div class="custom-option " data-select-singer="Naomie" data-cat="l" data-idx="0">Naomie</div><div class="custom-option " data-select-singer="Rebecca" data-cat="l" data-idx="0">Rebecca</div>
+              <div class="custom-option other" data-custom-singer="" data-cat="l" data-idx="0">+ Autre chantre...</div>
+            </div>
+          </div>
+          <input data-cat="l" data-idx="0" data-field="url" value="https://youtu.be/Wv_KsPW0tlY?is=uR8H8hU9Mshy-zzC" placeholder="https://youtu.be/..." style="margin-top:6px;font-size:12px;padding:8px 10px">
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <button class="btn btn-ghost btn-icon" style="color:var(--gold)" data-dup-cat="l" data-dup-idx="0" title="Dupliquer">📋</button>
+        <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-all-cat="l" data-remove-all-idx="0" title="Supprimer partout">🗑️</button>
+        <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-cat="l" data-remove-idx="0" title="Retirer">✕</button>
+      </div>
+    </div>
+    <div class="song-item" style="padding:10px">
+      <div class="song-info">
+        <input data-cat="l" data-idx="1" data-field="title" value="La trompette sonnera" style="margin-bottom:6px;font-size:13px;padding:8px 10px" placeholder="Titre">
+        <div style="display:flex;gap:6px">
+          <div class="custom-select" id="select_l_1">
+            <button class="custom-select-trigger" data-toggle-select="l_1" type="button">Rebecca<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            <div class="custom-select-options">
+              <div class="custom-option " data-select-singer="Prunelle" data-cat="l" data-idx="1">Prunelle</div><div class="custom-option " data-select-singer="Pélagie" data-cat="l" data-idx="1">Pélagie</div><div class="custom-option " data-select-singer="Naomie" data-cat="l" data-idx="1">Naomie</div><div class="custom-option selected" data-select-singer="Rebecca" data-cat="l" data-idx="1">Rebecca</div>
+              <div class="custom-option other" data-custom-singer="" data-cat="l" data-idx="1">+ Autre chantre...</div>
+            </div>
+          </div>
+          <input data-cat="l" data-idx="1" data-field="url" value="https://youtu.be/hSfKhJFOZfc" placeholder="https://youtu.be/..." style="margin-top:6px;font-size:12px;padding:8px 10px">
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <button class="btn btn-ghost btn-icon" style="color:var(--gold)" data-dup-cat="l" data-dup-idx="1" title="Dupliquer">📋</button>
+        <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-all-cat="l" data-remove-all-idx="1" title="Supprimer partout">🗑️</button>
+        <button class="btn btn-ghost btn-icon" style="color:var(--red)" data-remove-cat="l" data-remove-idx="1" title="Retirer">✕</button>
+      </div>
+    </div></div>
+    <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="edAddSong('l')">+ Ajouter un chant de louange</button>
+    <div style="margin-top:24px;display:flex;gap:8px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal()">Annuler</button>
+      <button class="btn btn-danger" onclick="deleteSunday('2027-08-15')">Supprimer</button>
+      <button class="btn btn-primary" style="flex:1.5" onclick="saveSunday('2027-08-15')">Enregistrer</button>
     </div></div>
   </div>
 </div>
@@ -766,7 +889,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Pélagie",
                 "title": "Je veux chanter un chant d'amour - Hosanna clips - EDEN",
-                "url": "https://youtu.be/XGlEp2rzT6M?is=2MkT8lqjx99T5QYX"
+                "url": "https://youtu.be/XGlEp2rzT6M?is=99eIUHsRVOfmp6Ux"
             },
             {
                 "singer": "Pélagie",
@@ -866,8 +989,8 @@ const SEED_SUNDAYS = [
             },
             {
                 "singer": "Pélagie",
-                "title": "Je veux me réjouir ",
-                "url": "https://youtu.be/aNL4VlDL57k?is=MpKsa8TG3pgHKA6g"
+                "title": "Je veux me réjouir",
+                "url": "https://youtu.be/aNL4VlDL57k?is=YvBPD_BGtPJPHchb"
             }
         ]
     },
@@ -904,7 +1027,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Naomie",
                 "title": "Oh mon Dieu, qui est bon comme toi - Impact Gospel",
-                "url": "https://youtu.be/_o7YezvIGVU?is=DRsSVRYE2nyFWr_d"
+                "url": "https://youtu.be/_o7YezvIGVU?is=ymBtW54mwKjYZlLF"
             }
         ]
     },
@@ -941,7 +1064,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Naomie",
                 "title": "Comment ne pas te louer",
-                "url": "https://youtu.be/Wv_KsPW0tIY?is=6AxLVgzVUa6twt_Y"
+                "url": "https://youtu.be/Wv_KsPW0tIY?is=080GyznuhrMtPazi"
             }
         ]
     },
@@ -1067,7 +1190,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Prunelle",
                 "title": "Digne est l'Agneau (Hillsong) - Momentum Musique feat Laetitia Perraud",
-                "url": "https://youtu.be/eusI00d92tI?is=GyVoN8yGveAL9jBd"
+                "url": "https://youtu.be/eusI00d92tI?is=BK4oU3vaMMu_qr8s"
             },
             {
                 "singer": "Pélagie",
@@ -1099,7 +1222,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Pélagie",
                 "title": "NOUS TE COURONNONS (We crown You) || Dena Mwana & Plénitude Music",
-                "url": "https://youtu.be/dx_H0LSQEyg?is=2k86nJPdHuXDWMsQ"
+                "url": "https://youtu.be/dx_H0LSQEyg?is=EQPcRWKm-szqU2Mp"
             },
             {
                 "singer": "Pélagie",
@@ -1136,7 +1259,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Rebecca",
                 "title": "MOI ET MA MAISON (Live au Dôme de Paris) | REACH WORSHIP",
-                "url": "https://youtu.be/TjKRyzy7yCY?is=68XdqIrKEHRtXur0"
+                "url": "https://youtu.be/TjKRyzy7yCY?is=68XdqIrKEHRtXuro"
             },
             {
                 "singer": "Rebecca",
@@ -1363,12 +1486,12 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Naomie",
                 "title": "Je sais que tu es là eden",
-                "url": "https://youtu.be/b6OXKeEDfZQ?is=A6GG6cfNZFa5LRdl"
+                "url": "https://youtu.be/b6OXKeEDfZQ?is=X_gOmzuT8D8qxO5F"
             },
             {
                 "singer": "Rebecca",
                 "title": "IL ENTEND LES CRIS|REACH WORSHIP (feat. Patrick Isaac II)",
-                "url": "https://youtu.be/d88iuud_TlI?is=o5MgU5XzlLlJ0Svd"
+                "url": "https://youtu.be/d88iuud_TlI?is=tO3a0lOWGzNp1fuF"
             },
             {
                 "singer": "Rebecca",
@@ -1565,7 +1688,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Pélagie",
                 "title": "Marina",
-                "url": "https://youtu.be/D4zeEAWKcZY?is=wL8M2O_6vLzvl7e8"
+                "url": "https://youtu.be/D4zeEAWKcZY?is=uhdlItZk974_oyjv"
             },
             {
                 "singer": "Naomie",
@@ -1844,7 +1967,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Pélagie",
                 "title": "Digne est l'Agneau (Hillsong) - Momentum Musique feat Laetitia Perraud",
-                "url": "https://youtu.be/eusl00d92tI?is=72DDS_XhWiuq7GTS"
+                "url": "https://youtu.be/eusI00d92tI?is=BK4oU3vaMMu_qr8s"
             },
             {
                 "singer": "Prunelle",
@@ -1861,12 +1984,12 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Rebecca",
                 "title": "Je veux me réjouir",
-                "url": "https://youtu.be/aNL4VIDL57k?is=NdCnf08Gp4Lgqe5Y"
+                "url": "https://youtu.be/aNL4VlDL57k?is=YvBPD_BGtPJPHchb"
             },
             {
                 "singer": "Naomie",
                 "title": "Daniel Nortey - J'ai choisi Jésus",
-                "url": "https://youtu.be/LEQ4JlmQ_3k?is=v8EH1ccaRGY1S5tw"
+                "url": "https://youtu.be/LEQ4JImQ_3k?is=bBZAysJ_Hztm_SET"
             }
         ]
     },
@@ -1876,7 +1999,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Pélagie",
                 "title": "NOUS TE COURONNONS (We crown You) || Dena Mwana & Plénitude Music",
-                "url": "https://youtu.be/dx_H0LSQEyq?is=aPSa1iuVTknyl-7g"
+                "url": "https://youtu.be/dx_H0LSQEyg?is=EQPcRWKm-szqU2Mp"
             },
             {
                 "singer": "Pélagie",
@@ -1898,7 +2021,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Prunelle",
                 "title": "Oh mon Dieu, qui est bon comme toi - Impact Gospel",
-                "url": "https://youtu.be/l86F3XhZD98?is=-gh-4YPflNWaf60o"
+                "url": "https://youtu.be/_o7YezvIGVU?is=ymBtW54mwKjYZlLF"
             },
             {
                 "singer": "Naomie",
@@ -1935,7 +2058,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Pélagie",
                 "title": "Comment ne pas te louer",
-                "url": "https://youtu.be/Wv_KsPW0tlY?is=uR8H8hU9Mshy-zzC"
+                "url": "https://youtu.be/Wv_KsPW0tIY?is=080GyznuhrMtPazi"
             },
             {
                 "singer": "Rebecca",
@@ -2288,12 +2411,12 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Pélagie",
                 "title": "Je sais que tu es là eden",
-                "url": "https://youtu.be/b6OXKeEDfzQ?is=WRijBVzqUIJGLaH_"
+                "url": "https://youtu.be/b6OXKeEDfZQ?is=X_gOmzuT8D8qxO5F"
             },
             {
                 "singer": "Prunelle",
                 "title": "IL ENTEND LES CRIS|REACH WORSHIP (feat. Patrick Isaac II)",
-                "url": "https://youtu.be/d88iuud_TII?is=z2GskoEFo1C24Yq9"
+                "url": "https://youtu.be/d88iuud_TlI?is=tO3a0lOWGzNp1fuF"
             },
             {
                 "singer": "Prunelle",
@@ -2468,7 +2591,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Pélagie",
                 "title": "Je veux chanter un chant d'amour - Hosanna clips - EDEN",
-                "url": "https://youtu.be/XGIEP2rzT6M?is=xFYheJrHJvHzvZDp"
+                "url": "https://youtu.be/XGlEp2rzT6M?is=99eIUHsRVOfmp6Ux"
             },
             {
                 "singer": "Pélagie",
@@ -2490,7 +2613,7 @@ const SEED_SUNDAYS = [
             {
                 "singer": "Rebecca",
                 "title": "Marina",
-                "url": "https://youtu.be/D4zeEAWKCzY"
+                "url": "https://youtu.be/D4zeEAWKcZY?is=uhdlItZk974_oyjv"
             },
             {
                 "singer": "Prunelle",
@@ -3491,4 +3614,3 @@ window.addEventListener('unhandledrejection', e => console.error('Promise:', e.r
 
 
 </body></html>
-
